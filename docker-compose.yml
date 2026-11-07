@@ -23,6 +23,7 @@ services:
       - ./backend:/srv/backend
       - /srv/backend/.venv
       - ./config:/srv/config:ro
+      - ./corpus:/srv/corpus
     depends_on:
       db: { condition: service_healthy }
 

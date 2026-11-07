@@ -14,15 +14,18 @@ dependencies = [
     "pgvector>=0.3",
     "litellm>=1.55",
     "pyyaml>=6.0",
+    "httpx>=0.28",
+    "beautifulsoup4>=4.12",
+    "lxml>=5.3",
 ]
 
 [project.optional-dependencies]
 dev = [
     "pytest>=8.3",
-    "httpx>=0.28",
     "ruff>=0.8",
     "mypy>=1.13",
     "types-PyYAML",
+    "types-beautifulsoup4",
 ]
 
 [build-system]
@@ -34,8 +37,12 @@ include = ["app*"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
-markers = ["live: calls a real LLM provider or external API (excluded by default)"]
+markers = [
+    "live: calls a real LLM provider or external API (excluded by default)",
+    "db: needs the PostgreSQL database (skipped when unreachable)",
+]
 addopts = "-m 'not live'"
+filterwarnings = ["ignore::bs4.XMLParsedAsHTMLWarning"]
 
 [tool.ruff]
 line-length = 110

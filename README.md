@@ -10,7 +10,15 @@ Cahier des charges : [`SPEC.md`](SPEC.md) · Décisions : [`docs/DECISIONS.md`](
 
 ## État
 
-Phase 0 — squelette : API, base de données, front avec navigation, routeur LLM avec contrôle de confidentialité.
+- Phase 0 — squelette : API, base de données, front avec navigation, routeur LLM avec contrôle de confidentialité.
+- Phase 1a — corpus : 11 textes officiels (MiCA, TFR, DAC/DAC8, régime pilote DLT, MiFID II, DORA, AMLR, AI Act,
+  RGPD, ESPR), dernière version consolidée, ~6 000 passages citables avec identifiants stables, empreintes SHA-256,
+  versions conservées, recherche plein texte.
+
+```bash
+docker compose exec api python -m app.corpus ingest            # tout le corpus
+docker compose exec api python -m app.corpus ingest --source MICA
+```
 
 ## Lancer
 

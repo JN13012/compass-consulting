@@ -1,0 +1,80 @@
+# Sources officielles du corpus — définies à la main, jamais par l'IA.
+#
+# Téléchargement : API de l'Office des publications de l'UE (même texte que EUR-Lex, XHTML structuré, FR).
+# Version : pour chaque texte, l'ingestion prend la DERNIÈRE VERSION CONSOLIDÉE dont la date est <= aujourd'hui
+# (articles + annexes). Les considérants viennent toujours de la version d'origine (ils ne sont jamais modifiés
+# et ne figurent pas dans les versions consolidées). Sans version consolidée, la version d'origine est utilisée.
+#
+# ⚠ Seul le Journal officiel fait foi : les versions consolidées sont des outils de documentation.
+#
+# Champs : code (préfixe des identifiants de passages), celex (acte d'origine), title, short, domain.
+
+sources:
+  - code: MICA
+    celex: 32023R1114
+    short: MiCA
+    title: Règlement (UE) 2023/1114 sur les marchés de crypto-actifs
+    domain: crypto
+
+  - code: TFR
+    celex: 32023R1113
+    short: TFR
+    title: Règlement (UE) 2023/1113 sur les informations accompagnant les transferts de fonds et de certains crypto-actifs
+    domain: crypto
+
+  - code: DAC
+    celex: 32011L0016
+    short: DAC (consolidée, inclut DAC8)
+    title: Directive 2011/16/UE relative à la coopération administrative dans le domaine fiscal
+    domain: fiscal
+
+  - code: DAC8
+    celex: 32023L2226
+    short: DAC8
+    title: Directive (UE) 2023/2226 modifiant la directive 2011/16/UE (crypto-actifs)
+    domain: fiscal
+
+  - code: DLT
+    celex: 32022R0858
+    short: Régime pilote DLT
+    title: Règlement (UE) 2022/858 sur un régime pilote pour les infrastructures de marché DLT
+    domain: tokenisation
+
+  - code: MIFID2
+    celex: 32014L0065
+    short: MiFID II
+    title: Directive 2014/65/UE concernant les marchés d'instruments financiers
+    domain: tokenisation
+
+  - code: DORA
+    celex: 32022R2554
+    short: DORA
+    title: Règlement (UE) 2022/2554 sur la résilience opérationnelle numérique du secteur financier
+    domain: resilience
+
+  - code: AMLR
+    celex: 32024R1624
+    short: AMLR
+    title: Règlement (UE) 2024/1624 relatif à la prévention de l'utilisation du système financier aux fins du blanchiment de capitaux ou du financement du terrorisme
+    domain: lcbft
+
+  - code: AIACT
+    celex: 32024R1689
+    short: AI Act
+    title: Règlement (UE) 2024/1689 établissant des règles harmonisées concernant l'intelligence artificielle
+    domain: ia
+
+  - code: RGPD
+    celex: 32016R0679
+    short: RGPD
+    title: Règlement (UE) 2016/679 relatif à la protection des données
+    domain: donnees
+
+  - code: ESPR
+    celex: 32024R1781
+    short: ESPR
+    title: Règlement (UE) 2024/1781 établissant un cadre pour la fixation d'exigences en matière d'écoconception (passeport numérique des produits)
+    domain: produits
+
+# Compléments à sélectionner (orientations ESMA/EBA, positions AMF, ressources CNIL) :
+# ces documents sont des PDF hors EUR-Lex ; leur ingestion arrive avec un lecteur PDF dédié.
