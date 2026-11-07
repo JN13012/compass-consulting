@@ -1,0 +1,13 @@
+@import 'tailwindcss';
+
+@theme {
+  --color-ink: #1b2a41;
+  --color-paper: #fbfaf7;
+  --color-line: #e4e1da;
+  --color-warn-bg: #fbf3d9;
+}
+
+body {
+  @apply bg-paper text-ink antialiased;
+  font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+}

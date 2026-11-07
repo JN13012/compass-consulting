@@ -1,0 +1,50 @@
+services:
+  db:
+    image: pgvector/pgvector:pg16
+    environment:
+      POSTGRES_USER: compass
+      POSTGRES_PASSWORD: compass
+      POSTGRES_DB: compass
+    ports: ["5432:5432"]
+    volumes: [db-data:/var/lib/postgresql/data]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U compass"]
+      interval: 3s
+      retries: 20
+
+  api:
+    build: ./backend
+    env_file: [{ path: .env, required: false }]
+    environment:
+      DATABASE_URL: postgresql+psycopg://compass:compass@db:5432/compass
+      LLM_CONFIG_PATH: /srv/config/llm.yaml
+    ports: ["8000:8000"]
+    volumes:
+      - ./backend:/srv/backend
+      - /srv/backend/.venv
+      - ./config:/srv/config:ro
+    depends_on:
+      db: { condition: service_healthy }
+
+  front:
+    image: node:22-alpine
+    working_dir: /app
+    command: sh -c "npm ci && npm run dev"
+    environment:
+      API_URL: http://api:8000
+    ports: ["5173:5173"]
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    depends_on: [api]
+
+  # Modèles locaux (missions confidentielles). Optionnel : `docker compose --profile local up`
+  ollama:
+    image: ollama/ollama:latest
+    profiles: [local]
+    ports: ["11434:11434"]
+    volumes: [ollama-data:/root/.ollama]
+
+volumes:
+  db-data:
+  ollama-data:
