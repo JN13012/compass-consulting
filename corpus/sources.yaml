@@ -52,6 +52,18 @@ sources:
     title: Règlement (UE) 2022/2554 sur la résilience opérationnelle numérique du secteur financier
     domain: resilience
 
+  - code: NIS2
+    celex: 32022L2555
+    short: NIS 2
+    title: Directive (UE) 2022/2555 concernant des mesures destinées à assurer un niveau élevé commun de cybersécurité dans l'ensemble de l'Union
+    domain: cyber
+
+  - code: CRA
+    celex: 32024R2847
+    short: Cyber Resilience Act
+    title: Règlement (UE) 2024/2847 concernant des exigences de cybersécurité horizontales pour les produits comportant des éléments numériques
+    domain: cyber
+
   - code: AMLR
     celex: 32024R1624
     short: AMLR

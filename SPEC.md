@@ -1,13 +1,17 @@
-# Compass — Assistant du consultant IA & Blockchain
+# Compass — Assistant du consultant IA, Blockchain & Cybersécurité
 
-> Cahier des charges. Version 0.1 — 2026-11-07.
+> Cahier des charges. Version 0.2 — 2026-11-07 (ajout du volet cybersécurité, plan recentré sur un démonstrateur).
 > Statut : document de référence pour le développement. Toute évolution de périmètre se fait ici d'abord.
+
+**Finalité du projet : un démonstrateur de portfolio** (captures, vidéo, publication LinkedIn, CV). Les choix
+privilégient ce qui se montre et se vérifie : parcours de démonstration complets, résultats chiffrés honnêtes,
+code propre. Pas d'exploitation en production.
 
 ---
 
 ## 1. Contexte et objectif
 
-Les consultants en IA générative et en blockchain passent une grande partie de leur temps à :
+Les consultants en IA générative, en blockchain et en cybersécurité passent une grande partie de leur temps à :
 diagnostiquer les processus d'un client, choisir la bonne technologie, vérifier la réglementation,
 faire des benchmarks, cadrer et évaluer des POC, puis produire des livrables.
 
@@ -94,6 +98,7 @@ Règles :
   - **Crypto** : le jeton est-il un instrument financier (MiFID II / régime pilote DLT), un EMT, un ART, un autre crypto-actif, ou hors champ MiCA ? L'activité nécessite-t-elle un agrément PSCA ? TFR applicable ? DAC8 ?
   - **IA** : niveau de risque AI Act (interdit, haut risque, transparence, minimal) ; données personnelles → RGPD (base légale, AIPD probable ?).
   - **Résilience** : entité financière → DORA.
+  - **Cybersécurité** : l'entité relève-t-elle de NIS 2 (entité essentielle ou importante selon secteur — annexes I/II — et taille) ? Ses produits sont-ils des « produits comportant des éléments numériques » au sens du Cyber Resilience Act (catégorie par défaut, importante, critique) ? Obligations de notification d'incident (NIS 2, DORA, RGPD art. 33).
 - Pour chaque obligation : statut `couvert` / `manquant` / `à vérifier` selon les informations de la mission.
 - Toute affirmation sans passage cité est **interdite** à l'affichage ; si le corpus ne suffit pas : « Le corpus ne permet pas de conclure ».
 
@@ -189,6 +194,8 @@ Chaque document est enregistré avec : identifiant, titre, URL officielle, date 
 | IA | AI Act | Règlement (UE) 2024/1689 |
 | Données | RGPD | Règlement (UE) 2016/679 |
 | Produits | ESPR (passeport numérique des produits) | Règlement (UE) 2024/1781 |
+| Cybersécurité | NIS 2 | Directive (UE) 2022/2555 |
+| Cybersécurité | Cyber Resilience Act | Règlement (UE) 2024/2847 |
 | Compléments | Orientations ESMA/EBA, positions AMF, ressources CNIL | à sélectionner en phase 1 |
 
 **Découpage** : par article (et par paragraphe pour les articles longs), considérants séparés, annexes par point. Chaque passage a un identifiant stable (`MICA-ART-3-1-5`, etc.).
@@ -308,23 +315,36 @@ Objectif : chiffrer la fiabilité honnêtement, sans sur-ajuster.
 
 ## 10. Cas de démonstration
 
-Deux missions fictives complètes, préchargées :
+Trois missions fictives complètes, préchargées :
 
 1. **« Maison Lumen »**, distributeur de prêt-à-porter haut de gamme : commandes et factures sur Excel, demandes de suivi de livraison, contrefaçon. → Solutions : digitalisation des commandes, agent de traitement des commandes (IA), passeport numérique produit (blockchain, avec grille de pertinence). → Réglementation : RGPD, AI Act, ESPR, vérification hors champ MiCA.
-2. **« Banque Azur »**, banque régionale : projet de fonds monétaire tokenisé réglé en stablecoin EUR, contrôle KYC des investisseurs par IA. → Réglementation : MiFID II / régime pilote DLT, MiCA (EMT), DORA, AMLR, AI Act. → Benchmark : stablecoins EUR et fonds monétaires tokenisés. → POC : token à transferts restreints + évaluation.
+2. **« Banque Azur »**, banque régionale : projet de fonds monétaire tokenisé réglé en stablecoin EUR, contrôle KYC des investisseurs par IA. → Réglementation : MiFID II / régime pilote DLT, MiCA (EMT), DORA, AMLR, AI Act. → Benchmark : stablecoins EUR et fonds monétaires tokenisés. → POC : token à transferts restreints + évaluation (audit Slither).
+3. **« Hexa Industrie »**, ETI (450 salariés) fabriquant des capteurs connectés pour l'industrie : Active Directory vieillissant, pas de plan de réponse à incident, sauvegardes non testées, firmware mis à jour à la main. → Diagnostic de maturité cyber (grille NIST CSF 2.0 : Gouverner, Identifier, Protéger, Détecter, Répondre, Rétablir). → Réglementation : NIS 2 (fabrication — annexe II, entité importante ?), Cyber Resilience Act (capteurs = produits comportant des éléments numériques), RGPD art. 32-33. → Solutions : quick wins (MFA, sauvegardes hors ligne testées, inventaire), feuille de route, et un usage IA encadré (tri des alertes) avec qualification AI Act.
 
 ---
 
-## 11. Plan de réalisation
+## 3.12 Volet cybersécurité (transverse)
 
-| Phase | Contenu | Durée indicative (≈20 h/sem) |
+- **Diagnostic de maturité** : grille NIST CSF 2.0 (6 fonctions), notée 1-3 par fonction avec justification reliée aux notes d'entretien ; mesures d'hygiène prioritaires.
+- **Qualification réglementaire** : NIS 2, CRA, DORA, RGPD (voir §3.5), avec citations.
+- **Solutions** : classées comme les autres (quick wins → projets), chaque mesure reliée au risque et à l'obligation qu'elle couvre.
+- **POC** : l'audit de smart contract (Slither) et le banc d'évaluation couvrent la partie technique ; pas d'outil offensif.
+
+---
+
+## 11. Plan de réalisation — recentré « démonstrateur »
+
+| Phase | Contenu | Statut |
 |---|---|---|
-| 0 | Squelette, Docker, config, CLAUDE.md | 2-3 jours |
-| 1 | Corpus, recherche, réponses citées, refus, Base de connaissances, évaluation | 2 semaines |
-| 2 | Missions, Diagnostic, Solutions, Réglementation | 1,5 semaine |
-| 3 | Benchmark + connecteurs | 1-1,5 semaine |
-| 4 | Dossier POC, banc d'évaluation, 2 POC de démonstration | 2 semaines |
-| 5 | Livrables, veille | 1 semaine |
-| 6 | Cas de démo, documentation, résultats, vidéo | 1 semaine |
+| 0 | Squelette, Docker, config | ✅ |
+| 1a | Corpus (13 textes, versions consolidées), vérification EUR-Lex | ✅ |
+| 1b | Recherche, réponses citées, refus, page Base de connaissances | |
+| 1c | Évaluation (jeu de questions validé, IC 95 %) | |
+| 2 | Missions, Diagnostic, Solutions, Réglementation (IA, blockchain, cyber) + 3 missions de démo | |
+| 3 | Benchmark sourcé (données on-chain + registres) | |
+| 4 | Dossier POC + banc d'évaluation ; 1 POC démontré de bout en bout | |
+| 5 | Export livrables (PDF/PPTX) ; veille simplifiée (bouton « vérifier les mises à jour ») | |
+| 6 | Finitions, captures, vidéo, README orienté recruteur | |
 
-**Version minimale présentable : phases 0 à 2.**
+Fournisseurs IA : Ollama (Windows, GPU local) branché en fin de parcours ; tout est développé et testé avec des
+appels simulés, puis validé avec le vrai modèle avant les captures.

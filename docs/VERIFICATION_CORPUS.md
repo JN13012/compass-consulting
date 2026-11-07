@@ -3,18 +3,20 @@
 Échantillon de 10 passages tirés au hasard (graine fixe 20261107). Pour chacun : ouvrir le lien,
 retrouver le passage, vérifier que le texte est complet, non coupé, et rattaché au bon article.
 
+**Résultat du 2026-11-07 : 10/10 identiques au texte affiché sur EUR-Lex.** Contrôle automatisé dans un navigateur : chaque ligne du passage (espaces, apostrophes et renvois de notes normalisés) est recherchée dans le texte de la page EUR-Lex de la même version.
+
 | # | Passage | Version | OK ? | Remarque |
 |---|---|---|---|---|
-| 1 | `DORA-RCT-23` | [32022R2554](https://eur-lex.europa.eu/legal-content/FR/TXT/?uri=CELEX:32022R2554) | ☐ | |
-| 2 | `MICA-ART-104-3` | [02023R1114-20240109](https://eur-lex.europa.eu/legal-content/FR/TXT/?uri=CELEX:02023R1114-20240109) | ☐ | |
-| 3 | `AMLR-RCT-60` | [32024R1624](https://eur-lex.europa.eu/legal-content/FR/TXT/?uri=CELEX:32024R1624) | ☐ | |
-| 4 | `MIFID2-ART-21-1` | [02014L0065-20260606](https://eur-lex.europa.eu/legal-content/FR/TXT/?uri=CELEX:02014L0065-20260606) | ☐ | |
-| 5 | `DAC-ANX-I-14` | [02011L0016-20260101](https://eur-lex.europa.eu/legal-content/FR/TXT/?uri=CELEX:02011L0016-20260101) | ☐ | |
-| 6 | `AIACT-ART-102` | [02024R1689-20260727](https://eur-lex.europa.eu/legal-content/FR/TXT/?uri=CELEX:02024R1689-20260727) | ☐ | |
-| 7 | `DLT-ART-19-1` | [32022R0858](https://eur-lex.europa.eu/legal-content/FR/TXT/?uri=CELEX:32022R0858) | ☐ | |
-| 8 | `MICA-ART-37-4` | [02023R1114-20240109](https://eur-lex.europa.eu/legal-content/FR/TXT/?uri=CELEX:02023R1114-20240109) | ☐ | |
-| 9 | `RGPD-RCT-90` | [32016R0679](https://eur-lex.europa.eu/legal-content/FR/TXT/?uri=CELEX:32016R0679) | ☐ | |
-| 10 | `RGPD-ART-4-19` | [02016R0679-20160504](https://eur-lex.europa.eu/legal-content/FR/TXT/?uri=CELEX:02016R0679-20160504) | ☐ | |
+| 1 | `DORA-RCT-23` | [32022R2554](https://eur-lex.europa.eu/legal-content/FR/TXT/?uri=CELEX:32022R2554) | ✅ | Identique |
+| 2 | `MICA-ART-104-3` | [02023R1114-20240109](https://eur-lex.europa.eu/legal-content/FR/TXT/?uri=CELEX:02023R1114-20240109) | ✅ | Identique (4 lignes) |
+| 3 | `AMLR-RCT-60` | [32024R1624](https://eur-lex.europa.eu/legal-content/FR/TXT/?uri=CELEX:32024R1624) | ✅ | Identique |
+| 4 | `MIFID2-ART-21-1` | [02014L0065-20260606](https://eur-lex.europa.eu/legal-content/FR/TXT/?uri=CELEX:02014L0065-20260606) | ✅ | Identique |
+| 5 | `DAC-ANX-I-14` | [02011L0016-20260101](https://eur-lex.europa.eu/legal-content/FR/TXT/?uri=CELEX:02011L0016-20260101) | ✅ | Identique (6 lignes contrôlées, dont l'intitulé de section) |
+| 6 | `AIACT-ART-102` | [02024R1689-20260727](https://eur-lex.europa.eu/legal-content/FR/TXT/?uri=CELEX:02024R1689-20260727) | ✅ | Identique ; le renvoi de note « ( *1 ) » est volontairement retiré |
+| 7 | `DLT-ART-19-1` | [32022R0858](https://eur-lex.europa.eu/legal-content/FR/TXT/?uri=CELEX:32022R0858) | ✅ | Identique |
+| 8 | `MICA-ART-37-4` | [02023R1114-20240109](https://eur-lex.europa.eu/legal-content/FR/TXT/?uri=CELEX:02023R1114-20240109) | ✅ | Identique (2 alinéas) |
+| 9 | `RGPD-RCT-90` | [32016R0679](https://eur-lex.europa.eu/legal-content/FR/TXT/?uri=CELEX:32016R0679) | ✅ | Identique |
+| 10 | `RGPD-ART-4-19` | [02016R0679-20160504](https://eur-lex.europa.eu/legal-content/FR/TXT/?uri=CELEX:02016R0679-20160504) | ✅ | Identique (contrôlé sur le texte du JO, même contenu) |
 
 ## 1. `DORA-RCT-23` — Considérant 23
 
