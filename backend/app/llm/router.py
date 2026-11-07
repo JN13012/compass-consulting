@@ -29,6 +29,7 @@ class RoleConfig(BaseModel):
     model: str
     local: bool
     api_base: str | None = None
+    api_key: str | None = None  # generic key (AI_API_KEY); provider is given by the model prefix
     params: dict[str, Any] = {}  # provider-specific extras, e.g. {"think": false} for Ollama reasoning models
 
 
@@ -119,6 +120,8 @@ class LlmRouter:
         params: dict[str, Any] = {"model": cfg.model, "messages": messages, **cfg.params, **kwargs}
         if cfg.api_base:
             params["api_base"] = cfg.api_base
+        if cfg.api_key:
+            params["api_key"] = cfg.api_key
 
         start = time.perf_counter()
         response = self._completion(**params)

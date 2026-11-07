@@ -3,13 +3,18 @@
 # `local: true` = le modèle tourne sur la machine ; seuls ces rôles sont autorisés
 # pour une mission « confidentiel ».
 # Les valeurs ${VAR:-défaut} sont lues dans l'environnement (.env).
+#
+# Fournisseur cloud : une seule clé générique AI_API_KEY ; le fournisseur est donné par le préfixe
+# du modèle AI_MODEL (anthropic/…, openai/…, mistral/…, gemini/…).
 
 roles:
   reasoning:
-    model: ${REASONING_MODEL:-anthropic/claude-opus-5-5}
+    model: ${AI_MODEL:-anthropic/claude-opus-5-5}
+    api_key: ${AI_API_KEY:-}
     local: false
   extraction:
-    model: ${EXTRACTION_MODEL:-anthropic/claude-sonnet-5-5}
+    model: ${AI_MODEL:-anthropic/claude-opus-5-5}
+    api_key: ${AI_API_KEY:-}
     local: false
   local:
     model: ${LOCAL_MODEL:-ollama_chat/qwen3.5:9b}
@@ -18,6 +23,6 @@ roles:
     params:
       think: false   # qwen3.5 « réfléchit » par défaut : réponse vide ou très lente sans cette option
   embedding:
-    model: ollama/bge-m3
+    model: ${EMBEDDING_MODEL:-ollama/bge-m3}
     local: true
     api_base: ${OLLAMA_BASE_URL:-http://ollama:11434}

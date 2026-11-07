@@ -57,6 +57,19 @@ def test_role_params_are_forwarded() -> None:
     assert fake.calls[0]["think"] is False and fake.calls[0]["temperature"] == 0
 
 
+def test_generic_api_key_is_forwarded_only_when_set() -> None:
+    fake = FakeCompletion()
+    cfg = LlmConfig(roles={
+        "reasoning": RoleConfig(model="openai/gpt-x", local=False, api_key="sk-test"),
+        "local": RoleConfig(model="ollama_chat/m", local=True, api_key=""),
+    })
+    router = LlmRouter(cfg, fake)
+    router.complete("reasoning", MSG, Confidentiality.PUBLIC)
+    router.complete("local", MSG, Confidentiality.PUBLIC)
+    assert fake.calls[0]["api_key"] == "sk-test"
+    assert "api_key" not in fake.calls[1]
+
+
 def test_env_vars_in_config(tmp_path: "Path", monkeypatch: pytest.MonkeyPatch) -> None:
     path = tmp_path / "llm.yaml"
     path.write_text("roles:\n  local:\n    model: ${M:-ollama/default}\n    local: true\n    api_base: ${URL}\n")
