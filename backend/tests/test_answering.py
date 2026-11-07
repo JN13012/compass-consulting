@@ -52,6 +52,17 @@ def test_layer1_refusal_does_not_call_model(monkeypatch: pytest.MonkeyPatch) -> 
     assert completion.calls == []
 
 
+def test_layer1_uses_similarity_in_vector_modes() -> None:
+    from dataclasses import replace
+
+    from app.answering.service import is_relevant
+
+    settings = AnswerSettings(min_similarity=0.5)
+    assert not is_relevant([replace(hit("A"), similarity=0.42)], "hybrid", settings)
+    assert is_relevant([replace(hit("A"), similarity=0.42), replace(hit("B"), similarity=0.61)], "vector", settings)
+    assert not is_relevant([hit("A")], "hybrid", settings)  # no similarity known -> refuse
+
+
 def test_model_says_insufficient(hits: list[Hit]) -> None:
     router, _ = fake_router('{"statut": "INSUFFISANT", "reponse": "", "passages": []}')
     assert ask(router).refusal_reason == "insuffisant"

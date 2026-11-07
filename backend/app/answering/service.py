@@ -19,7 +19,7 @@ from sqlalchemy.orm import Session
 
 from app.core.models import Confidentiality
 from app.llm.router import LlmRouter
-from app.retrieval.search import Embedder, Hit, Mode, search
+from app.retrieval.search import Embedder, Hit, Mode, best_similarity, search
 
 PROMPT = (Path(__file__).parent / "prompts" / "answer.md").read_text(encoding="utf-8")
 _JSON_OBJECT = re.compile(r"\{.*\}", re.S)
@@ -45,7 +45,8 @@ class AnswerSettings:
     role: str = "reasoning"
     mode: Mode = "hybrid"
     top_k: int = 8
-    min_score: float = 0.30  # layer-1 threshold on the best hit (tuned on the dev set, phase 1c)
+    min_score: float = 0.30  # layer-1 threshold, full-text mode (tuned on the dev set, phase 1c)
+    min_similarity: float = 0.50  # layer-1 threshold, vector/hybrid modes (tuned on the dev set, phase 1c)
 
 
 @dataclass
@@ -64,6 +65,16 @@ class Answer:
     @property
     def refusal_message(self) -> str | None:
         return REFUSAL_MESSAGES[self.refusal_reason] if self.refusal_reason else None
+
+
+def is_relevant(hits: list[Hit], mode_used: Mode, settings: AnswerSettings) -> bool:
+    """Layer-1 gate: full-text uses the best rank score; vector/hybrid the best cosine similarity."""
+    if not hits:
+        return False
+    if mode_used == "fulltext":
+        return hits[0].score >= settings.min_score
+    similarity = best_similarity(hits)
+    return similarity is not None and similarity >= settings.min_similarity
 
 
 def format_passages(hits: list[Hit]) -> str:
@@ -98,7 +109,7 @@ def answer_question(
         ans.duration_s = time.perf_counter() - start
         return ans
 
-    if not hits or (mode_used == "fulltext" and hits[0].score < settings.min_score):
+    if not is_relevant(hits, mode_used, settings):
         return refuse("aucun_passage_pertinent")
 
     messages = [

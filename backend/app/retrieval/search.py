@@ -42,6 +42,7 @@ class Hit:
     original_url: str
     score: float
     ranks: dict[str, int] = field(default_factory=dict)
+    similarity: float | None = None  # cosine similarity to the question (vector / hybrid only)
 
 
 # Question words carry no legal meaning; the 'french' config does not drop them all.
@@ -146,7 +147,7 @@ def vector(
         .order_by(distance, Passage.ref).limit(limit)
     )
     return [
-        _hit(p, d, 1.0 - float(dist), {"vector": i})
+        _replace(_hit(p, d, 1.0 - float(dist), {"vector": i}), similarity=1.0 - float(dist))
         for i, (p, d, dist) in enumerate(session.execute(stmt), 1)
     ]
 
@@ -156,13 +157,21 @@ def rrf(*rankings: list[Hit], limit: int) -> list[Hit]:
     scores: dict[str, float] = {}
     best: dict[str, Hit] = {}
     ranks: dict[str, dict[str, int]] = {}
+    sims: dict[str, float] = {}
     for ranking in rankings:
         for position, hit in enumerate(ranking, 1):
             scores[hit.ref] = scores.get(hit.ref, 0.0) + 1.0 / (RRF_K + position)
             best.setdefault(hit.ref, hit)
             ranks.setdefault(hit.ref, {}).update(hit.ranks)
+            if hit.similarity is not None:
+                sims[hit.ref] = hit.similarity
     ordered = sorted(scores, key=lambda r: (-scores[r], r))[:limit]
-    return [_replace(best[r], score=scores[r], ranks=ranks[r]) for r in ordered]
+    return [_replace(best[r], score=scores[r], ranks=ranks[r], similarity=sims.get(r)) for r in ordered]
+
+
+def best_similarity(hits: list[Hit]) -> float | None:
+    values = [h.similarity for h in hits if h.similarity is not None]
+    return max(values) if values else None
 
 
 def search(

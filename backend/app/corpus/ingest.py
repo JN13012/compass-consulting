@@ -99,9 +99,14 @@ def ingest_source(
 
         parsed = build_passages(main, original, source.code)
         if same is not None:  # same text, newer splitting rules: re-parse this version in place
+            # Keep embeddings of passages whose content did not change (avoids recomputing them).
+            kept = {(p.ref, p.heading, p.text): p.embedding for p in same.passages if p.embedding is not None}
             same.passages.clear()
             session.flush()
-            same.passages = _to_rows(parsed, source.celex, version.celex)
+            rows = _to_rows(parsed, source.celex, version.celex)
+            for row in rows:
+                row.embedding = kept.get((row.ref, row.heading, row.text))
+            same.passages = rows
             same.parser_version = PARSER_VERSION
             _set_current(session, source.code, same)
             session.commit()

@@ -52,6 +52,7 @@ def test_consolidated_format() -> None:
     assert "▼M6" not in para.text  # amendment markers removed
     assert refs["C-ART-4-2"].text == "Paragraphe deux."
     assert refs["C-ART-4a"].heading == "Article 4 bis"
+    assert "Applicable jusqu’au 1er juillet 2026 au plus tard." in refs["C-ART-4a"].text  # inline sup glued
 
 
 def test_consolidated_point_split() -> None:

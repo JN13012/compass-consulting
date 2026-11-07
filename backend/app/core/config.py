@@ -13,6 +13,7 @@ class Settings(BaseSettings):
     # Role used by the knowledge base ("reasoning" = cloud model, "local" = Ollama).
     kb_role: str = "reasoning"
     kb_min_score: float = 0.30
+    kb_min_similarity: float = 0.45  # frozen on the dev set (config/eval_frozen.yaml)
     cors_origins: list[str] = ["http://localhost:5173"]
 
 

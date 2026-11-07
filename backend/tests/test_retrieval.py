@@ -61,7 +61,9 @@ def test_api_ask_end_to_end_with_fake_model(session: Session) -> None:
     router, _ = fake_router('{"statut": "OK", "reponse": "Synthèse.", "passages": ["{first}"]}')
     app.dependency_overrides[get_router] = lambda: router
     try:
-        r = TestClient(app).post("/kb/ask", json={"question": "Qu'est-ce qu'un jeton de monnaie électronique ?"})
+        r = TestClient(app).post(
+            "/kb/ask", json={"question": "Qu'est-ce qu'un jeton de monnaie électronique ?", "mode": "fulltext"}
+        )
     finally:
         app.dependency_overrides.clear()
     body = r.json()
@@ -75,7 +77,8 @@ def test_api_refuses_off_topic(session: Session) -> None:
     router, completion = fake_router("{}")
     app.dependency_overrides[get_router] = lambda: router
     try:
-        r = TestClient(app).post("/kb/ask", json={"question": "Quelle est la recette de la tarte tatin ?"})
+        body = {"question": "Quelle est la recette de la tarte tatin ?", "mode": "fulltext"}
+        r = TestClient(app).post("/kb/ask", json=body)
     finally:
         app.dependency_overrides.clear()
     assert r.json()["status"] == "refused" and completion.calls == []

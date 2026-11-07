@@ -24,6 +24,7 @@ services:
       - /srv/backend/.venv
       - ./config:/srv/config:ro
       - ./corpus:/srv/corpus
+      - ./eval:/srv/eval
     depends_on:
       db: { condition: service_healthy }
 

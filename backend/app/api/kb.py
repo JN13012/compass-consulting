@@ -27,7 +27,7 @@ def get_router() -> LlmRouter:
 class AskRequest(BaseModel):
     question: str = Field(min_length=3, max_length=1000)
     domains: list[str] | None = None
-    mode: Mode = "hybrid"
+    mode: Mode = "vector"  # frozen on the dev set (config/eval_frozen.yaml)
 
 
 class PassageOut(BaseModel):
@@ -90,7 +90,9 @@ def _embedder(llm: LlmRouter):  # type: ignore[no-untyped-def]
 @router.post("/ask", response_model=AskResponse)
 def ask(body: AskRequest, session: SessionDep, llm: RouterDep) -> AskResponse:
     s = get_settings()
-    settings = AnswerSettings(role=s.kb_role, mode=body.mode, min_score=s.kb_min_score)
+    settings = AnswerSettings(
+        role=s.kb_role, mode=body.mode, min_score=s.kb_min_score, min_similarity=s.kb_min_similarity
+    )
     try:
         ans = answer_question(session, llm, body.question, settings, body.domains, _embedder(llm))
     except Exception as exc:  # provider unreachable, missing key…

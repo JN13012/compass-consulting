@@ -24,7 +24,7 @@ warnings.filterwarnings("ignore", category=XMLParsedAsHTMLWarning)
 
 MAX_CHARS = 2500
 # Bump whenever splitting rules change: ingestion re-parses documents parsed with an older version.
-PARSER_VERSION = 4
+PARSER_VERSION = 5
 
 _PARAGRAPH_ID = re.compile(r"^\d{3}\.(\d{3})$")
 _ARTICLE_ID = re.compile(r"^art_(\d+[a-z]*)$")
@@ -98,19 +98,37 @@ def _point_parts(tag: Tag) -> tuple[str, Tag | None]:
     return _norm(first.get_text(" ") if first else ""), body if isinstance(body, Tag) else None
 
 
+_INLINE_TAGS = {"span", "sup", "sub", "a", "em", "i", "b", "strong", "abbr", "u", "q"}
+
+
 def _items(el: Tag, keep_points: bool) -> list[Item]:
-    """Render `el` as lines; top-level points become _Point items when keep_points is True."""
+    """Render `el` as lines; top-level points become _Point items when keep_points is True.
+
+    Consecutive inline content (text nodes, <span>, <sup>…) is glued into ONE line, so that
+    "1<span>er</span> juillet" stays "1er juillet" when it sits directly in a <div>.
+    """
     out: list[Item] = []
+    inline: list[str] = []
+
+    def flush() -> None:
+        text = _norm("".join(inline))
+        if text:
+            out.append(text)
+        inline.clear()
+
     for child in el.children:
         if isinstance(child, NavigableString):
-            text = _norm(str(child))
-            if text and el.name not in {"table", "tbody", "tr", "colgroup"}:
-                out.append(text)
+            if el.name not in {"table", "tbody", "tr", "colgroup"}:
+                inline.append(str(child))
             continue
         if not isinstance(child, Tag) or _classes(child) & _DROP_CLASSES or child.name in {"col", "colgroup"}:
             continue
         if "no-parag" in _classes(child):
             continue  # paragraph number, captured separately
+        if child.name in _INLINE_TAGS and not child.find(["div", "table", "p"]) and not _is_point(child):
+            inline.append(child.get_text(""))
+            continue
+        flush()
         if _is_point(child):
             label, body = _point_parts(child)
             lines = _flatten(_items(body, keep_points=False)) if body else []
@@ -123,12 +141,13 @@ def _items(el: Tag, keep_points: bool) -> list[Item]:
                 cells = [_norm(c.get_text(" ")) for c in row.find_all(["td", "th"])]
                 if any(cells):
                     out.append(" | ".join(cells))
-        elif child.name in {"p", "span"} and not child.find(["div", "table", "p"]):
+        elif child.name == "p" and not child.find(["div", "table", "p"]):
             text = _norm(child.get_text(""))  # "" keeps inline tags glued (n<sup>o</sup> -> no)
             if text:
                 out.append(text)
         else:
             out.extend(_items(child, keep_points))
+    flush()
     return out
 
 

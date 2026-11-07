@@ -1,0 +1,13 @@
+# Configuration figée le 2026-11-07, choisie sur le jeu de RÉGLAGE uniquement (eval/qa_dev.jsonl, 32 questions).
+# Elle est commitée AVANT la mesure unique sur le jeu de test (eval/qa_test.jsonl, 48 questions).
+#
+# Choix et justification (jeu de réglage) :
+# - mode : vector   — bon passage dans les 8 premiers : vector 23/24, hybrid 17/24, plein texte 10/24
+# - min_similarity : 0.45 — 22/24 bonnes réponses citées, 8/8 refus corrects (0.55 : 21/24, 8/8)
+# - top_k : 8 (valeur par défaut, non réglée)
+mode: vector
+role: local
+model: ollama_chat/qwen3.5:9b (think désactivé)
+embedding: ollama/bge-m3
+top_k: 8
+min_similarity: 0.45

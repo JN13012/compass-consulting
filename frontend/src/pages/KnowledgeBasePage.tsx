@@ -36,7 +36,7 @@ export function KnowledgeBasePage() {
   const availableDomains = [...new Set((sources.data ?? []).map((s) => s.domain))]
   const passageCount = (sources.data ?? []).reduce((n, s) => n + s.passages, 0)
 
-  const body = () => ({ question: question.trim(), domains: domains.length ? domains : null, mode: 'hybrid' as const })
+  const body = () => ({ question: question.trim(), domains: domains.length ? domains : null, mode: 'vector' as const })
 
   const ask = useMutation({
     mutationFn: async () => {
