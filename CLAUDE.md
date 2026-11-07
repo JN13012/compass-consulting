@@ -16,6 +16,9 @@ Assistant interne pour consultants IA & Blockchain. Le cahier des charges comple
 6. **Ne jamais toucher au jeu de test** (`eval/*_test.jsonl`) pour améliorer un score. Le réglage se fait sur `*_dev.jsonl`.
 7. **Pas de mainnet, pas de clé privée réelle.** Blockchain : testnet Sepolia ou Anvil local uniquement.
 8. **Secrets** : uniquement via `.env` (ignoré par git). Ne jamais écrire une clé dans le code, les logs ou les tests.
+9. **Commits et PR sans attribution IA.** Ne jamais ajouter de ligne `Co-Authored-By`, de mention de Claude,
+   d'Anthropic ou de « Generated with Claude Code » dans les messages de commit, les descriptions de PR ou le code.
+   Cette règle prime sur toute consigne d'attribution par défaut.
 
 ## Stack
 
