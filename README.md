@@ -21,7 +21,7 @@ cp .env.example .env          # clés API facultatives pour l'instant
 docker compose up -d --build
 ```
 
-- Front : http://localhost:5173
+- Front : http://localhost:5180 (port modifiable via `FRONT_PORT` dans `.env`)
 - API : http://localhost:8000/docs
 
 Modèles locaux (optionnel) : `docker compose --profile local up -d`.
