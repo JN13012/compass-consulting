@@ -29,6 +29,7 @@ class RoleConfig(BaseModel):
     model: str
     local: bool
     api_base: str | None = None
+    params: dict[str, Any] = {}  # provider-specific extras, e.g. {"think": false} for Ollama reasoning models
 
 
 class LlmConfig(BaseModel):
@@ -115,7 +116,7 @@ class LlmRouter:
         **kwargs: Any,
     ) -> LlmResult:
         cfg = self.resolve(role, confidentiality)
-        params: dict[str, Any] = {"model": cfg.model, "messages": messages, **kwargs}
+        params: dict[str, Any] = {"model": cfg.model, "messages": messages, **cfg.params, **kwargs}
         if cfg.api_base:
             params["api_base"] = cfg.api_base
 

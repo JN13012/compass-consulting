@@ -15,6 +15,8 @@ roles:
     model: ${LOCAL_MODEL:-ollama_chat/qwen3.5:9b}
     local: true
     api_base: ${OLLAMA_BASE_URL:-http://ollama:11434}
+    params:
+      think: false   # qwen3.5 « réfléchit » par défaut : réponse vide ou très lente sans cette option
   embedding:
     model: ollama/bge-m3
     local: true

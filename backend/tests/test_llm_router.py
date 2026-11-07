@@ -1,3 +1,4 @@
+from pathlib import Path
 from types import SimpleNamespace
 from typing import Any
 
@@ -47,6 +48,22 @@ def test_local_role_passes_api_base() -> None:
     fake = FakeCompletion()
     LlmRouter(CONFIG, fake).complete("local", MSG, Confidentiality.CONFIDENTIAL)
     assert fake.calls[0]["api_base"] == "http://ollama:11434"
+
+
+def test_role_params_are_forwarded() -> None:
+    fake = FakeCompletion()
+    cfg = LlmConfig(roles={"local": RoleConfig(model="ollama_chat/m", local=True, params={"think": False})})
+    LlmRouter(cfg, fake).complete("local", MSG, Confidentiality.PUBLIC, temperature=0)
+    assert fake.calls[0]["think"] is False and fake.calls[0]["temperature"] == 0
+
+
+def test_env_vars_in_config(tmp_path: "Path", monkeypatch: pytest.MonkeyPatch) -> None:
+    path = tmp_path / "llm.yaml"
+    path.write_text("roles:\n  local:\n    model: ${M:-ollama/default}\n    local: true\n    api_base: ${URL}\n")
+    monkeypatch.setenv("URL", "http://h:1")
+    monkeypatch.delenv("M", raising=False)
+    cfg = LlmConfig.from_yaml(path)
+    assert cfg.roles["local"].model == "ollama/default" and cfg.roles["local"].api_base == "http://h:1"
 
 
 def test_confidential_mission_cannot_reach_cloud_model() -> None:
