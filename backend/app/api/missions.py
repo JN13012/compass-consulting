@@ -5,6 +5,7 @@ from datetime import datetime
 from typing import Annotated, Any, Literal
 
 from fastapi import APIRouter, Depends, HTTPException
+from fastapi.responses import HTMLResponse
 from pydantic import BaseModel, Field
 from sqlalchemy import select
 from sqlalchemy.orm import Session
@@ -12,7 +13,8 @@ from sqlalchemy.orm import Session
 from app.api.kb import get_router
 from app.core.config import get_settings
 from app.core.db import get_session
-from app.core.models import Confidentiality, Mission
+from app.core.models import Benchmark, Confidentiality, Mission
+from app.deliverables.note import render_note
 from app.llm.router import ConfidentialityViolationError, LlmRouter
 from app.missions.analysis import (
     Diagnostic,
@@ -111,6 +113,15 @@ def seed_demo(session: SessionDep) -> list[MissionSummary]:
 @router.get("/{mission_id}", response_model=MissionOut)
 def get_mission(mission_id: uuid.UUID, session: SessionDep) -> MissionOut:
     return _out(_get(session, mission_id))
+
+
+@router.get("/{mission_id}/note", response_class=HTMLResponse)
+def mission_note(mission_id: uuid.UUID, session: SessionDep) -> HTMLResponse:
+    """Print-ready mission note (the browser saves it as PDF)."""
+    mission = _get(session, mission_id)
+    bench = session.scalars(select(Benchmark).where(Benchmark.mission_id == mission_id)
+                            .order_by(Benchmark.created_at.desc())).first()
+    return HTMLResponse(render_note(mission, bench))
 
 
 @router.delete("/{mission_id}", status_code=204)

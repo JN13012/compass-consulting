@@ -5,6 +5,7 @@ import { FOCUS_LABELS } from '../lib/labels'
 import { PageHeader, Placeholder } from '../components/PageHeader'
 import { useAnalyze, useMission, type MissionOut, type Step } from '../lib/missions'
 import { BenchmarkTab } from './mission/BenchmarkTab'
+import { DeliverablesTab } from './mission/DeliverablesTab'
 import { DiagnosticTab, RegulationTab, SolutionsTab } from './mission/tabs'
 
 export const MISSION_TABS = [
@@ -13,7 +14,7 @@ export const MISSION_TABS = [
   { slug: 'reglementation', label: '3. Réglementation', phase: '' },
   { slug: 'benchmark', label: '4. Benchmark', phase: '' },
   { slug: 'poc', label: '5. POC & évaluation', phase: 'phase 4' },
-  { slug: 'livrables', label: '6. Livrables', phase: 'phase 5' },
+  { slug: 'livrables', label: '6. Livrables', phase: '' },
 ] as const
 
 const STEP_OF: Record<string, Step> = { diagnostic: 'diagnostic', solutions: 'solutions', reglementation: 'regulation' }
@@ -55,6 +56,8 @@ export function MissionPage() {
         <StepPanel mission={m} step={STEP_OF[current.slug]} />
       ) : current.slug === 'benchmark' ? (
         <BenchmarkTab missionId={m.id} />
+      ) : current.slug === 'livrables' ? (
+        <DeliverablesTab mission={m} />
       ) : (
         <Placeholder phase={current.phase} />
       )}

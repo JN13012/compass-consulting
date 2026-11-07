@@ -343,7 +343,7 @@ Trois missions fictives complètes, préchargées :
 | 2 | Missions, Diagnostic, Solutions, Réglementation (IA, blockchain, cyber) + 3 missions de démo | |
 | 3 | Benchmark sourcé (données on-chain + registres) | |
 | 4 | Dossier POC + banc d'évaluation ; 1 POC démontré de bout en bout | |
-| 5 | Export livrables (PDF/PPTX) ; veille simplifiée (bouton « vérifier les mises à jour ») | |
+| 5 | Export livrables (PDF/PPTX) ; veille simplifiée (bouton « vérifier les mises à jour ») | ✅ PDF (note de mission) ; PPTX et veille non faits |
 | 6 | Finitions, captures, vidéo, README orienté recruteur | |
 
 Fournisseurs IA : Ollama (Windows, GPU local) branché en fin de parcours ; tout est développé et testé avec des

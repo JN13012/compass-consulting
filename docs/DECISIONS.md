@@ -71,3 +71,11 @@ Format : date — décision — alternatives — raison.
 - Alternatives : appels directs aux SDK des fournisseurs.
 - Raison : changer de fournisseur = modifier la config ; contrôle de confidentialité centralisé.
 - Défauts : `reasoning` Claude Opus 5.5, `extraction` Claude Sonnet 5.5, `local` mistral-small (Ollama), `embedding` bge-m3.
+
+## 2026-11-07 — Export de la note de mission : HTML imprimable plutôt que WeasyPrint
+
+- **Choix** : l'API sert `GET /missions/{id}/note`, une page HTML A4 (styles `@page`) assemblée en Python à partir
+  des résultats enregistrés et de la dernière collecte de benchmark ; le navigateur produit le PDF (« Exporter en PDF »).
+- **Alternatives** : WeasyPrint (dépendances système Cairo/Pango dans l'image Docker), python-pptx (reporté).
+- **Raison** : zéro dépendance ajoutée, rendu identique à l'écran et sur papier ; aucune citation générée, les extraits
+  viennent de la base comme partout ailleurs. Export PPTX non fait.

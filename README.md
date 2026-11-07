@@ -17,6 +17,10 @@ Cahier des charges : [`SPEC.md`](SPEC.md) · Décisions : [`docs/DECISIONS.md`](
 
 - Phase 1b — base de connaissances : recherche (plein texte, vectorielle, hybride), réponses citées avec refus en
   deux couches, page React avec citations exactes et liens EUR-Lex, mode « recherche seule » sans IA.
+- Phase 1c — évaluation : 80 questions, jeu de test gelé, intervalles de Wilson (résultats dans `docs/RESULTATS.md`).
+- Phase 2 — missions : diagnostic, solutions (verdict blockchain calculé), réglementation avec obligations citées.
+- Phase 3 — benchmark sourcé : DefiLlama + registre MiCA de l'ESMA, chaque cellule garde sa source.
+- Phase 5 — livrables : note de mission imprimable, export PDF depuis le navigateur.
 
 ```bash
 docker compose exec api python -m app.corpus ingest            # tout le corpus
