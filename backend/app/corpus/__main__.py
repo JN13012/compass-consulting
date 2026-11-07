@@ -20,9 +20,20 @@ def main(argv: list[str] | None = None) -> int:
     sub = parser.add_subparsers(dest="command", required=True)
     ingest = sub.add_parser("ingest", help="download and index official texts")
     ingest.add_argument("--source", help="only this source code (e.g. MICA)")
+    sub.add_parser("embed", help="compute missing embeddings (role 'embedding' in config/llm.yaml)")
     args = parser.parse_args(argv)
 
     settings = get_settings()
+    if args.command == "embed":
+        from app.corpus.embed import run
+        from app.llm.router import LlmConfig, LlmRouter
+
+        llm = LlmRouter(LlmConfig.from_yaml(settings.llm_config_path))
+        session = sessionmaker(bind=get_engine())()
+        run(session, llm.embed)
+        session.close()
+        return 0
+
     sources = load_sources(settings.corpus_dir / "sources.yaml")
     if args.source:
         sources = [s for s in sources if s.code == args.source.upper()]

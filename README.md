@@ -35,7 +35,8 @@ docker compose up -d --build
 - Front : http://localhost:5180 (port modifiable via `FRONT_PORT` dans `.env`)
 - API : http://localhost:8000/docs
 
-Modèles locaux (optionnel) : `docker compose --profile local up -d`.
+Modèles locaux : Ollama sous Windows (GPU), voir [`docs/OLLAMA.md`](docs/OLLAMA.md) — lancement, modèles
+(`qwen3.5:9b`, `bge-m3`), adresse vue depuis WSL, calcul des embeddings (`python -m app.corpus embed`).
 
 ## Développer
 
