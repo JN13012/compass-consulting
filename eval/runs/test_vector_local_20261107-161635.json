@@ -1,0 +1,1069 @@
+{
+ "date": "2026-11-07T16:16:35",
+ "split": "test",
+ "config": {
+  "mode": "vector",
+  "role": "local",
+  "model": "ollama_chat/qwen3.5:9b",
+  "top_k": 8,
+  "min_score": 0.3,
+  "min_similarity": 0.45
+ },
+ "summary": {
+  "bonne_source": {
+   "k": 27,
+   "n": 36,
+   "rate": 0.75,
+   "ic95": [
+    0.589,
+    0.862
+   ]
+  },
+  "correct_strict": {
+   "k": 26,
+   "n": 36,
+   "rate": 0.722,
+   "ic95": [
+    0.56,
+    0.842
+   ]
+  },
+  "faux_refus": {
+   "k": 7,
+   "n": 36,
+   "rate": 0.194,
+   "ic95": [
+    0.098,
+    0.35
+   ]
+  },
+  "mauvaise_source": {
+   "k": 2,
+   "n": 36,
+   "rate": 0.056,
+   "ic95": [
+    0.015,
+    0.181
+   ]
+  },
+  "refus_corrects": {
+   "k": 11,
+   "n": 12,
+   "rate": 0.917,
+   "ic95": [
+    0.646,
+    0.985
+   ]
+  },
+  "global": {
+   "k": 38,
+   "n": 48,
+   "rate": 0.792,
+   "ic95": [
+    0.657,
+    0.883
+   ]
+  },
+  "rappel_recherche": {
+   "k": 32,
+   "n": 36,
+   "rate": 0.889,
+   "ic95": [
+    0.747,
+    0.956
+   ]
+  },
+  "duree_moyenne_s": 10.59
+ },
+ "outcomes": [
+  {
+   "id": "n01",
+   "label": "refus_correct",
+   "status": "refused",
+   "cited": [],
+   "expected": [],
+   "answer": "",
+   "refusal_reason": "reponse_invalide",
+   "best_similarity": 0.5895077548458338,
+   "retrieved": [
+    "DAC8-ART-1-3",
+    "MICA-ART-4-2",
+    "DAC8-RCT-15",
+    "MICA-RCT-27",
+    "DAC8-RCT-9"
+   ]
+  },
+  {
+   "id": "n02",
+   "label": "refus_correct",
+   "status": "refused",
+   "cited": [],
+   "expected": [],
+   "answer": "",
+   "refusal_reason": "insuffisant",
+   "best_similarity": 0.5422922595216774,
+   "retrieved": [
+    "DAC8-RCT-27",
+    "MICA-ART-141-d",
+    "DAC8-ANX-I-5",
+    "MICA-ART-141-e",
+    "MICA-ART-146"
+   ]
+  },
+  {
+   "id": "n03",
+   "label": "refus_correct",
+   "status": "refused",
+   "cited": [],
+   "expected": [],
+   "answer": "",
+   "refusal_reason": "reponse_invalide",
+   "best_similarity": 0.4915988455296939,
+   "retrieved": [
+    "DAC-ANX-VI-6",
+    "DAC8-ANX-III-6",
+    "DAC8-ANX-III-12",
+    "DAC-ANX-VI-12",
+    "MICA-ART-25-2"
+   ]
+  },
+  {
+   "id": "n04",
+   "label": "refus_correct",
+   "status": "refused",
+   "cited": [],
+   "expected": [],
+   "answer": "",
+   "refusal_reason": "reponse_invalide",
+   "best_similarity": 0.5542010040221018,
+   "retrieved": [
+    "MICA-RCT-41",
+    "MICA-RCT-112",
+    "MICA-ART-25-1",
+    "MICA-RCT-110",
+    "MICA-RCT-113"
+   ]
+  },
+  {
+   "id": "n05",
+   "label": "refus_correct",
+   "status": "refused",
+   "cited": [],
+   "expected": [],
+   "answer": "",
+   "refusal_reason": "reponse_invalide",
+   "best_similarity": 0.4870724387721763,
+   "retrieved": [
+    "MICA-ART-60-4",
+    "MICA-RCT-45",
+    "MICA-RCT-98",
+    "MICA-RCT-110",
+    "MICA-RCT-19"
+   ]
+  },
+  {
+   "id": "n06",
+   "label": "refus_correct",
+   "status": "refused",
+   "cited": [],
+   "expected": [],
+   "answer": "",
+   "refusal_reason": "reponse_invalide",
+   "best_similarity": 0.5607825823867088,
+   "retrieved": [
+    "CRA-RCT-13",
+    "DAC8-ART-1-6",
+    "DAC8-ART-1-13",
+    "AIACT-RCT-106",
+    "ESPR-ART-30-2"
+   ]
+  },
+  {
+   "id": "n07",
+   "label": "refus_correct",
+   "status": "refused",
+   "cited": [],
+   "expected": [],
+   "answer": "",
+   "refusal_reason": "insuffisant",
+   "best_similarity": 0.5692802585029658,
+   "retrieved": [
+    "AMLR-RCT-65",
+    "CRA-ANX-III-1",
+    "AMLR-ART-22-1-d",
+    "CRA-ART-12-3",
+    "AMLR-ART-22-1-a"
+   ]
+  },
+  {
+   "id": "n08",
+   "label": "refus_correct",
+   "status": "refused",
+   "cited": [],
+   "expected": [],
+   "answer": "",
+   "refusal_reason": "insuffisant",
+   "best_similarity": 0.5283154226759497,
+   "retrieved": [
+    "ESPR-ANX-IV-1",
+    "CRA-ART-12-3",
+    "AIACT-ART-112-2",
+    "CRA-ANX-VIII-1",
+    "CRA-ART-32-3"
+   ]
+  },
+  {
+   "id": "n10",
+   "label": "reponse_hors_corpus",
+   "status": "answered",
+   "cited": [
+    "ESPR-ART-35-2"
+   ],
+   "expected": [],
+   "answer": "Le Digital Services Act confère aux autorités de surveillance du marché le pouvoir d'enjoindre à un fournisseur de place de marché en ligne de retirer des contenus spécifiques identifiés comme illicites, conformément au règlement (UE) 2022/2065. Ces contenus sont considérés comme illicites au sens de l'article 3, point h), du règlement susmentionné. Les autorités peuvent émettre ces injonctions en application de l'article 9 du même règlement.",
+   "refusal_reason": null,
+   "best_similarity": 0.5564428832268192,
+   "retrieved": [
+    "AIACT-RCT-136",
+    "CRA-RCT-13",
+    "ESPR-ART-35-2",
+    "AIACT-ART-50-4",
+    "MICA-ART-111-4"
+   ]
+  },
+  {
+   "id": "n14",
+   "label": "refus_correct",
+   "status": "refused",
+   "cited": [],
+   "expected": [],
+   "answer": "",
+   "refusal_reason": "insuffisant",
+   "best_similarity": 0.5631365365141953,
+   "retrieved": [
+    "MICA-ART-38-5",
+    "AMLR-RCT-59",
+    "AMLR-ART-52-2",
+    "AMLR-ART-6-3",
+    "MIFID2-ART-51a-1"
+   ]
+  },
+  {
+   "id": "n15",
+   "label": "refus_correct",
+   "status": "refused",
+   "cited": [],
+   "expected": [],
+   "answer": "",
+   "refusal_reason": "insuffisant",
+   "best_similarity": 0.4898444979919496,
+   "retrieved": [
+    "AIACT-ART-99-4",
+    "CRA-ART-64-2",
+    "MIFID2-ART-71-6",
+    "MIFID2-ART-70-6-f",
+    "AIACT-ART-99-3"
+   ]
+  },
+  {
+   "id": "n17",
+   "label": "refus_correct",
+   "status": "refused",
+   "cited": [],
+   "expected": [],
+   "answer": "",
+   "refusal_reason": "insuffisant",
+   "best_similarity": 0.4604498195111999,
+   "retrieved": [
+    "ESPR-ANX-II-1",
+    "ESPR-ART-37-2",
+    "ESPR-RCT-24",
+    "ESPR-RCT-47",
+    "ESPR-ART-5-11"
+   ]
+  },
+  {
+   "id": "q03",
+   "label": "correct",
+   "status": "answered",
+   "cited": [
+    "MICA-ART-3-1-6"
+   ],
+   "expected": [
+    "MICA-ART-3-1-6"
+   ],
+   "answer": "Un jeton se référant à un ou des actifs est défini comme un type de crypto-actif qui n’est pas un jeton de monnaie électronique et qui vise à conserver une valeur stable en se référant à une autre valeur, un droit ou une combinaison de ceux-ci, y compris une ou plusieurs monnaies officielles. Cette définition s'applique aux jetons utilisés pour des paiements et des envois de fonds au sein d'une zone de monnaie unique.",
+   "refusal_reason": null,
+   "best_similarity": 0.7233964077934245,
+   "retrieved": [
+    "MICA-ART-3-1-6",
+    "MICA-ART-43-1",
+    "MICA-RCT-61",
+    "MICA-ART-36-8",
+    "MICA-ART-44-1"
+   ]
+  },
+  {
+   "id": "q05",
+   "label": "correct",
+   "status": "answered",
+   "cited": [
+    "MICA-ART-50-1",
+    "MICA-ART-50-3"
+   ],
+   "expected": [
+    "MICA-ART-50-1"
+   ],
+   "answer": "Non, les émetteurs de jetons de monnaie électronique ne peuvent pas verser d'intérêts en lien avec ces jetons. Toute rémunération ou avantage lié à la durée de détention est considéré comme un intérêt et est interdit. Cette interdiction s'applique même aux compensations ou remises nettes ayant un effet équivalent à celui d'un intérêt.",
+   "refusal_reason": null,
+   "best_similarity": 0.7416109174689824,
+   "retrieved": [
+    "MICA-ART-50-3",
+    "MICA-ART-50-1",
+    "MICA-RCT-68",
+    "MICA-RCT-72",
+    "MICA-ART-49-2"
+   ]
+  },
+  {
+   "id": "q10",
+   "label": "correct",
+   "status": "answered",
+   "cited": [
+    "MICA-ART-67-1",
+    "MICA-ANX-IV-1"
+   ],
+   "expected": [
+    "MICA-ART-67-1",
+    "MICA-ANX-IV"
+   ],
+   "answer": "Les prestataires doivent détenir des garanties prudentielles égales au plus élevé entre les exigences de capital minimal permanent (selon la catégorie de services) et un quart des frais généraux fixes de l'année précédente. Les montants de capital varient ainsi : 50 000 EUR pour la catégorie 1, 125 000 EUR pour la catégorie 2 et 150 000 EUR pour la catégorie 3. Ces exigences s'appliquent à tout moment.",
+   "refusal_reason": null,
+   "best_similarity": 0.8103973865509263,
+   "retrieved": [
+    "MICA-ART-67-1",
+    "MICA-RCT-80",
+    "MICA-ANX-IV-1",
+    "MICA-RCT-83",
+    "MICA-RCT-73"
+   ]
+  },
+  {
+   "id": "q11",
+   "label": "correct",
+   "status": "answered",
+   "cited": [
+    "MICA-ART-75-7",
+    "MICA-ART-70-1",
+    "MICA-RCT-83"
+   ],
+   "expected": [
+    "MICA-ART-75-7"
+   ],
+   "answer": "Oui, un prestataire de services sur crypto-actifs qui assure la conservation et l'administration de crypto-actifs pour le compte de clients doit opérer une ségrégation entre les détentions pour compte de ses clients et celles pour compte propre. Les crypto-actifs conservés sont juridiquement séparés du patrimoine du prestataire, de sorte que les créanciers du prestataire ne peuvent faire valoir aucun droit sur ces actifs en cas d'insolvabilité. De plus, le prestataire veille à ce que les crypto-actifs conservés soient fonctionnellement séparés de son patrimoine.",
+   "refusal_reason": null,
+   "best_similarity": 0.7750272311359786,
+   "retrieved": [
+    "MICA-ART-75-7",
+    "MICA-ART-70-2",
+    "MICA-ART-70-1",
+    "MICA-RCT-83",
+    "MICA-RCT-82"
+   ]
+  },
+  {
+   "id": "q12",
+   "label": "correct",
+   "status": "answered",
+   "cited": [
+    "MICA-ART-89-1",
+    "MICA-ART-89-2",
+    "MICA-ART-89-3"
+   ],
+   "expected": [
+    "MICA-ART-89-1"
+   ],
+   "answer": "Une opération d'initié se produit lorsqu'une personne utilise une information privilégiée pour acquérir ou céder des crypto-actifs, directement ou indirectement, pour son compte ou celui d'un tiers. L'utilisation d'une telle information pour annuler ou modifier un ordre passé avant la possession de l'information est également considérée comme une opération d'initié. Il est interdit à quiconque possédant une information privilégiée de recommander ou d'inciter une autre personne à effectuer ces acquisitions, cessions, annulations ou modifications.",
+   "refusal_reason": null,
+   "best_similarity": 0.726088864390368,
+   "retrieved": [
+    "MICA-ART-89-1",
+    "MICA-ART-89-2",
+    "MICA-ART-89-3",
+    "TFR-ART-3-21",
+    "TFR-ART-20"
+   ]
+  },
+  {
+   "id": "q14",
+   "label": "correct",
+   "status": "answered",
+   "cited": [
+    "MICA-ART-59-1",
+    "MICA-ART-59-7",
+    "DAC8-RCT-17"
+   ],
+   "expected": [
+    "MICA-ART-59-1"
+   ],
+   "answer": "Seules les personnes morales ou entreprises agréées en tant que prestataires de services sur crypto-actifs peuvent fournir ces services au sein de l'Union, conformément à l'article 59, paragraphe 1 [MICA-ART-59-1]. De même, les établissements de crédit, dépositaires centraux de titres, entreprises d'investissement et autres entités autorisées selon l'article 60 peuvent également fournir ces services [MICA-ART-59-1]. Les prestataires agréés dans un État membre peuvent exercer leur activité dans toute l'Union via le passeportage [DAC8-RCT-17].",
+   "refusal_reason": null,
+   "best_similarity": 0.7457380759616893,
+   "retrieved": [
+    "MICA-ART-59-1",
+    "DAC8-RCT-17",
+    "MICA-ART-59-7",
+    "MICA-RCT-75",
+    "MICA-RCT-76"
+   ]
+  },
+  {
+   "id": "q16",
+   "label": "faux_refus",
+   "status": "refused",
+   "cited": [],
+   "expected": [
+    "TFR-ART-14-2"
+   ],
+   "answer": "",
+   "refusal_reason": "reponse_invalide",
+   "best_similarity": 0.7933627839901075,
+   "retrieved": [
+    "TFR-ART-14-2",
+    "TFR-ART-14-1",
+    "TFR-RCT-37",
+    "TFR-RCT-43",
+    "TFR-RCT-36"
+   ]
+  },
+  {
+   "id": "q19",
+   "label": "mauvaise_source",
+   "status": "answered",
+   "cited": [
+    "TFR-ART-17-1",
+    "TFR-RCT-43",
+    "TFR-ART-20",
+    "TFR-RCT-47"
+   ],
+   "expected": [
+    "TFR-ART-16-1"
+   ],
+   "answer": "Le prestataire de services sur crypto-actifs du bénéficiaire doit appliquer des procédures efficaces, fondées sur les risques, pour déterminer s'il y a lieu de rejeter, renvoyer ou suspendre un transfert non accompagné des informations requises. Ces procédures doivent inclure, le cas échéant, un contrôle après ou durant les transferts afin de détecter si les informations sont manquantes ou incomplètes. Le prestataire doit également faire preuve d'une vigilance particulière lors de l'évaluation des risques si ces informations sont absentes.",
+   "refusal_reason": null,
+   "best_similarity": 0.7998073337970295,
+   "retrieved": [
+    "TFR-RCT-43",
+    "TFR-ART-17-1",
+    "TFR-ART-20",
+    "TFR-ART-21-1",
+    "TFR-ART-16-1"
+   ]
+  },
+  {
+   "id": "q20",
+   "label": "correct",
+   "status": "answered",
+   "cited": [
+    "DAC8-ART-2-1",
+    "DAC8-ART-2-3",
+    "DAC8-ART-2-2"
+   ],
+   "expected": [
+    "DAC8-ART-2-1"
+   ],
+   "answer": "Les États membres devaient adopter et publier les dispositions nécessaires pour se conformer à la directive au plus tard le 31 décembre 2025, date d'application du 1er janvier 2026. Une dérogation permet aux États membres de reporter cette transposition jusqu'au 31 décembre 2029 pour certaines dispositions spécifiques relatives à l'article 27 quater, paragraphe 2, avec application au 1er janvier 2030. Par ailleurs, une autre dérogation autorise un délai supplémentaire jusqu'au 31 décembre 2027 pour la transposition des articles 1er, points 11) et 16), ainsi que de l'article 27 quater, paragraphes 3 et 4, avec application au 1er janvier 2028.",
+   "refusal_reason": null,
+   "best_similarity": 0.54243892937171,
+   "retrieved": [
+    "DAC8-ART-2-1",
+    "DAC8-ART-2-3",
+    "DAC8-ART-1-11",
+    "DAC8-ART-1-8",
+    "DAC8-ART-2-2"
+   ]
+  },
+  {
+   "id": "q21",
+   "label": "faux_refus",
+   "status": "refused",
+   "cited": [],
+   "expected": [
+    "DAC-ART-8ad"
+   ],
+   "answer": "",
+   "refusal_reason": "reponse_invalide",
+   "best_similarity": 0.7227586327750183,
+   "retrieved": [
+    "DAC8-ANX-III-1",
+    "DAC-ANX-VI-1",
+    "DAC8-ART-1-6",
+    "DAC8-ANX-III-25",
+    "DAC8-RCT-14"
+   ]
+  },
+  {
+   "id": "q22",
+   "label": "faux_refus",
+   "status": "refused",
+   "cited": [],
+   "expected": [
+    "DAC-ART-8ad-3"
+   ],
+   "answer": "",
+   "refusal_reason": "reponse_invalide",
+   "best_similarity": 0.769051042838732,
+   "retrieved": [
+    "DAC8-RCT-15",
+    "DAC8-RCT-19",
+    "DAC-ART-8ad-3-c",
+    "DAC8-ART-1-6",
+    "DAC8-RCT-9"
+   ]
+  },
+  {
+   "id": "q25",
+   "label": "correct",
+   "status": "answered",
+   "cited": [
+    "DLT-ART-2-6",
+    "DLT-RCT-13",
+    "DLT-ART-4-1"
+   ],
+   "expected": [
+    "DLT-ART-2-6"
+   ],
+   "answer": "Un MTF DLT est défini comme un système multilatéral de négociation qui n'admet à la négociation que des instruments financiers DLT. Il doit être exploité par une entreprise d'investissement ou un opérateur de marché agréé au titre de la directive 2014/65/UE et bénéficiaire d'une autorisation spécifique. Ce système est soumis aux exigences applicables aux systèmes multilatéraux de négociation, sauf exemptions accordées par l'autorité compétente.",
+   "refusal_reason": null,
+   "best_similarity": 0.622658739124315,
+   "retrieved": [
+    "DLT-RCT-13",
+    "DLT-ART-2-6",
+    "DLT-ART-4-1",
+    "DLT-ART-4-3",
+    "MIFID2-ART-4-1-22"
+   ]
+  },
+  {
+   "id": "q26",
+   "label": "correct",
+   "status": "answered",
+   "cited": [
+    "DLT-ART-8-11",
+    "DLT-RCT-48"
+   ],
+   "expected": [
+    "DLT-ART-8-11"
+   ],
+   "answer": "Une autorisation spécifique d'exploiter un MTF DLT est valable pour une période maximale de six ans à compter de sa date de délivrance. Cette durée permet aux exploitants d'adapter leur plan d'affaires et à l'AEMF de réunir des données sur le fonctionnement du régime pilote.",
+   "refusal_reason": null,
+   "best_similarity": 0.7663853825647907,
+   "retrieved": [
+    "DLT-ART-8-11",
+    "DLT-ART-8-9",
+    "DLT-ART-8-6",
+    "DLT-ART-9-11",
+    "DLT-ART-10-11"
+   ]
+  },
+  {
+   "id": "q27",
+   "label": "faux_refus",
+   "status": "refused",
+   "cited": [],
+   "expected": [
+    "MIFID2-ART-4-1-15"
+   ],
+   "answer": "",
+   "refusal_reason": "reponse_invalide",
+   "best_similarity": 0.5518689093747036,
+   "retrieved": [
+    "MIFID2-RCT-9",
+    "MIFID2-ART-52-2",
+    "MIFID2-ART-51-6",
+    "MIFID2-ART-32-2",
+    "MIFID2-ART-24-2"
+   ]
+  },
+  {
+   "id": "q28",
+   "label": "correct",
+   "status": "answered",
+   "cited": [
+    "MIFID2-ANX-I-1",
+    "MIFID2-ART-4-1-2"
+   ],
+   "expected": [
+    "MIFID2-ANX-I"
+   ],
+   "answer": "Les services d'investissement listés par MiFID II incluent la réception et transmission d'ordres, l'exécution d'ordres au nom de clients, la négociation pour compte propre, la gestion de portefeuille, le conseil en investissement, la prise ferme ou le placement d'instruments financiers, ainsi que l'exploitation de MTF ou OTF. Ces services concernent les instruments financiers tels que les valeurs mobilières, les instruments du marché monétaire et les parts d'organismes de placement collectif. Les services auxiliaires comme la conservation d'instruments financiers ou le conseil en structure du capital sont également énumérés.",
+   "refusal_reason": null,
+   "best_similarity": 0.5750596001567884,
+   "retrieved": [
+    "MIFID2-ANX-I-1",
+    "MIFID2-ART-34-1",
+    "MIFID2-ART-4-1-2",
+    "MIFID2-ART-34-2",
+    "MIFID2-RCT-161"
+   ]
+  },
+  {
+   "id": "q29",
+   "label": "correct",
+   "status": "answered",
+   "cited": [
+    "MIFID2-ART-5-1",
+    "MIFID2-RCT-37",
+    "MIFID2-RCT-43"
+   ],
+   "expected": [
+    "MIFID2-ART-5-1"
+   ],
+   "answer": "Oui, la fourniture de services d'investissement et/ou l'exercice d'activités d'investissement à titre professionnel nécessite un agrément préalable délivré par l'autorité compétente de l'État membre d'origine. Cet agrément est obligatoire pour assurer la protection des investisseurs et la stabilité du système financier, sauf si les services fournis sont ponctuels et non couverts par l'agrément existant.",
+   "refusal_reason": null,
+   "best_similarity": 0.629853389867993,
+   "retrieved": [
+    "MIFID2-ART-5-1",
+    "MIFID2-ANX-II-1",
+    "MIFID2-ART-34-1",
+    "MIFID2-RCT-37",
+    "MIFID2-ANX-II-2"
+   ]
+  },
+  {
+   "id": "q30",
+   "label": "correct",
+   "status": "answered",
+   "cited": [
+    "DORA-ART-19-1",
+    "DORA-RCT-51"
+   ],
+   "expected": [
+    "DORA-ART-19-1"
+   ],
+   "answer": "Une entité financière doit déclarer les incidents majeurs liés aux TIC à l'autorité compétente pertinente désignée par les États membres, conformément à l'article 46. Pour les établissements de crédit importants, la déclaration s'effectue auprès de l'autorité nationale compétente concernée qui transmet ensuite immédiatement cette information à la BCE. Les entités financières soumises à la surveillance de plusieurs autorités nationales doivent également déclarer l'incident à l'autorité unique désignée par les États membres.",
+   "refusal_reason": null,
+   "best_similarity": 0.8137863853893414,
+   "retrieved": [
+    "DORA-ART-19-1",
+    "DORA-ART-19-3",
+    "DORA-RCT-52",
+    "DORA-ART-19-8",
+    "DORA-ART-19-4"
+   ]
+  },
+  {
+   "id": "q32",
+   "label": "correct",
+   "status": "answered",
+   "cited": [
+    "DORA-ART-26-1",
+    "DORA-RCT-61",
+    "DORA-ART-26-8"
+   ],
+   "expected": [
+    "DORA-ART-26-1"
+   ],
+   "answer": "Les entités financières concernées doivent effectuer au moins tous les trois ans des tests avancés au moyen d'un test d'intrusion fondé sur la menace. L'autorité compétente peut, en fonction du profil de risque et des circonstances opérationnelles, demander de réduire ou d'augmenter cette fréquence. De plus, lorsque des entités financières ont recours à des testeurs internes, elles doivent engager un testeur externe tous les trois tests.",
+   "refusal_reason": null,
+   "best_similarity": 0.7336249887682589,
+   "retrieved": [
+    "DORA-ART-26-1",
+    "DORA-RCT-61",
+    "DORA-RCT-56",
+    "DORA-ART-26-8",
+    "DORA-ART-27-3"
+   ]
+  },
+  {
+   "id": "q36",
+   "label": "correct",
+   "status": "answered",
+   "cited": [
+    "NIS2-ART-21-1",
+    "NIS2-RCT-79",
+    "NIS2-ART-21-2",
+    "NIS2-ART-21-5"
+   ],
+   "expected": [
+    "NIS2-ART-21-2"
+   ],
+   "answer": "La directive impose aux entités essentielles et importantes de prendre des mesures techniques, opérationnelles et organisationnelles appropriées pour gérer les risques liés à la sécurité des réseaux et systèmes d'information (NIS2-ART-21-1). Ces mesures doivent reposer sur une approche «tous risques» protégeant contre les incidents, y compris les événements physiques comme les incendies ou les défaillances électriques (NIS2-RCT-79), et comprennent au moins dix domaines spécifiques tels que l'analyse des risques, la gestion des incidents, la continuité des activités et la sécurité de la chaîne d'approvisionnement (NIS2-ART-21-2). La Commission peut également adopter des actes d'exécution pour préciser les exigences techniques et méthodologiques liées à ces mesures (NIS2-ART-21-5).",
+   "refusal_reason": null,
+   "best_similarity": 0.5837171722302582,
+   "retrieved": [
+    "NIS2-ART-21-2",
+    "NIS2-ART-21-1",
+    "NIS2-ART-7-2",
+    "NIS2-RCT-22",
+    "NIS2-RCT-79"
+   ]
+  },
+  {
+   "id": "q37",
+   "label": "bonne_source_fait_absent",
+   "status": "answered",
+   "cited": [
+    "NIS2-RCT-137",
+    "NIS2-ART-20-1",
+    "NIS2-ART-20-2"
+   ],
+   "expected": [
+    "NIS2-ART-20-1"
+   ],
+   "answer": "Selon NIS 2, les organes de direction des entités essentielles doivent approuver les mesures de gestion des risques en matière de cybersécurité et superviser leur mise en œuvre. Ils sont également tenus d'assurer la responsabilité de ces mesures et peuvent être tenus responsables en cas de violation des obligations prévues à l'article 21. De plus, les membres de ces organes doivent suivre une formation pour acquérir les compétences nécessaires afin de déterminer les risques et évaluer les pratiques de gestion.",
+   "refusal_reason": null,
+   "best_similarity": 0.6510792512904504,
+   "retrieved": [
+    "NIS2-RCT-137",
+    "NIS2-RCT-83",
+    "NIS2-ART-20-2",
+    "NIS2-ART-20-1",
+    "NIS2-RCT-15"
+   ]
+  },
+  {
+   "id": "q38",
+   "label": "correct",
+   "status": "answered",
+   "cited": [
+    "NIS2-ART-34-4",
+    "NIS2-ART-34-2"
+   ],
+   "expected": [
+    "NIS2-ART-34-4"
+   ],
+   "answer": "Pour une entité essentielle violant les articles 21 ou 23, l'amende maximale s'élève à au moins 10 000 000 EUR ou à au moins 2 % du chiffre d'affaires annuel mondial total de l'exercice précédent, le montant le plus élevé étant retenu. Ces sanctions sont imposées en complément des mesures visées aux articles 32 et 33.",
+   "refusal_reason": null,
+   "best_similarity": 0.6300597509546713,
+   "retrieved": [
+    "NIS2-ART-34-4",
+    "NIS2-ART-34-5",
+    "NIS2-ART-34-8",
+    "NIS2-ART-34-1",
+    "NIS2-ART-34-2"
+   ]
+  },
+  {
+   "id": "q39",
+   "label": "faux_refus",
+   "status": "refused",
+   "cited": [],
+   "expected": [
+    "NIS2-ART-2-1"
+   ],
+   "answer": "",
+   "refusal_reason": "reponse_invalide",
+   "best_similarity": 0.47750742047760086,
+   "retrieved": [
+    "NIS2-ANX-II-1",
+    "NIS2-ANX-II-2",
+    "NIS2-ANX-I-3",
+    "NIS2-RCT-7",
+    "NIS2-RCT-56"
+   ]
+  },
+  {
+   "id": "q41",
+   "label": "correct",
+   "status": "answered",
+   "cited": [
+    "CRA-RCT-60",
+    "CRA-ART-13-8"
+   ],
+   "expected": [
+    "CRA-ART-13-8"
+   ],
+   "answer": "Un fabricant doit assurer le traitement des vulnérabilités pendant une période d'assistance minimale de cinq ans, sauf si la durée de vie du produit est inférieure à cette durée. Dans ce cas, la période d'assistance correspond à la durée d'utilisation prévue du produit.",
+   "refusal_reason": null,
+   "best_similarity": 0.7397165453602956,
+   "retrieved": [
+    "CRA-RCT-60",
+    "CRA-ART-14-2",
+    "CRA-ART-13-8",
+    "CRA-ART-13-9",
+    "CRA-RCT-34"
+   ]
+  },
+  {
+   "id": "q43",
+   "label": "mauvaise_source",
+   "status": "answered",
+   "cited": [
+    "CRA-RCT-126"
+   ],
+   "expected": [
+    "CRA-ART-71-2"
+   ],
+   "answer": "Le règlement s'applique à partir du 11 décembre 2027, sauf pour certaines obligations spécifiques comme les signalements de vulnérabilités activement exploitées (à partir du 11 septembre 2026) et la notification des organismes d'évaluation de la conformité (à partir du 11 juin 2026).",
+   "refusal_reason": null,
+   "best_similarity": 0.5870810954764284,
+   "retrieved": [
+    "CRA-RCT-126",
+    "CRA-ART-54-1",
+    "CRA-ART-54-8",
+    "CRA-ART-33-2",
+    "CRA-ART-69-1"
+   ]
+  },
+  {
+   "id": "q44",
+   "label": "correct",
+   "status": "answered",
+   "cited": [
+    "AMLR-ART-80-1",
+    "AMLR-RCT-161",
+    "AMLR-RCT-18",
+    "AMLR-ART-80-4",
+    "AMLR-ART-80-3"
+   ],
+   "expected": [
+    "AMLR-ART-80-1"
+   ],
+   "answer": "Le règlement fixe un plafond de 10 000 EUR pour les paiements en argent liquide effectués ou reçus lors d'échanges de biens ou de services, que la transaction soit exécutée en une fois ou en plusieurs opérations liées. Ce seuil s'applique aux personnes négociant des biens ou fournissant des services, mais ne concerne pas les paiements entre personnes physiques agissant à titre privé ni ceux effectués dans les locaux d'établissements de crédit ou de paiement. Les États membres peuvent adopter des seuils inférieurs au niveau national.",
+   "refusal_reason": null,
+   "best_similarity": 0.6820776572782938,
+   "retrieved": [
+    "AMLR-RCT-161",
+    "AMLR-RCT-18",
+    "AMLR-RCT-61",
+    "AMLR-ART-80-4",
+    "AMLR-ART-80-1"
+   ]
+  },
+  {
+   "id": "q45",
+   "label": "correct",
+   "status": "answered",
+   "cited": [
+    "AMLR-ART-52-1",
+    "AMLR-RCT-107"
+   ],
+   "expected": [
+    "AMLR-ART-52-1"
+   ],
+   "answer": "Selon l'article 52, paragraphe 1, une personne est considérée comme détenant une participation au capital si elle détient directement ou indirectement au moins 25 % des actions ou des droits de vote. Le considérant 107 confirme que cette participation à hauteur d'au moins 25 % détermine le bénéficiaire effectif d'une société, bien que des seuils inférieurs puissent être appliqués dans des cas spécifiques à risque élevé.",
+   "refusal_reason": null,
+   "best_similarity": 0.5899042791755764,
+   "retrieved": [
+    "AMLR-ART-52-1",
+    "AMLR-ART-51",
+    "AMLR-ART-55",
+    "AMLR-ART-52-4",
+    "AMLR-RCT-107"
+   ]
+  },
+  {
+   "id": "q47",
+   "label": "correct",
+   "status": "answered",
+   "cited": [
+    "AIACT-ART-5-1-c",
+    "AIACT-RCT-31"
+   ],
+   "expected": [
+    "AIACT-ART-5-1-c"
+   ],
+   "answer": "La notation sociale des personnes par l'IA n'est pas autorisée car elle est expressément interdite. Le règlement interdit la mise sur le marché, la mise en service ou l'utilisation de systèmes d'IA pour l'évaluation ou la classification de personnes physiques en fonction de leur comportement social, lorsque cela conduit à un traitement préjudiciable ou défavorable [AIACT-ART-5-1-c]. Cette interdiction s'applique également aux systèmes permettant la notation sociale qui peuvent conduire à des résultats discriminatoires et à l'exclusion de certains groupes [AIACT-RCT-31].",
+   "refusal_reason": null,
+   "best_similarity": 0.7757851347795884,
+   "retrieved": [
+    "AIACT-RCT-31",
+    "AIACT-ART-5-1-c",
+    "AIACT-ART-5-1-g",
+    "AIACT-ART-5-1-d",
+    "AIACT-RCT-58"
+   ]
+  },
+  {
+   "id": "q48",
+   "label": "correct",
+   "status": "answered",
+   "cited": [
+    "AIACT-ART-3-1",
+    "AIACT-RCT-12"
+   ],
+   "expected": [
+    "AIACT-ART-3-1"
+   ],
+   "answer": "L'AI Act définit un «système d'IA» comme un système automatisé conçu pour fonctionner à différents niveaux d'autonomie et capable de s'adapter après son déploiement. Il déduit, à partir des entrées reçues, la manière de générer des sorties telles que des prédictions, du contenu, des recommandations ou des décisions influençant les environnements physiques ou virtuels. Cette définition repose sur une capacité d'inférence qui va au-delà du traitement de données de base et permet l'apprentissage, le raisonnement ou la modélisation.",
+   "refusal_reason": null,
+   "best_similarity": 0.6858741096516549,
+   "retrieved": [
+    "AIACT-ART-3-1",
+    "AIACT-RCT-12",
+    "AIACT-RCT-1",
+    "AIACT-ANX-III-1",
+    "AIACT-ART-6-3"
+   ]
+  },
+  {
+   "id": "q49",
+   "label": "faux_refus",
+   "status": "refused",
+   "cited": [],
+   "expected": [
+    "AIACT-ANX-III",
+    "AIACT-ART-6"
+   ],
+   "answer": "",
+   "refusal_reason": "reponse_invalide",
+   "best_similarity": 0.7173047895636495,
+   "retrieved": [
+    "AIACT-RCT-61",
+    "AIACT-RCT-57",
+    "AIACT-ART-6-3",
+    "AIACT-ANX-III-1",
+    "AIACT-RCT-54"
+   ]
+  },
+  {
+   "id": "q50",
+   "label": "correct",
+   "status": "answered",
+   "cited": [
+    "AIACT-ART-50-1"
+   ],
+   "expected": [
+    "AIACT-ART-50-1"
+   ],
+   "answer": "Oui, il faut informer les utilisateurs lorsqu'ils interagissent avec un système d'IA comme un chatbot. Les fournisseurs doivent veiller à ce que les personnes physiques soient informées qu'elles interagissent avec un système d'IA, sauf si cela est évident pour une personne normalement informée et raisonnablement attentive (MICA-ART-7-1). Cette obligation ne s'applique pas aux systèmes utilisés pour la prévention ou la détection des infractions pénales sous certaines conditions (MICA-ART-7-1).",
+   "refusal_reason": null,
+   "best_similarity": 0.5309287552364991,
+   "retrieved": [
+    "MICA-ART-7-1",
+    "AIACT-ART-50-1",
+    "MICA-ART-8-2",
+    "TFR-RCT-41",
+    "MICA-ART-8-6"
+   ]
+  },
+  {
+   "id": "q51",
+   "label": "correct",
+   "status": "answered",
+   "cited": [
+    "AIACT-ART-99-3",
+    "AIACT-ART-100-2"
+   ],
+   "expected": [
+    "AIACT-ART-99-3"
+   ],
+   "answer": "Le montant maximal des amendes pour le non-respect des pratiques interdites en matière d'IA (article 5) est de 35 000 000 EUR ou, pour une entreprise, jusqu'à 7 % de son chiffre d'affaires annuel mondial total réalisé au cours de l'exercice précédent, le montant le plus élevé étant retenu. Pour les institutions et organes de l'Union, ce montant est limité à 1 500 000 EUR. Ces montants s'appliquent spécifiquement aux violations des pratiques interdites énumérées à l'article 5.",
+   "refusal_reason": null,
+   "best_similarity": 0.723099990075826,
+   "retrieved": [
+    "AIACT-ART-99-3",
+    "AIACT-ART-100-2",
+    "AIACT-ART-100-3",
+    "AIACT-ART-101-1",
+    "AIACT-ART-5-1-d"
+   ]
+  },
+  {
+   "id": "q52",
+   "label": "correct",
+   "status": "answered",
+   "cited": [
+    "AIACT-ART-4-1"
+   ],
+   "expected": [
+    "AIACT-ART-4"
+   ],
+   "answer": "Les fournisseurs et les déployeurs de systèmes d'IA doivent prendre des mesures pour favoriser le développement de la maîtrise de l'IA par leur personnel, en tenant compte de leurs connaissances techniques et de leur formation. Cette obligation vise à s'assurer que les personnes occupant du fonctionnement ou de l'utilisation des systèmes possèdent les compétences nécessaires pour leur contexte d'utilisation spécifique.",
+   "refusal_reason": null,
+   "best_similarity": 0.6609392186621068,
+   "retrieved": [
+    "AIACT-ART-4-1",
+    "AIACT-ART-50-1",
+    "AIACT-RCT-92",
+    "AIACT-RCT-73",
+    "AIACT-RCT-88"
+   ]
+  },
+  {
+   "id": "q53",
+   "label": "correct",
+   "status": "answered",
+   "cited": [
+    "AIACT-ART-113",
+    "AIACT-RCT-179"
+   ],
+   "expected": [
+    "AIACT-ART-113"
+   ],
+   "answer": "L'AI Act entre en vigueur le vingtième jour suivant sa publication et devient applicable à partir du 2 août 2026. Toutefois, certains chapitres s'appliquent dès le 2 février 2025 ou le 2 août 2025 selon les dispositions spécifiques.",
+   "refusal_reason": null,
+   "best_similarity": 0.6267788410186768,
+   "retrieved": [
+    "AIACT-RCT-179",
+    "AIACT-ART-111-1",
+    "AIACT-ART-113",
+    "AIACT-ART-111-3",
+    "AIACT-RCT-177"
+   ]
+  },
+  {
+   "id": "q54",
+   "label": "correct",
+   "status": "answered",
+   "cited": [
+    "RGPD-RCT-85",
+    "RGPD-ART-33-1"
+   ],
+   "expected": [
+    "RGPD-ART-33-1"
+   ],
+   "answer": "Le responsable du traitement doit notifier la violation à l'autorité de contrôle compétente, telle que la CNIL, dans les meilleurs délais et, si possible, 72 heures au plus tard après en avoir pris connaissance. Ce délai s'applique sauf si la violation ne présente pas de risque pour les droits et libertés des personnes physiques. En cas de retard, la notification doit être assortie des motifs du retard.",
+   "refusal_reason": null,
+   "best_similarity": 0.6482468004815103,
+   "retrieved": [
+    "RGPD-RCT-85",
+    "RGPD-ART-33-1",
+    "DAC-ART-25-6",
+    "RGPD-ART-33-3",
+    "NIS2-ART-35-1"
+   ]
+  },
+  {
+   "id": "q56",
+   "label": "faux_refus",
+   "status": "refused",
+   "cited": [],
+   "expected": [
+    "RGPD-ART-6-1"
+   ],
+   "answer": "",
+   "refusal_reason": "reponse_invalide",
+   "best_similarity": 0.7200421571480752,
+   "retrieved": [
+    "NIS2-RCT-121",
+    "RGPD-RCT-19",
+    "RGPD-RCT-50",
+    "AMLR-ART-76-3",
+    "AIACT-RCT-10"
+   ]
+  },
+  {
+   "id": "q58",
+   "label": "correct",
+   "status": "answered",
+   "cited": [
+    "RGPD-ART-83-5"
+   ],
+   "expected": [
+    "RGPD-ART-83-5"
+   ],
+   "answer": "Les violations des principes de base d'un traitement font l'objet d'amendes administratives pouvant s'élever jusqu'à 20 000 000 EUR ou, dans le cas d'une entreprise, jusqu'à 4 % du chiffre d'affaires annuel mondial total de l'exercice précédent. Ce montant correspond à la catégorie de violations les plus graves définie au paragraphe 5 de l'article 83.",
+   "refusal_reason": null,
+   "best_similarity": 0.6732943836940996,
+   "retrieved": [
+    "RGPD-ART-83-5",
+    "RGPD-ART-83-4",
+    "RGPD-ART-83-3",
+    "RGPD-ART-83-6",
+    "RGPD-RCT-10"
+   ]
+  }
+ ]
+}
