@@ -75,6 +75,79 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/missions": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** List Missions */
+        get: operations["list_missions_missions_get"];
+        put?: never;
+        /** Create Mission */
+        post: operations["create_mission_missions_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/missions/demo": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Seed Demo
+         * @description Creates the three demo missions if they do not exist yet (idempotent).
+         */
+        post: operations["seed_demo_missions_demo_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/missions/{mission_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get Mission */
+        get: operations["get_mission_missions__mission_id__get"];
+        put?: never;
+        post?: never;
+        /** Delete Mission */
+        delete: operations["delete_mission_missions__mission_id__delete"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/missions/{mission_id}/analyze/{step}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Analyze */
+        post: operations["analyze_missions__mission_id__analyze__step__post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
 }
 export type webhooks = Record<string, never>;
 export interface components {
@@ -87,7 +160,7 @@ export interface components {
             domains?: string[] | null;
             /**
              * Mode
-             * @default hybrid
+             * @default vector
              * @enum {string}
              */
             mode: "fulltext" | "vector" | "hybrid";
@@ -119,6 +192,11 @@ export interface components {
             /** Duration S */
             duration_s: number;
         };
+        /**
+         * Confidentiality
+         * @enum {string}
+         */
+        Confidentiality: "public" | "confidentiel";
         /** HTTPValidationError */
         HTTPValidationError: {
             /** Detail */
@@ -138,6 +216,92 @@ export interface components {
             database: "ok" | "unreachable";
             /** Version */
             version: string;
+        };
+        /** MissionIn */
+        MissionIn: {
+            /** Client */
+            client: string;
+            /** Sector */
+            sector: string;
+            /**
+             * Context
+             * @default
+             */
+            context: string;
+            /**
+             * Notes
+             * @default
+             */
+            notes: string;
+            /**
+             * Focus
+             * @default []
+             */
+            focus: ("ia" | "blockchain" | "cyber")[];
+            /** @default public */
+            confidentiality: components["schemas"]["Confidentiality"];
+        };
+        /** MissionOut */
+        MissionOut: {
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /** Client */
+            client: string;
+            /** Sector */
+            sector: string;
+            /** Focus */
+            focus: string[];
+            confidentiality: components["schemas"]["Confidentiality"];
+            /**
+             * Created At
+             * Format: date-time
+             */
+            created_at: string;
+            /** Steps Done */
+            steps_done: string[];
+            /** Context */
+            context: string;
+            /** Notes */
+            notes: string;
+            /** Maturity Axes */
+            maturity_axes: string[];
+            /** Diagnostic */
+            diagnostic: {
+                [key: string]: unknown;
+            } | null;
+            /** Solutions */
+            solutions: {
+                [key: string]: unknown;
+            } | null;
+            /** Regulation */
+            regulation: {
+                [key: string]: unknown;
+            } | null;
+        };
+        /** MissionSummary */
+        MissionSummary: {
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /** Client */
+            client: string;
+            /** Sector */
+            sector: string;
+            /** Focus */
+            focus: string[];
+            confidentiality: components["schemas"]["Confidentiality"];
+            /**
+             * Created At
+             * Format: date-time
+             */
+            created_at: string;
+            /** Steps Done */
+            steps_done: string[];
         };
         /** PassageOut */
         PassageOut: {
@@ -329,6 +493,171 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["SourceOut"][];
+                };
+            };
+        };
+    };
+    list_missions_missions_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["MissionSummary"][];
+                };
+            };
+        };
+    };
+    create_mission_missions_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["MissionIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["MissionOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    seed_demo_missions_demo_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["MissionSummary"][];
+                };
+            };
+        };
+    };
+    get_mission_missions__mission_id__get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                mission_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["MissionOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    delete_mission_missions__mission_id__delete: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                mission_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    analyze_missions__mission_id__analyze__step__post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                mission_id: string;
+                step: "diagnostic" | "solutions" | "regulation";
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["MissionOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
                 };
             };
         };

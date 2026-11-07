@@ -181,12 +181,14 @@ def search(
     limit: int = 8,
     domains: list[str] | None = None,
     embed: Embedder | None = None,
+    sources: list[str] | None = None,
 ) -> tuple[list[Hit], Mode]:
     """Returns hits and the mode actually used (hybrid/vector degrade to fulltext without embeddings).
 
-    A text named in the question (MiCA, NIS 2, AI Act…) restricts the search to that text.
+    A text named in the question (MiCA, NIS 2, AI Act…) restricts the search to that text,
+    unless `sources` is given explicitly.
     """
-    sources = detect_sources(question) or None
+    sources = sources or detect_sources(question) or None
     can_vector = embed is not None and has_embeddings(session)
     if mode == "fulltext" or not can_vector:
         return fulltext(session, question, limit, domains, sources), "fulltext"

@@ -21,3 +21,5 @@ export function frDate(iso: string): string {
   const [y, m, d] = iso.split('-')
   return `${d}/${m}/${y}`
 }
+
+export const FOCUS_LABELS: Record<string, string> = { ia: 'IA', blockchain: 'Blockchain', cyber: 'Cybersécurité' }

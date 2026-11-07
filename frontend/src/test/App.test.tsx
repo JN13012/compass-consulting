@@ -34,8 +34,22 @@ describe('App', () => {
     expect(await screen.findByText('Base de données : connectée')).toBeInTheDocument()
   })
 
-  it('renders the six mission tabs', () => {
-    renderAt('/missions/demo/benchmark')
+  it('renders a mission with its six tabs and diagnostic results', async () => {
+    const mission = {
+      id: 'm1', client: 'Hexa Industrie', sector: 'Industrie', focus: ['cyber'], confidentiality: 'public',
+      created_at: '2026-11-07T10:00:00Z', steps_done: ['diagnostic'], context: 'ETI', notes: 'notes',
+      maturity_axes: [], solutions: null, regulation: null,
+      diagnostic: {
+        synthese: 'SI vieillissant.', processus: [], maturite: [{ axe: 'Cyber — Protéger', note: 1, justification: 'pas de MFA' }],
+        irritants: [{ id: 'I1', titre: 'Pas de MFA', description: 'VPN sans MFA', impact: 'élevé', source: 'pas d’authentification multifacteur', source_verifiee: true }],
+      },
+    }
+    vi.spyOn(globalThis, 'fetch').mockResolvedValue(
+      new Response(JSON.stringify(mission), { headers: { 'Content-Type': 'application/json' } }),
+    )
+    renderAt('/missions/m1/diagnostic')
+    expect(await screen.findByText('Pas de MFA')).toBeInTheDocument()
+    expect(screen.getByText('✓ citation retrouvée dans les notes')).toBeInTheDocument()
     const tabs = screen.getByRole('navigation', { name: 'Étapes de la mission' })
     expect(tabs.querySelectorAll('a')).toHaveLength(6)
   })

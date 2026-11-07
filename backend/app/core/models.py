@@ -3,9 +3,11 @@
 import enum
 import uuid
 from datetime import UTC, date, datetime
+from typing import Any
 
 from pgvector.sqlalchemy import Vector
 from sqlalchemy import Boolean, Date, DateTime, Enum, ForeignKey, Integer, String, Text, UniqueConstraint
+from sqlalchemy.dialects.postgresql import JSONB
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.core.db import Base
@@ -33,6 +35,14 @@ class Mission(Base):
     )
     status: Mapped[str] = mapped_column(String(30), default="ouverte")
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=_now)
+    # Practices involved: any of "ia", "blockchain", "cyber".
+    focus: Mapped[list[str]] = mapped_column(JSONB, default=list)
+    # Interview notes / process description provided by the consultant.
+    notes: Mapped[str] = mapped_column(Text, default="")
+    # Analysis results (validated JSON), None until generated.
+    diagnostic: Mapped[dict[str, Any] | None] = mapped_column(JSONB, nullable=True)
+    solutions: Mapped[dict[str, Any] | None] = mapped_column(JSONB, nullable=True)
+    regulation: Mapped[dict[str, Any] | None] = mapped_column(JSONB, nullable=True)
 
 
 EMBEDDING_DIM = 1024  # bge-m3
