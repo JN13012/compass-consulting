@@ -5,7 +5,6 @@ import { HomePage } from './pages/HomePage'
 import { KnowledgeBasePage } from './pages/KnowledgeBasePage'
 import { MissionPage, MISSION_TABS } from './pages/MissionPage'
 import { MissionsPage } from './pages/MissionsPage'
-import { SettingsPage } from './pages/SettingsPage'
 import { WatchPage } from './pages/WatchPage'
 
 export default function App() {
@@ -18,7 +17,6 @@ export default function App() {
         <Route path="missions/:missionId/:tab" element={<MissionPage />} />
         <Route path="veille" element={<WatchPage />} />
         <Route path="connaissances" element={<KnowledgeBasePage />} />
-        <Route path="parametres" element={<SettingsPage />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Route>
     </Routes>

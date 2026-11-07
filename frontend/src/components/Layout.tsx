@@ -6,7 +6,6 @@ const NAV = [
   { to: '/missions', label: 'Missions' },
   { to: '/veille', label: 'Veille' },
   { to: '/connaissances', label: 'Base de connaissances' },
-  { to: '/parametres', label: 'Paramètres' },
 ]
 
 export function Layout() {

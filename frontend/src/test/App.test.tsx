@@ -25,13 +25,13 @@ describe('App', () => {
   })
 
   it('displays API health from /health', async () => {
-    vi.spyOn(globalThis, 'fetch').mockResolvedValue(
-      new Response(JSON.stringify({ status: 'ok', database: 'ok', version: '0.1.0' }), {
-        headers: { 'Content-Type': 'application/json' },
-      }),
-    )
+    vi.spyOn(globalThis, 'fetch').mockImplementation(async (input) => {
+      const url = input instanceof Request ? input.url : String(input)
+      const body = url.endsWith('/health') ? { status: 'ok', database: 'ok', version: '0.1.0' } : []
+      return new Response(JSON.stringify(body), { headers: { 'Content-Type': 'application/json' } })
+    })
     renderAt('/')
-    expect(await screen.findByText('Base de données : connectée')).toBeInTheDocument()
+    expect(await screen.findByText(/Base de données : connectée/)).toBeInTheDocument()
   })
 
   it('renders a mission with its six tabs and diagnostic results', async () => {
