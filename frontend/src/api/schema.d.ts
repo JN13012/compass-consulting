@@ -148,6 +148,41 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/benchmarks/templates": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** List Templates */
+        get: operations["list_templates_benchmarks_templates_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/benchmarks": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** List Benchmarks */
+        get: operations["list_benchmarks_benchmarks_get"];
+        put?: never;
+        /** Run Benchmark */
+        post: operations["run_benchmark_benchmarks_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
 }
 export type webhooks = Record<string, never>;
 export interface components {
@@ -191,6 +226,34 @@ export interface components {
             model: string | null;
             /** Duration S */
             duration_s: number;
+        };
+        /** BenchmarkIn */
+        BenchmarkIn: {
+            /** Template */
+            template: string;
+            /** Mission Id */
+            mission_id?: string | null;
+        };
+        /** BenchmarkOut */
+        BenchmarkOut: {
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /** Mission Id */
+            mission_id: string | null;
+            /** Template */
+            template: string;
+            /**
+             * Created At
+             * Format: date-time
+             */
+            created_at: string;
+            /** Data */
+            data: {
+                [key: string]: unknown;
+            };
         };
         /**
          * Confidentiality
@@ -368,6 +431,15 @@ export interface components {
             original_url: string;
             /** Passages */
             passages: number;
+        };
+        /** TemplateOut */
+        TemplateOut: {
+            /** Key */
+            key: string;
+            /** Title */
+            title: string;
+            /** Description */
+            description: string;
         };
         /** ValidationError */
         ValidationError: {
@@ -649,6 +721,90 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["MissionOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    list_templates_benchmarks_templates_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["TemplateOut"][];
+                };
+            };
+        };
+    };
+    list_benchmarks_benchmarks_get: {
+        parameters: {
+            query?: {
+                mission_id?: string | null;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["BenchmarkOut"][];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    run_benchmark_benchmarks_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["BenchmarkIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["BenchmarkOut"];
                 };
             };
             /** @description Validation Error */

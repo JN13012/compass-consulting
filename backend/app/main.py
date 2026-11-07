@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
+from app.api.benchmarks import router as benchmarks_router
 from app.api.health import router as health_router
 from app.api.kb import router as kb_router
 from app.api.missions import router as missions_router
@@ -18,3 +19,4 @@ app.add_middleware(
 app.include_router(health_router)
 app.include_router(kb_router)
 app.include_router(missions_router)
+app.include_router(benchmarks_router)

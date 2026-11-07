@@ -1,0 +1,29 @@
+# Gabarits de benchmark. Les données viennent de sources publiques au moment de la collecte ;
+# chaque cellule garde sa source, son lien et sa date.
+#
+# `issuers` : rapprochement MANUEL token -> émetteur (LEI), vérifié ensuite dans le registre MiCA de l'ESMA.
+# Il est affiché comme tel dans l'interface (« rapprochement manuel, à valider »). Un token sans rapprochement
+# est indiqué « émetteur non rapproché », pas « non autorisé ».
+
+templates:
+  stablecoins_eur:
+    title: Stablecoins adossés à l'euro
+    description: Offre en circulation, blockchains et statut MiCA des stablecoins euro (offre ≥ 1 M€).
+    peg: peggedEUR
+    min_circulating: 1000000
+    limit: 12
+    issuers:
+      EURC: {lei: 969500OYUDADGZKCR583, label: Circle Internet Financial Europe SAS}
+      EURCV: {lei: 969500FX8K40ZDW4F377, label: Société Générale - Forge}
+      EUROP: {lei: 969500SGAEBRXYUAJ739, label: SALVUS (Schuman Financial)}
+      EURE: {lei: 2549003QDNZWASSSCY31, label: Monerium ehf}
+      EURR: {lei: 984500AA0OCA9CE0D796, label: StablR Ltd, name_contains: StablR}
+
+  stablecoins_usd:
+    title: Principaux stablecoins adossés au dollar
+    description: Les 10 premiers stablecoins dollar par offre en circulation, et leur présence dans le registre MiCA.
+    peg: peggedUSD
+    min_circulating: 0
+    limit: 10
+    issuers:
+      USDC: {lei: 969500OYUDADGZKCR583, label: Circle Internet Financial Europe SAS}

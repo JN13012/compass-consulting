@@ -73,6 +73,18 @@ class SourceDocument(Base):
     passages: Mapped[list["Passage"]] = relationship(back_populates="document", cascade="all, delete-orphan")
 
 
+class Benchmark(Base):
+    """One collection run of a benchmark template (re-running creates a new version)."""
+
+    __tablename__ = "benchmarks"
+
+    id: Mapped[uuid.UUID] = mapped_column(primary_key=True, default=uuid.uuid4)
+    mission_id: Mapped[uuid.UUID | None] = mapped_column(ForeignKey("missions.id", ondelete="CASCADE"), nullable=True)
+    template: Mapped[str] = mapped_column(String(50))
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=_now)
+    data: Mapped[dict[str, Any]] = mapped_column(JSONB)
+
+
 class Passage(Base):
     __tablename__ = "passages"
     __table_args__ = (UniqueConstraint("document_id", "ref", name="uq_passage_doc_ref"),)

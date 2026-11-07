@@ -4,13 +4,14 @@ import { Badge } from '../components/Badge'
 import { FOCUS_LABELS } from '../lib/labels'
 import { PageHeader, Placeholder } from '../components/PageHeader'
 import { useAnalyze, useMission, type MissionOut, type Step } from '../lib/missions'
+import { BenchmarkTab } from './mission/BenchmarkTab'
 import { DiagnosticTab, RegulationTab, SolutionsTab } from './mission/tabs'
 
 export const MISSION_TABS = [
   { slug: 'diagnostic', label: '1. Diagnostic', phase: '' },
   { slug: 'solutions', label: '2. Solutions', phase: '' },
   { slug: 'reglementation', label: '3. Réglementation', phase: '' },
-  { slug: 'benchmark', label: '4. Benchmark', phase: 'phase 3' },
+  { slug: 'benchmark', label: '4. Benchmark', phase: '' },
   { slug: 'poc', label: '5. POC & évaluation', phase: 'phase 4' },
   { slug: 'livrables', label: '6. Livrables', phase: 'phase 5' },
 ] as const
@@ -50,7 +51,13 @@ export function MissionPage() {
           </NavLink>
         ))}
       </nav>
-      {STEP_OF[current.slug] ? <StepPanel mission={m} step={STEP_OF[current.slug]} /> : <Placeholder phase={current.phase} />}
+      {STEP_OF[current.slug] ? (
+        <StepPanel mission={m} step={STEP_OF[current.slug]} />
+      ) : current.slug === 'benchmark' ? (
+        <BenchmarkTab missionId={m.id} />
+      ) : (
+        <Placeholder phase={current.phase} />
+      )}
     </>
   )
 }
