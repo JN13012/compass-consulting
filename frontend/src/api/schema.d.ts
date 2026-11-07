@@ -21,10 +21,109 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/kb/ask": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Ask */
+        post: operations["ask_kb_ask_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/kb/search": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Search Passages
+         * @description Retrieval only (no generation): always available, even without an AI provider.
+         */
+        post: operations["search_passages_kb_search_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/kb/sources": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Sources */
+        get: operations["sources_kb_sources_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
 }
 export type webhooks = Record<string, never>;
 export interface components {
     schemas: {
+        /** AskRequest */
+        AskRequest: {
+            /** Question */
+            question: string;
+            /** Domains */
+            domains?: string[] | null;
+            /**
+             * Mode
+             * @default hybrid
+             * @enum {string}
+             */
+            mode: "fulltext" | "vector" | "hybrid";
+        };
+        /** AskResponse */
+        AskResponse: {
+            /**
+             * Status
+             * @enum {string}
+             */
+            status: "answered" | "refused";
+            /** Answer */
+            answer: string;
+            /** Refusal Reason */
+            refusal_reason: string | null;
+            /** Refusal Message */
+            refusal_message: string | null;
+            /** Citations */
+            citations: components["schemas"]["PassageOut"][];
+            /** Retrieved */
+            retrieved: components["schemas"]["PassageOut"][];
+            /**
+             * Mode Used
+             * @enum {string}
+             */
+            mode_used: "fulltext" | "vector" | "hybrid";
+            /** Model */
+            model: string | null;
+            /** Duration S */
+            duration_s: number;
+        };
+        /** HTTPValidationError */
+        HTTPValidationError: {
+            /** Detail */
+            detail?: components["schemas"]["ValidationError"][];
+        };
         /** HealthResponse */
         HealthResponse: {
             /**
@@ -39,6 +138,85 @@ export interface components {
             database: "ok" | "unreachable";
             /** Version */
             version: string;
+        };
+        /** PassageOut */
+        PassageOut: {
+            /** Ref */
+            ref: string;
+            /** Kind */
+            kind: string;
+            /** Heading */
+            heading: string;
+            /** Text */
+            text: string;
+            /** Source Code */
+            source_code: string;
+            /** Source Title */
+            source_title: string;
+            /** Domain */
+            domain: string;
+            /** Url */
+            url: string;
+            /** Version */
+            version: string;
+            /** Consolidated */
+            consolidated: boolean;
+            /**
+             * Consulted On
+             * Format: date
+             */
+            consulted_on: string;
+            /** Original Url */
+            original_url: string;
+            /** Score */
+            score: number;
+        };
+        /** SearchResponse */
+        SearchResponse: {
+            /** Passages */
+            passages: components["schemas"]["PassageOut"][];
+            /**
+             * Mode Used
+             * @enum {string}
+             */
+            mode_used: "fulltext" | "vector" | "hybrid";
+        };
+        /** SourceOut */
+        SourceOut: {
+            /** Code */
+            code: string;
+            /** Title */
+            title: string;
+            /** Domain */
+            domain: string;
+            /** Version */
+            version: string;
+            /** Consolidated */
+            consolidated: boolean;
+            /**
+             * Consulted On
+             * Format: date
+             */
+            consulted_on: string;
+            /** Url */
+            url: string;
+            /** Original Url */
+            original_url: string;
+            /** Passages */
+            passages: number;
+        };
+        /** ValidationError */
+        ValidationError: {
+            /** Location */
+            loc: (string | number)[];
+            /** Message */
+            msg: string;
+            /** Error Type */
+            type: string;
+            /** Input */
+            input?: unknown;
+            /** Context */
+            ctx?: Record<string, never>;
         };
     };
     responses: never;
@@ -65,6 +243,92 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["HealthResponse"];
+                };
+            };
+        };
+    };
+    ask_kb_ask_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["AskRequest"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["AskResponse"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    search_passages_kb_search_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["AskRequest"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["SearchResponse"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    sources_kb_sources_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["SourceOut"][];
                 };
             };
         };

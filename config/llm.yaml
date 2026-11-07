@@ -2,19 +2,20 @@
 # Le code demande toujours un RÔLE, jamais un modèle en dur.
 # `local: true` = le modèle tourne sur la machine ; seuls ces rôles sont autorisés
 # pour une mission « confidentiel ».
+# Les valeurs ${VAR:-défaut} sont lues dans l'environnement (.env).
 
 roles:
   reasoning:
-    model: anthropic/claude-opus-5-5
+    model: ${REASONING_MODEL:-anthropic/claude-opus-5-5}
     local: false
   extraction:
-    model: anthropic/claude-sonnet-5-5
+    model: ${EXTRACTION_MODEL:-anthropic/claude-sonnet-5-5}
     local: false
   local:
-    model: ollama/mistral-small
+    model: ${LOCAL_MODEL:-ollama_chat/qwen3.5:9b}
     local: true
-    api_base: http://ollama:11434
+    api_base: ${OLLAMA_BASE_URL:-http://ollama:11434}
   embedding:
     model: ollama/bge-m3
     local: true
-    api_base: http://ollama:11434
+    api_base: ${OLLAMA_BASE_URL:-http://ollama:11434}

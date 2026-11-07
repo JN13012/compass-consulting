@@ -15,6 +15,9 @@ Cahier des charges : [`SPEC.md`](SPEC.md) · Décisions : [`docs/DECISIONS.md`](
   RGPD, ESPR), dernière version consolidée, ~6 000 passages citables avec identifiants stables, empreintes SHA-256,
   versions conservées, recherche plein texte.
 
+- Phase 1b — base de connaissances : recherche (plein texte, vectorielle, hybride), réponses citées avec refus en
+  deux couches, page React avec citations exactes et liens EUR-Lex, mode « recherche seule » sans IA.
+
 ```bash
 docker compose exec api python -m app.corpus ingest            # tout le corpus
 docker compose exec api python -m app.corpus ingest --source MICA

@@ -43,6 +43,30 @@ Format : date — décision — alternatives — raison.
 - Raison : Ollama (bge-m3) n'est pas installé pour l'instant. La colonne `embedding vector(1024)` existe ; la
   recherche plein texte (`tsvector` français + index GIN) fonctionne dès maintenant.
 
+## 2026-11-07 — Base de connaissances : réponses citées et refus en deux couches
+- Le modèle renvoie un JSON `{statut, reponse, passages: [identifiants]}` ; le texte affiché est toujours relu
+  depuis la base. Tout identifiant non fourni au modèle → refus (`citation_invalide`). Réponse sans citation → refus.
+- Couche 1 (sans appel au modèle) : meilleur score plein texte < 0,30 → refus. Seuil provisoire, à régler en
+  phase 1c sur le jeu de développement uniquement.
+- Sortie mal formée : un nouvel essai, puis refus (`reponse_invalide`).
+
+## 2026-11-07 — Recherche plein texte : requête OU + reclassement simple
+- Une question naturelle en ET ne trouve presque rien ; on cherche en OU sur les mots porteurs de sens (mots
+  interrogatifs retirés), puis on reclasse : considérants ×0,75, articles « Définitions » ×1,5 pour les questions de
+  définition. Un texte nommé dans la question (MiCA, NIS 2, AI Act…) restreint la recherche à ce texte.
+- Limite connue : sans embeddings, une question formulée autrement que le texte (« pratiques interdites » →
+  art. 5 AI Act) peut rater le bon article. Le mode hybride (plein texte + vecteurs, fusion RRF) est prêt et
+  s'active dès que les embeddings sont calculés.
+
+## 2026-11-07 — Mode « Rechercher les passages » sans génération
+- Toujours disponible, même sans fournisseur IA ; si le fournisseur est injoignable, `/kb/ask` renvoie 503 et
+  l'interface propose ce mode.
+
+## 2026-11-07 — Ollama côté Windows (GPU) plutôt que dans Docker
+- Le poste a déjà Ollama sous Windows avec une RTX 4060 et `qwen3.5:9b`. L'URL est configurable
+  (`OLLAMA_BASE_URL`) ; branchement et calcul des embeddings en fin de parcours. Tout est testé avec des appels
+  simulés en attendant.
+
 ## 2026-11-07 — Routeur LLM par rôles (`config/llm.yaml`) au-dessus de LiteLLM
 - Alternatives : appels directs aux SDK des fournisseurs.
 - Raison : changer de fournisseur = modifier la config ; contrôle de confidentialité centralisé.

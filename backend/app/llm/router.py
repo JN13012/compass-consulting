@@ -7,6 +7,8 @@ Confidentiality is enforced here: a confidential mission can only reach roles fl
 from __future__ import annotations
 
 import logging
+import os
+import re
 import time
 from collections.abc import Callable
 from dataclasses import dataclass
@@ -34,7 +36,11 @@ class LlmConfig(BaseModel):
 
     @classmethod
     def from_yaml(cls, path: Path) -> LlmConfig:
-        return cls.model_validate(yaml.safe_load(path.read_text(encoding="utf-8")))
+        raw = _ENV_VAR.sub(lambda m: os.environ.get(m.group(1)) or m.group(2) or "", path.read_text("utf-8"))
+        return cls.model_validate(yaml.safe_load(raw))
+
+
+_ENV_VAR = re.compile(r"\$\{(\w+)(?::-([^}]*))?\}")  # ${VAR} or ${VAR:-default}
 
 
 class UnknownRoleError(KeyError):
@@ -62,10 +68,32 @@ def _default_completion(**kwargs: Any) -> Any:
     return litellm.completion(**kwargs)
 
 
+def _default_embedding(**kwargs: Any) -> Any:
+    import litellm
+
+    return litellm.embedding(**kwargs)
+
+
 class LlmRouter:
-    def __init__(self, config: LlmConfig, completion_fn: CompletionFn | None = None) -> None:
+    def __init__(
+        self,
+        config: LlmConfig,
+        completion_fn: CompletionFn | None = None,
+        embedding_fn: CompletionFn | None = None,
+    ) -> None:
         self._config = config
         self._completion = completion_fn or _default_completion
+        self._embedding = embedding_fn or _default_embedding
+
+    def embed(
+        self, texts: list[str], confidentiality: Confidentiality = Confidentiality.PUBLIC
+    ) -> list[list[float]]:
+        cfg = self.resolve("embedding", confidentiality)
+        params: dict[str, Any] = {"model": cfg.model, "input": texts}
+        if cfg.api_base:
+            params["api_base"] = cfg.api_base
+        response = self._embedding(**params)
+        return [list(item["embedding"]) for item in response.data]
 
     def resolve(self, role: str, confidentiality: Confidentiality) -> RoleConfig:
         try:
