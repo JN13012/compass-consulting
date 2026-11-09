@@ -4,11 +4,12 @@ import { Link } from 'react-router-dom'
 import { api } from '../api/client'
 
 const STEPS = [
+  ['Entretiens', 'Grille de questions par domaine, relances proposées par l’IA, réponses rangées dans les notes.'],
   ['Diagnostic', 'Notes d’entretien → irritants, maturité ; chaque citation est vérifiée dans les notes.'],
   ['Solutions', 'De la simple digitalisation à l’IA ou la blockchain ; verdict blockchain calculé par une grille.'],
   ['Réglementation', 'MiCA, DORA, NIS2, AI Act… obligations appuyées sur le passage officiel exact.'],
   ['Benchmark', 'Données on-chain et registre MiCA de l’ESMA, collectées en direct, chaque cellule sourcée.'],
-  ['POC & évaluation', 'Cadrage du prototype et critères de mesure avant de le construire.'],
+  ['POC', 'Cadrage avec critères chiffrés, puis évaluation sur un jeu de test que le développeur ne voit pas.'],
   ['Livrables', 'Note de mission prête à imprimer, export PDF.'],
 ] as const
 
@@ -16,7 +17,7 @@ const PRINCIPLES = [
   ['Aucune citation générée', 'Le modèle renvoie des identifiants ; le texte affiché est relu depuis la base.'],
   ['Refuser plutôt qu’inventer', 'Hors corpus, l’outil répond « le corpus ne permet pas de conclure ».'],
   ['Confidentialité dans le code', 'Une mission confidentielle ne peut appeler qu’un modèle local.'],
-  ['Mesuré, pas affirmé', '80 questions, jeu de test gelé avant mesure, intervalles de confiance de Wilson.'],
+  ['Mesuré, pas affirmé', '48 questions de test gelées avant mesure, intervalles de confiance de Wilson.'],
 ] as const
 
 function Figure({ value, label }: { value: string; label: string }) {
@@ -52,19 +53,18 @@ export function HomePage() {
         </div>
       </header>
 
-      <section aria-label="Chiffres clés" className="grid grid-cols-2 gap-3 md:grid-cols-4">
+      <section aria-label="Chiffres clés" className="grid grid-cols-3 gap-3">
         <Figure value={String(sources.data?.length ?? '-')} label="textes officiels (versions consolidées)" />
         <Figure value={passages ? passages.toLocaleString('fr-FR') : '-'} label="passages indexés et citables" />
-        <Figure value="100 %" label="des citations relues mot pour mot dans le texte officiel" />
         <Figure value={missions.data ? String(missions.data.length) : '-'} label="missions en cours" />
       </section>
 
       <section>
-        <h2 className="mb-3 font-medium">Une mission en six étapes</h2>
-        <ol className="grid gap-3 md:grid-cols-3">
+        <h2 className="mb-3 font-medium">Une mission en sept étapes</h2>
+        <ol className="grid gap-3 md:grid-cols-4">
           {STEPS.map(([title, text], i) => (
             <li key={title} className="rounded border border-line bg-white p-4">
-              <p className="text-xs text-ink/60">Étape {i + 1}</p>
+              <p className="text-xs text-ink/60">Étape {i}</p>
               <p className="font-medium">{title}</p>
               <p className="mt-1 text-sm text-ink/75">{text}</p>
             </li>

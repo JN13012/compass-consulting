@@ -77,3 +77,8 @@ Scission déterministe : 20 cas dans le dossier du développeur, **30 cas de tes
   le jeu de test a déjà servi deux fois ; une itération de plus serait un réglage sur le test.
 - **Limite** : 6 cas ambigus seulement, d'où un intervalle très large (44-97 %). Pour décider, il faut un jeu plus
   grand de cas ambigus réels. C'est la vraie conclusion du POC.
+
+**Mesure 3 (même POC, aucun changement de code)** : après régénération des analyses de la mission avec gpt-5.1, le
+POC a été recadré (seuils proposés : champs justes ≥ 97 %, latence p95 ≤ 15 s, les autres inchangés) puis réévalué
+sur les mêmes 30 cas. Résultats identiques à l'itération 2 : 24/24 commandes justes, 5/6 cas ambigus refusés,
+0 refus à tort, latence p95 3,3 s. Verdict : pas encore (« champs justes » atteint mais IC 96-100 % sous le seuil de 97 %).
