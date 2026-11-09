@@ -11,9 +11,9 @@ from sqlalchemy import select
 from sqlalchemy.orm import Session
 
 from app.api.kb import get_router
-from app.core.config import get_settings
 from app.core.db import get_session
 from app.core.models import Benchmark, Confidentiality, Mission
+from app.core.runtime import active_role
 from app.deliverables.note import render_note
 from app.llm.router import ConfidentialityViolationError, LlmRouter
 from app.missions.analysis import (
@@ -152,7 +152,7 @@ def analyze(mission_id: uuid.UUID, step: Step, session: SessionDep, llm: RouterD
     mission = _get(session, mission_id)
     if not mission.notes.strip():
         raise HTTPException(422, "Ajoutez des notes d'entretien avant de lancer l'analyse.")
-    role = role_for(mission, get_settings().kb_role)
+    role = role_for(mission, active_role(session))
     diagnostic = Diagnostic.model_validate(mission.diagnostic) if mission.diagnostic else None
     solutions = Solutions.model_validate(mission.solutions) if mission.solutions else None
     try:

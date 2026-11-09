@@ -13,6 +13,7 @@ from app.answering.service import AnswerSettings, answer_question
 from app.core.config import get_settings
 from app.core.db import get_session
 from app.core.models import Passage, SourceDocument
+from app.core.runtime import active_role
 from app.llm.router import LlmConfig, LlmRouter
 from app.retrieval.search import Hit, Mode, search
 
@@ -91,7 +92,7 @@ def _embedder(llm: LlmRouter):  # type: ignore[no-untyped-def]
 def ask(body: AskRequest, session: SessionDep, llm: RouterDep) -> AskResponse:
     s = get_settings()
     settings = AnswerSettings(
-        role=s.kb_role, mode=body.mode, min_score=s.kb_min_score, min_similarity=s.kb_min_similarity
+        role=active_role(session), mode=body.mode, min_score=s.kb_min_score, min_similarity=s.kb_min_similarity
     )
     try:
         ans = answer_question(session, llm, body.question, settings, body.domains, _embedder(llm))

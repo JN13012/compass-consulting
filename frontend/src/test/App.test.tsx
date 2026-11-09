@@ -28,13 +28,18 @@ describe('App', () => {
     vi.spyOn(globalThis, 'fetch').mockImplementation(async (input) => {
       const url = input instanceof Request ? input.url : String(input)
       const body = url.endsWith('/health')
-        ? { status: 'ok', database: 'ok', version: '0.1.0', ai_model: 'qwen3.5:9b (local)', ai_status: 'ok', search_model: 'bge-m3 (local)' }
+        ? {
+            status: 'ok', database: 'ok', version: '0.1.0', ai_active: 'local',
+            ai_options: [{ role: 'local', label: 'IA locale', model: 'qwen3.5:9b', local: true, status: 'ok' }],
+            search: { label: 'Recherche sémantique', status: 'ok', detail: 'bge-m3' },
+            texts: { label: 'Textes officiels', status: 'ok', detail: '13 textes · à jour au 09/11' },
+          }
         : []
       return new Response(JSON.stringify(body), { headers: { 'Content-Type': 'application/json' } })
     })
     renderAt('/')
-    expect(await screen.findByText('qwen3.5:9b (local)')).toBeInTheDocument()
-    expect(screen.getByText('disponibles')).toBeInTheDocument()
+    expect(await screen.findByText('bge-m3 (local)')).toBeInTheDocument()
+    expect(screen.getByText('13 textes · à jour au 09/11')).toBeInTheDocument()
   })
 
   it('renders a mission with its seven tabs and diagnostic results', async () => {
@@ -47,7 +52,8 @@ describe('App', () => {
         irritants: [{ id: 'I1', titre: 'Pas de MFA', description: 'VPN sans MFA', impact: 'élevé', source: 'pas d’authentification multifacteur', source_verifiee: true }],
       },
     }
-    vi.spyOn(globalThis, 'fetch').mockResolvedValue(
+    // a fresh Response per call: the sidebar also fetches (a body can only be read once)
+    vi.spyOn(globalThis, 'fetch').mockImplementation(async () =>
       new Response(JSON.stringify(mission), { headers: { 'Content-Type': 'application/json' } }),
     )
     renderAt('/missions/m1/diagnostic')

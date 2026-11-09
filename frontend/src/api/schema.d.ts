@@ -21,6 +21,27 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/settings/ai": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        /**
+         * Choose Ai
+         * @description Switches the generative AI between the local model and the hosted provider (confidential missions stay
+         *     on the local model whatever is chosen here).
+         */
+        put: operations["choose_ai_settings_ai_put"];
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/kb/ask": {
         parameters: {
             query?: never;
@@ -351,6 +372,27 @@ export interface paths {
 export type webhooks = Record<string, never>;
 export interface components {
     schemas: {
+        /** AiChoice */
+        AiChoice: {
+            /** Role */
+            role: string;
+        };
+        /** AiOption */
+        AiOption: {
+            /** Role */
+            role: string;
+            /** Label */
+            label: string;
+            /** Model */
+            model: string;
+            /** Local */
+            local: boolean;
+            /**
+             * Status
+             * @enum {string}
+             */
+            status: "ok" | "unreachable" | "no_key" | "not_configured";
+        };
         /** AskRequest */
         AskRequest: {
             /** Question */
@@ -440,6 +482,18 @@ export interface components {
             /** Texts */
             texts: components["schemas"]["TextStatus"][];
         };
+        /** Component */
+        Component: {
+            /** Label */
+            label: string;
+            /**
+             * Status
+             * @enum {string}
+             */
+            status: "ok" | "unreachable" | "no_key" | "not_configured";
+            /** Detail */
+            detail: string;
+        };
         /**
          * Confidentiality
          * @enum {string}
@@ -498,15 +552,12 @@ export interface components {
             database: "ok" | "unreachable";
             /** Version */
             version: string;
-            /** Ai Model */
-            ai_model: string;
-            /**
-             * Ai Status
-             * @enum {string}
-             */
-            ai_status: "ok" | "unreachable" | "no_key" | "not_configured";
-            /** Search Model */
-            search_model: string;
+            /** Ai Active */
+            ai_active: string;
+            /** Ai Options */
+            ai_options: components["schemas"]["AiOption"][];
+            search: components["schemas"]["Component"];
+            texts: components["schemas"]["Component"];
         };
         /** Impact */
         Impact: {
@@ -832,6 +883,39 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["HealthResponse"];
+                };
+            };
+        };
+    };
+    choose_ai_settings_ai_put: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["AiChoice"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HealthResponse"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
                 };
             };
         };

@@ -112,3 +112,12 @@ class WatchCheck(Base):
     id: Mapped[uuid.UUID] = mapped_column(primary_key=True, default=uuid.uuid4)
     checked_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=_now)
     data: Mapped[dict[str, Any]] = mapped_column(JSONB)
+
+
+class AppSetting(Base):
+    """Small key/value store for settings changed from the interface (e.g. the active AI role)."""
+
+    __tablename__ = "app_settings"
+
+    key: Mapped[str] = mapped_column(String(50), primary_key=True)
+    value: Mapped[str] = mapped_column(String(200))

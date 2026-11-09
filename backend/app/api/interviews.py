@@ -10,6 +10,7 @@ from pydantic import BaseModel
 
 from app.api.missions import MissionOut, RouterDep, SessionDep, _get, _out
 from app.core.config import get_settings
+from app.core.runtime import active_role
 from app.interviews.guide import (
     FollowUps,
     Interview,
@@ -71,7 +72,7 @@ def to_notes(mission_id: uuid.UUID, session: SessionDep) -> MissionOut:
 @router.post("/followups", response_model=FollowUps)
 def followups(mission_id: uuid.UUID, session: SessionDep, llm: RouterDep) -> FollowUps:
     m = _get(session, mission_id)
-    role = role_for(m, get_settings().kb_role)
+    role = role_for(m, active_role(session))
     try:
         return suggest_followups(llm, role, m, sections_for(guide(), m.focus), _interview(m.interview))
     except ConfidentialityViolationError as exc:

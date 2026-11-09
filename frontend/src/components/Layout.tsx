@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { NavLink, Outlet } from 'react-router-dom'
 
 import { api } from '../api/client'
@@ -11,11 +11,6 @@ const NAV = [
 ]
 
 export function Layout() {
-  const health = useQuery({
-    queryKey: ['health'],
-    queryFn: async () => (await api.GET('/health')).data ?? null,
-  })
-
   return (
     <div className="flex min-h-screen">
       <aside className="sticky top-0 flex h-screen w-60 shrink-0 flex-col bg-ink px-4 py-6 text-white">
@@ -39,17 +34,7 @@ export function Layout() {
             </NavLink>
           ))}
         </nav>
-        <div className="mt-auto space-y-2.5 border-t border-white/10 px-3 pt-4 text-[11px] text-white/50">
-          <Status
-            ok={health.data?.ai_status === 'ok'}
-            pending={health.isPending}
-            label="IA"
-            value={health.data?.ai_model}
-            down={health.data?.ai_status === 'no_key' ? 'clé API manquante' : 'hors ligne'}
-          />
-          <Status ok={health.data?.ai_status === 'ok'} pending={health.isPending} label="Recherche" value={health.data?.search_model} down="hors ligne" />
-          <Status ok={health.data?.database === 'ok'} pending={health.isPending} label="Textes et missions" value="disponibles" down="indisponibles" />
-        </div>
+        <SystemPanel />
       </aside>
       <main className="mx-auto w-full max-w-6xl min-w-0 flex-1 px-10 py-10">
         <Outlet />
@@ -58,17 +43,80 @@ export function Layout() {
   )
 }
 
-function Status({ ok, pending, label, value, down }: { ok: boolean; pending: boolean; label: string; value?: string; down: string }) {
-  const color = pending ? 'bg-white/30' : ok ? 'bg-emerald-400' : 'bg-red-400'
+const DOWN: Record<string, string> = {
+  unreachable: 'hors ligne',
+  no_key: 'clé API absente',
+  not_configured: 'non configurée',
+}
+
+function SystemPanel() {
+  const qc = useQueryClient()
+  const health = useQuery({
+    queryKey: ['health'],
+    queryFn: async () => (await api.GET('/health')).data ?? null,
+    refetchInterval: 30_000,
+  })
+  const choose = useMutation({
+    mutationFn: async (role: string) => (await api.PUT('/settings/ai', { body: { role } })).data,
+    onSuccess: (data) => qc.setQueryData(['health'], data),
+  })
+  const h = health.data
+  const active = h?.ai_options?.find((o) => o.role === h.ai_active)
+
   return (
-    <p className="flex items-start gap-2">
-      <span className="relative mt-1 flex h-2 w-2 shrink-0">
-        {ok && !pending && <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-60" />}
-        <span className={`relative inline-flex h-2 w-2 rounded-full ${color}`} />
-      </span>
-      <span>
-        {label} : <span className="text-white/80">{pending ? '…' : ok ? value : down}</span>
-      </span>
-    </p>
+    <div className="mt-auto space-y-3 border-t border-white/10 px-3 pt-4 text-[11px] text-white/55">
+      <div>
+        <label htmlFor="ai-choice" className="mb-1 flex items-center gap-2 text-white/80">
+          <Dot status={health.isPending ? undefined : active?.status} />
+          IA générative
+        </label>
+        <select
+          id="ai-choice"
+          value={h?.ai_active ?? ''}
+          onChange={(e) => choose.mutate(e.target.value)}
+          disabled={!h || choose.isPending}
+          className="w-full rounded border border-white/15 bg-white/5 px-2 py-1 text-[11px] text-white"
+        >
+          {h?.ai_options?.map((o) => (
+            <option key={o.role} value={o.role} disabled={o.status === 'no_key'} className="text-ink">
+              {o.label} · {o.model}
+              {o.status === 'no_key' ? ' (clé absente)' : ''}
+            </option>
+          ))}
+        </select>
+        <p className="mt-1 leading-snug">
+          {active && active.status !== 'ok' ? DOWN[active.status] : 'Missions confidentielles : toujours en local'}
+        </p>
+      </div>
+      {h?.search && h.texts && (
+        <>
+          <Line status={h.search.status} label={h.search.label} detail={h.search.status === 'ok' ? `${h.search.detail} (local)` : DOWN[h.search.status]} />
+          <Line status={h.texts.status} label={h.texts.label} detail={h.texts.detail} />
+        </>
+      )}
+    </div>
+  )
+}
+
+function Line({ status, label, detail }: { status: string; label: string; detail: string }) {
+  return (
+    <div>
+      <p className="flex items-center gap-2 text-white/80">
+        <Dot status={status} />
+        {label}
+      </p>
+      <p className="ml-4">{detail}</p>
+    </div>
+  )
+}
+
+function Dot({ status }: { status?: string }) {
+  const ok = status === 'ok'
+  const color = status === undefined ? 'bg-white/30' : ok ? 'bg-emerald-400' : status === 'no_key' ? 'bg-amber-400' : 'bg-red-400'
+  return (
+    <span className="relative flex h-2 w-2 shrink-0">
+      {ok && <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-60" />}
+      <span className={`relative inline-flex h-2 w-2 rounded-full ${color}`} />
+    </span>
   )
 }
