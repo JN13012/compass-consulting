@@ -36,12 +36,12 @@ Résultats : [`docs/RESULTATS.md`](docs/RESULTATS.md)
 - Phase 1a - corpus : 13 textes officiels (MiCA, TFR, DAC/DAC8, régime pilote DLT, MiFID II, DORA, NIS2, CRA, AMLR, AI Act,
   RGPD, ESPR), dernière version consolidée, ~7 000 passages citables avec identifiants stables, empreintes SHA-256,
   versions conservées, recherche plein texte.
-
 - Phase 1b - base de connaissances : recherche (plein texte, vectorielle, hybride), réponses citées avec refus en
   deux couches, page React avec citations exactes et liens EUR-Lex, mode « recherche seule » sans IA.
 - Phase 1c - évaluation : 80 questions, jeu de test gelé, intervalles de Wilson (résultats dans `docs/RESULTATS.md`).
 - Phase 2 - missions : diagnostic, solutions (verdict blockchain calculé), réglementation avec obligations citées.
 - Phase 3 - benchmark sourcé : DefiLlama + registre MiCA de l'ESMA, chaque cellule garde sa source.
+- Phase 4 - POC & évaluation : à venir (l'onglet existe, vide pour l'instant).
 - Phase 5 - livrables : note de mission imprimable, export PDF depuis le navigateur.
 - Veille : vérification des nouvelles versions sur EUR-Lex, comparaison article par article, missions concernées, calendrier des échéances.
 - Entretiens : grille par domaine (questions + « ce qu'on cherche »), relances proposées par l'IA, réponses envoyées vers les notes, grille vierge imprimable.
