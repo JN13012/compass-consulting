@@ -1,4 +1,4 @@
-# Prompts par phase — Compass
+# Prompts par phase - Compass
 
 Mode d'emploi :
 - **Une phase = une session Claude Code** (ou plusieurs si la phase est longue). Ouvrir une nouvelle session entre deux phases.
@@ -8,7 +8,7 @@ Mode d'emploi :
 
 ---
 
-## Phase 0 — Squelette du projet
+## Phase 0 - Squelette du projet
 
 ```
 Lis SPEC.md et CLAUDE.md en entier. Nous démarrons la phase 0 (SPEC §11).
@@ -43,7 +43,7 @@ Commence par me proposer ton plan.
 
 ---
 
-## Phase 1a — Corpus et ingestion
+## Phase 1a - Corpus et ingestion
 
 👤 **Avant de lancer :** relire la liste du corpus (SPEC §4) et ajouter 3-5 compléments (orientations ESMA/EBA, positions AMF, CNIL) avec leur URL officielle.
 
@@ -70,7 +70,7 @@ Commence par me proposer ton plan.
 
 ---
 
-## Phase 1b — Recherche, réponses citées, Base de connaissances
+## Phase 1b - Recherche, réponses citées, Base de connaissances
 
 ```
 Lis SPEC.md (§3.6, §7) et CLAUDE.md. Phase 1b.
@@ -92,7 +92,7 @@ Commence par me proposer ton plan.
 
 ---
 
-## Phase 1c — Évaluation de la Base de connaissances
+## Phase 1c - Évaluation de la Base de connaissances
 
 👤 **Avant de lancer :** c'est la tâche la plus importante du projet.
 1. Faire générer un brouillon de 80 questions (par Claude, à part), réparties par domaine, 75 % répondables / 25 % non.
@@ -122,7 +122,7 @@ Commence par me proposer ton plan.
 
 ---
 
-## Phase 2a — Missions et Diagnostic
+## Phase 2a - Missions et Diagnostic
 
 ```
 Lis SPEC.md (§3.2, §3.3, §6) et CLAUDE.md. Phase 2a.
@@ -131,7 +131,7 @@ Lis SPEC.md (§3.2, §3.3, §6) et CLAUDE.md. Phase 2a.
 - CRUD missions (API + page React « Missions »), niveau de confidentialité, import de fichiers de mission.
 - Indexation des fichiers de mission dans un espace propre à la mission.
 - Onglet Diagnostic :
-  - analyse de tableurs en pandas (colonnes, types, doublons, champs vides, incohérences) — aucun calcul par le modèle ;
+  - analyse de tableurs en pandas (colonnes, types, doublons, champs vides, incohérences) - aucun calcul par le modèle ;
   - extraction par le modèle : processus, acteurs, outils, irritants (chaque irritant relié à sa source) ;
   - grille de maturité 5 axes notée 1-3 avec justification ;
   - le consultant peut valider / modifier / supprimer chaque élément.
@@ -144,7 +144,7 @@ Commence par me proposer ton plan.
 
 ---
 
-## Phase 2b — Solutions et Réglementation
+## Phase 2b - Solutions et Réglementation
 
 ```
 Lis SPEC.md (§3.4, §3.5) et CLAUDE.md. Phase 2b.
@@ -173,7 +173,7 @@ Commence par me proposer ton plan.
 
 ---
 
-## Phase 3 — Benchmark
+## Phase 3 - Benchmark
 
 ```
 Lis SPEC.md (§3.7) et CLAUDE.md. Phase 3.
@@ -196,14 +196,14 @@ Commence par me proposer ton plan.
 
 ---
 
-## Phase 4a — Dossier POC et banc d'évaluation
+## Phase 4a - Dossier POC et banc d'évaluation
 
 ```
 Lis SPEC.md (§3.8) et CLAUDE.md. Phase 4a.
 
 À livrer :
 - Générateur de dossier POC (zip) : CLAUDE.md, SPEC.md, ARCHITECTURE.md, data/, eval/cases.jsonl, eval/README.md,
-  INTERFACE.md — rempli depuis la mission (solution retenue, contraintes réglementaires citées, confidentialité).
+  INTERFACE.md - rempli depuis la mission (solution retenue, contraintes réglementaires citées, confidentialité).
 - Contrat d'évaluation : CLI `run --input` → JSON, ou HTTP POST /run.
 - Banc d'évaluation générique (réutilise le module de la phase 1c) : justesse par champ, refus, latence, coût, IC 95 %.
 - Évaluation smart contract : lancement des tests Foundry + Slither, synthèse des findings par sévérité.
@@ -213,7 +213,7 @@ Lis SPEC.md (§3.8) et CLAUDE.md. Phase 4a.
 Commence par me proposer ton plan.
 ```
 
-## Phase 4b — POC de démonstration
+## Phase 4b - POC de démonstration
 
 Lancer **chaque POC dans sa propre session**, à partir du dossier généré par Compass (c'est la démonstration de la boucle complète).
 
@@ -226,7 +226,7 @@ Lancer **chaque POC dans sa propre session**, à partir du dossier généré par
 
 ---
 
-## Phase 5 — Livrables et veille
+## Phase 5 - Livrables et veille
 
 ```
 Lis SPEC.md (§3.9, §3.10) et CLAUDE.md. Phase 5.
@@ -243,7 +243,7 @@ Commence par me proposer ton plan.
 
 ---
 
-## Phase 6 — Finitions (surtout 👤)
+## Phase 6 - Finitions (surtout 👤)
 
 - Rejouer les deux missions de démonstration de bout en bout, corriger ce qui accroche.
 - Tests Playwright des 3 parcours clés : question à la Base de connaissances, mission de bout en bout, export.

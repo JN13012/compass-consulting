@@ -30,7 +30,7 @@ export function MissionPage() {
 
   return (
     <>
-      <PageHeader title={m.client} subtitle={`${m.sector} — ${m.context}`} />
+      <PageHeader title={m.client} subtitle={`${m.sector} - ${m.context}`} />
       <div className="-mt-3 mb-5 flex flex-wrap gap-1.5">
         {m.focus.map((f) => (
           <Badge key={f} tone="blue">

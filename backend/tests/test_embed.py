@@ -13,7 +13,7 @@ class FakeEmbedding:
 
 
 def test_embedding_input_includes_heading_and_is_bounded() -> None:
-    assert embedding_input("Article 3 — Définitions", "texte") == "Article 3 — Définitions\ntexte"
+    assert embedding_input("Article 3 - Définitions", "texte") == "Article 3 - Définitions\ntexte"
     assert len(embedding_input("h", "x" * 10_000)) == MAX_CHARS
 
 

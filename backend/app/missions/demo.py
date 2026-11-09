@@ -7,7 +7,7 @@ from typing import Any
 DEMO_MISSIONS: list[dict[str, Any]] = [
     {
         "client": "Maison Lumen",
-        "sector": "Distribution — prêt-à-porter haut de gamme",
+        "sector": "Distribution - prêt-à-porter haut de gamme",
         "focus": ["ia", "blockchain"],
         "confidentiality": "public",
         "context": (
@@ -46,14 +46,14 @@ La direction veut des résultats visibles en moins de 6 mois et un budget maîtr
         ),
         "notes": """Entretien avec le directeur de l'innovation, la directrice de la conformité et le RSSI.
 
-Projet 1 — Fonds monétaire tokenisé : la filiale de gestion d'actifs voudrait émettre les parts d'un fonds monétaire
+Projet 1 - Fonds monétaire tokenisé : la filiale de gestion d'actifs voudrait émettre les parts d'un fonds monétaire
 sous forme de jetons sur une blockchain publique, accessibles à des investisseurs professionnels. Les souscriptions
 et rachats seraient réglés dans un stablecoin euro émis par un établissement de crédit partenaire. La banque se
 demande si les parts tokenisées relèvent de MiCA ou de la réglementation des instruments financiers, et si elle doit
 obtenir un agrément supplémentaire. Elle veut pouvoir geler des jetons sur décision de justice et restreindre les
 transferts aux investisseurs dont le KYC est validé.
 
-Projet 2 — Contrôle KYC par IA : 1 200 dossiers d'investisseurs professionnels par an, contrôlés à la main
+Projet 2 - Contrôle KYC par IA : 1 200 dossiers d'investisseurs professionnels par an, contrôlés à la main
 (extraits Kbis, pièces d'identité des dirigeants, bénéficiaires effectifs). La conformité veut un outil qui lit les
 pièces, détecte les incohérences et prépare la décision, l'analyste gardant la décision finale.
 
@@ -63,7 +63,7 @@ La direction veut une feuille de route et un premier pilote en 9 mois.""",
     },
     {
         "client": "Hexa Industrie",
-        "sector": "Industrie — fabricant de capteurs connectés",
+        "sector": "Industrie - fabricant de capteurs connectés",
         "focus": ["cyber", "ia"],
         "confidentiality": "public",
         "context": (

@@ -33,7 +33,7 @@ CYBER_AXES = ["Gouverner", "Identifier", "Protéger", "Détecter", "Répondre", 
 
 
 def maturity_axes(focus: list[str]) -> list[str]:
-    return GENERIC_AXES + ([f"Cyber — {a}" for a in CYBER_AXES] if "cyber" in focus else [])
+    return GENERIC_AXES + ([f"Cyber - {a}" for a in CYBER_AXES] if "cyber" in focus else [])
 
 
 # --- Diagnostic ----------------------------------------------------------------------------------
@@ -81,7 +81,7 @@ def quote_found(quote: str, notes: str) -> bool:
 def run_diagnostic(mission: Mission, router: LlmRouter, role: str) -> Diagnostic:
     axes = maturity_axes(mission.focus)
     user = (
-        f"Client : {mission.client} — {mission.sector}\nContexte : {mission.context}\n"
+        f"Client : {mission.client} - {mission.sector}\nContexte : {mission.context}\n"
         f"Axes de maturité à noter : {', '.join(axes)}\n\nNotes d'entretien :\n{mission.notes}"
     )
     diag = complete_json(router, role, _prompt("diagnostic"), user, Diagnostic, mission.confidentiality,
@@ -134,7 +134,7 @@ def blockchain_verdict(check: BlockchainCheck) -> Literal["pertinente", "deconse
 def run_solutions(mission: Mission, diagnostic: Diagnostic, router: LlmRouter, role: str) -> Solutions:
     irritants = "\n".join(f"- {i.id} ({i.impact}) {i.titre} : {i.description}" for i in diagnostic.irritants)
     user = (
-        f"Client : {mission.client} — {mission.sector}\nContexte : {mission.context}\n"
+        f"Client : {mission.client} - {mission.sector}\nContexte : {mission.context}\n"
         f"Domaines de la mission : {', '.join(mission.focus)}\n\nIrritants :\n{irritants}\n\n"
         f"Notes d'entretien (pour les volumes et contraintes) :\n{mission.notes}"
     )
@@ -213,7 +213,7 @@ def _citation(hit: Hit) -> Citation:
 
 
 def mission_summary(mission: Mission, diagnostic: Diagnostic | None, solutions: Solutions | None) -> str:
-    parts = [f"Client : {mission.client} — {mission.sector}", f"Contexte : {mission.context}"]
+    parts = [f"Client : {mission.client} - {mission.sector}", f"Contexte : {mission.context}"]
     if diagnostic:
         parts.append("Irritants : " + "; ".join(i.titre for i in diagnostic.irritants))
     if solutions:
@@ -255,7 +255,7 @@ def run_regulation(
         hits_by_ref = {h.ref: h for h in hits}
         drafts = complete_json(
             router, role, _prompt("obligations"),
-            f"Texte : {app_.code} — {titles[app_.code]}\n\nPassages :\n\n"
+            f"Texte : {app_.code} - {titles[app_.code]}\n\nPassages :\n\n"
             + "\n\n".join(f"[{h.ref}] {h.heading}\n{h.text}" for h in hits)
             + f"\n\nMission :\n{summary}",
             ObligationList, mission.confidentiality, str(mission.id),

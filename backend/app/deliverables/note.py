@@ -48,7 +48,7 @@ def _diagnostic(d: dict[str, Any] | None) -> str:
     if not d:
         return _missing("diagnostic")
     irritants = "".join(
-        f'<div class="item"><strong>{_e(i["titre"])}</strong> — impact {_e(i["impact"])}<br>{_e(i["description"])}'
+        f'<div class="item"><strong>{_e(i["titre"])}</strong> - impact {_e(i["impact"])}<br>{_e(i["description"])}'
         f'<blockquote>« {_e(i["source"])} »{"" if i.get("source_verifiee") else " (citation non retrouvée)"}'
         f"</blockquote></div>"
         for i in d.get("irritants", [])
@@ -82,14 +82,14 @@ def _regulation(r: dict[str, Any] | None) -> str:
     parts = []
     for t in r.get("textes", []):
         obligations = "".join(
-            f'<div class="item"><strong>{_e(STATUS.get(o["statut"], o["statut"]))}</strong> — {_e(o["obligation"])}'
+            f'<div class="item"><strong>{_e(STATUS.get(o["statut"], o["statut"]))}</strong> - {_e(o["obligation"])}'
             f"<br>{_e(o['justification'])}"
             + "".join(f'<blockquote><span class="ref">{_e(c["ref"])} · {_e(c["heading"])}</span><br>{_e(c["text"])}'
                       f"</blockquote>" for c in o.get("citations", []))
             + "</div>"
             for o in t.get("obligations", [])
         )
-        parts.append(f"<h3>{_e(t['titre'])} — {_e(APPLICABLE.get(t['applicable'], t['applicable']))}</h3>"
+        parts.append(f"<h3>{_e(t['titre'])} - {_e(APPLICABLE.get(t['applicable'], t['applicable']))}</h3>"
                      f"<p>{_e(t['raisonnement'])}</p>{obligations}")
     discarded = ", ".join(_e(x["code"]) for x in r.get("ecartes", []))
     if discarded:
@@ -106,7 +106,7 @@ def _benchmark(b: Benchmark | None) -> str:
     body = "".join("<tr>" + "".join(f"<td>{_e(r['cells'].get(c['key'], {}).get('display'))}</td>" for c in cols)
                    + "</tr>" for r in data["rows"])
     sources = " · ".join(f"{_e(s['name'])} ({_e(s['url'])})" for s in data["sources"])
-    return (f"<p>{_e(data['title'])} — {_e(data['description'])}</p><table><tr>{head}</tr>{body}</table>"
+    return (f"<p>{_e(data['title'])} - {_e(data['description'])}</p><table><tr>{head}</tr>{body}</table>"
             f'<p class="meta">Collecté le {_e(data["collected_at"][:10])}. Sources : {sources}.</p>')
 
 
@@ -114,9 +114,9 @@ def render_note(mission: Mission, benchmark: Benchmark | None, today: date | Non
     today = today or date.today()
     conf = " · CONFIDENTIEL" if mission.confidentiality.value == "confidentiel" else ""
     return f"""<!doctype html><html lang="fr"><head><meta charset="utf-8">
-<title>Note de mission — {_e(mission.client)}</title><style>{CSS}</style></head><body>
+<title>Note de mission - {_e(mission.client)}</title><style>{CSS}</style></head><body>
 <div class="cover"><p class="meta">Compass · Note de mission{conf}</p><h1>{_e(mission.client)}</h1>
-<p class="meta">{_e(mission.sector)} — {_e(mission.context)}<br>Édité le {today.strftime("%d/%m/%Y")}</p></div>
+<p class="meta">{_e(mission.sector)} - {_e(mission.context)}<br>Édité le {today.strftime("%d/%m/%Y")}</p></div>
 <h2>1. Diagnostic</h2>{_diagnostic(mission.diagnostic)}
 <h2>2. Solutions et feuille de route</h2>{_solutions(mission.solutions)}
 <h2>3. Réglementation applicable</h2>{_regulation(mission.regulation)}

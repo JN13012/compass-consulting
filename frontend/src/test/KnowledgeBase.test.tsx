@@ -8,7 +8,7 @@ import App from '../App'
 const passage = {
   ref: 'MICA-ART-3-1-33',
   kind: 'point',
-  heading: 'Article 3 — Définitions, paragraphe 1, point 33',
+  heading: 'Article 3 - Définitions, paragraphe 1, point 33',
   text: '33) «jeton de monnaie électronique»: un type de crypto-actif…',
   source_code: 'MICA',
   source_title: 'Règlement (UE) 2023/1114',

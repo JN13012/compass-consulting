@@ -19,7 +19,7 @@ class Item:
 
 
 def wilson(successes: int, n: int, z: float = 1.96) -> tuple[float, float]:
-    """95 % Wilson score interval — reliable for small samples and proportions near 0 or 1."""
+    """95 % Wilson score interval - reliable for small samples and proportions near 0 or 1."""
     if n == 0:
         return (0.0, 0.0)
     p = successes / n

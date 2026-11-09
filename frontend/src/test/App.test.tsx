@@ -40,7 +40,7 @@ describe('App', () => {
       created_at: '2026-11-07T10:00:00Z', steps_done: ['diagnostic'], context: 'ETI', notes: 'notes',
       maturity_axes: [], solutions: null, regulation: null,
       diagnostic: {
-        synthese: 'SI vieillissant.', processus: [], maturite: [{ axe: 'Cyber — Protéger', note: 1, justification: 'pas de MFA' }],
+        synthese: 'SI vieillissant.', processus: [], maturite: [{ axe: 'Cyber - Protéger', note: 1, justification: 'pas de MFA' }],
         irritants: [{ id: 'I1', titre: 'Pas de MFA', description: 'VPN sans MFA', impact: 'élevé', source: 'pas d’authentification multifacteur', source_verifiee: true }],
       },
     }

@@ -183,5 +183,5 @@ def format_report(reports: list[SourceReport]) -> str:
     failed = [r.code for r in reports if r.status == "failed"]
     lines.append("")
     summary = f"{len(reports) - len(failed)}/{len(reports)} sources OK"
-    lines.append(summary + (f" — échecs : {failed}" if failed else ""))
+    lines.append(summary + (f" - échecs : {failed}" if failed else ""))
     return "\n".join(lines)

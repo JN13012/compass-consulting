@@ -1,4 +1,4 @@
-"""ESMA interim MiCA register — e-money token (EMT) issuers (CSV, public)."""
+"""ESMA interim MiCA register - e-money token (EMT) issuers (CSV, public)."""
 
 from __future__ import annotations
 

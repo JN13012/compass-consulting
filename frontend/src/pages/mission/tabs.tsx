@@ -59,7 +59,7 @@ export function DiagnosticTab({ mission }: { mission: MissionOut }) {
             <ul className="space-y-2 text-sm">
               {d.processus.map((p) => (
                 <li key={p.nom}>
-                  <span className="font-medium">{p.nom}</span> — {p.description}
+                  <span className="font-medium">{p.nom}</span> - {p.description}
                   {p.volume && <span className="text-ink/60"> · {p.volume}</span>}
                   {p.outils.length > 0 && <span className="text-ink/60"> · {p.outils.join(', ')}</span>}
                 </li>
@@ -180,7 +180,7 @@ export function RegulationTab({ mission }: { mission: MissionOut }) {
                 {o.citations.map((c) => (
                   <details key={c.ref} className="mt-2 text-xs">
                     <summary className="cursor-pointer">
-                      <code className="font-semibold">{c.ref}</code> — {c.heading}
+                      <code className="font-semibold">{c.ref}</code> - {c.heading}
                     </summary>
                     <p className="mt-1 whitespace-pre-line rounded bg-paper p-2 leading-relaxed">{c.text}</p>
                     <p className="mt-1 text-ink/60">
@@ -206,7 +206,7 @@ export function RegulationTab({ mission }: { mission: MissionOut }) {
           <ul className="space-y-1 text-sm">
             {r.ecartes.map((e) => (
               <li key={e.code}>
-                <span className="font-medium">{e.code}</span> — <span className="text-ink/70">{e.raisonnement}</span>
+                <span className="font-medium">{e.code}</span> - <span className="text-ink/70">{e.raisonnement}</span>
               </li>
             ))}
           </ul>

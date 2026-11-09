@@ -1,7 +1,7 @@
 [project]
 name = "compass-api"
 version = "0.1.0"
-description = "Compass — assistant du consultant IA & Blockchain (API)"
+description = "Compass - assistant du consultant IA & Blockchain (API)"
 requires-python = ">=3.12"
 dependencies = [
     "fastapi>=0.115",

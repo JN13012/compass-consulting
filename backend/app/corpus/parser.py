@@ -267,7 +267,7 @@ def parse_articles_and_annexes(xhtml: str, code: str, max_chars: int = MAX_CHARS
         subtitle = art.find(class_=lambda c: bool(c) and bool(set(str(c).split()) & _SUBTITLE_CLASSES))
         heading = _norm(title.get_text(" ")) if title else f"Article {number}"
         if subtitle:
-            heading += f" — {_norm(subtitle.get_text(' '))}"
+            heading += f" - {_norm(subtitle.get_text(' '))}"
         blocks = _paragraphs(art)
         if len(blocks) == 1 and blocks[0][0] is None:
             out += _split_points(f"{code}-ART-{number}", heading, blocks[0][1], refs, max_chars, "article")

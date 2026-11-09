@@ -1,6 +1,6 @@
-# Compass — Assistant du consultant IA, Blockchain & Cybersécurité
+# Compass - Assistant du consultant IA, Blockchain & Cybersécurité
 
-> Cahier des charges. Version 0.2 — 2026-11-07 (ajout du volet cybersécurité, plan recentré sur un démonstrateur).
+> Cahier des charges. Version 0.2 - 2026-11-07 (ajout du volet cybersécurité, plan recentré sur un démonstrateur).
 > Statut : document de référence pour le développement. Toute évolution de périmètre se fait ici d'abord.
 
 **Finalité du projet : un démonstrateur de portfolio** (captures, vidéo, publication LinkedIn, CV). Les choix
@@ -72,7 +72,7 @@ Entrées : description libre des processus, notes d'entretien, fichiers d'exempl
 
 Sorties :
 - **Cartographie des processus** : étapes, acteurs, outils actuels, volumes estimés.
-- **Analyse des fichiers** (tableurs) : structure des colonnes, doublons, ressaisies, champs vides, incohérences — calculés en Python (pandas), pas devinés par le modèle.
+- **Analyse des fichiers** (tableurs) : structure des colonnes, doublons, ressaisies, champs vides, incohérences - calculés en Python (pandas), pas devinés par le modèle.
 - **Irritants** : liste priorisée (temps perdu, erreurs, risques), chacun relié à sa source (passage des notes ou constat sur fichier).
 - **Maturité** : grille sur 5 axes (données, outils/ERP, intégrations/API, compétences, gouvernance), note 1-3 justifiée.
 
@@ -80,8 +80,8 @@ Sorties :
 
 Pour chaque irritant, l'outil propose des solutions classées par **niveau de complexité croissante** :
 
-1. **Digitaliser** (remplacer un outil manuel) — sans IA
-2. **Automatiser** (connecter, supprimer les ressaisies) — sans IA
+1. **Digitaliser** (remplacer un outil manuel) - sans IA
+2. **Automatiser** (connecter, supprimer les ressaisies) - sans IA
 3. **IA** (extraction de documents, recherche sémantique, agents, prévision, assistant RAG)
 4. **Blockchain** (tokenisation, stablecoin, traçabilité, passeport produit)
 
@@ -98,7 +98,7 @@ Règles :
   - **Crypto** : le jeton est-il un instrument financier (MiFID II / régime pilote DLT), un EMT, un ART, un autre crypto-actif, ou hors champ MiCA ? L'activité nécessite-t-elle un agrément PSCA ? TFR applicable ? DAC8 ?
   - **IA** : niveau de risque AI Act (interdit, haut risque, transparence, minimal) ; données personnelles → RGPD (base légale, AIPD probable ?).
   - **Résilience** : entité financière → DORA.
-  - **Cybersécurité** : l'entité relève-t-elle de NIS 2 (entité essentielle ou importante selon secteur — annexes I/II — et taille) ? Ses produits sont-ils des « produits comportant des éléments numériques » au sens du Cyber Resilience Act (catégorie par défaut, importante, critique) ? Obligations de notification d'incident (NIS 2, DORA, RGPD art. 33).
+  - **Cybersécurité** : l'entité relève-t-elle de NIS 2 (entité essentielle ou importante selon secteur - annexes I/II - et taille) ? Ses produits sont-ils des « produits comportant des éléments numériques » au sens du Cyber Resilience Act (catégorie par défaut, importante, critique) ? Obligations de notification d'incident (NIS 2, DORA, RGPD art. 33).
 - Pour chaque obligation : statut `couvert` / `manquant` / `à vérifier` selon les informations de la mission.
 - Toute affirmation sans passage cité est **interdite** à l'affichage ; si le corpus ne suffit pas : « Le corpus ne permet pas de conclure ».
 
@@ -117,7 +117,7 @@ Règles :
 3. Collecte depuis trois types de sources :
    - **On-chain** : offre en circulation, nombre de détenteurs, blockchains, historique (DefiLlama, Etherscan, RPC).
    - **Registres officiels** : registre intérimaire MiCA de l'ESMA, listes AMF.
-   - **Documents** : prospectus, rapports de réserves, pages officielles — extraction par le modèle **avec l'extrait source**.
+   - **Documents** : prospectus, rapports de réserves, pages officielles - extraction par le modèle **avec l'extrait source**.
 4. Chaque cellule = `{valeur, unité, source_url, date_collecte, extrait, méthode, statut}` où `statut ∈ {trouvé, non_trouvé, validé, corrigé}`. **Jamais de valeur sans source.**
 5. Le consultant valide/corrige chaque cellule. Le benchmark est **relançable** (mêmes acteurs, mêmes critères, nouvelles données) avec historique des versions.
 6. Graphiques simples (évolution d'offre, comparaison) et synthèse rédigée à partir des seules cellules validées.
@@ -126,7 +126,7 @@ Règles :
 
 **L'outil ne code pas le POC.** Il le cadre, puis l'évalue.
 
-**a) Générateur de dossier POC** — produit un dossier zip prêt pour Claude Code :
+**a) Générateur de dossier POC** - produit un dossier zip prêt pour Claude Code :
 ```
 poc-<nom>/
 ├── CLAUDE.md            contexte, règles, contraintes (confidentialité, RGPD, AI Act…)
@@ -139,16 +139,16 @@ poc-<nom>/
 └── INTERFACE.md         contrat que le POC doit respecter pour être évalué
 ```
 
-**b) Contrat d'évaluation** — un POC est évaluable s'il expose soit :
+**b) Contrat d'évaluation** - un POC est évaluable s'il expose soit :
 - une commande CLI : `run --input <fichier>` → JSON sur stdout ; soit
 - une route HTTP : `POST /run` `{input}` → `{output}`.
 
-**c) Banc d'évaluation** — lance les cas du jeu de tests, compare aux attendus, calcule :
+**c) Banc d'évaluation** - lance les cas du jeu de tests, compare aux attendus, calcule :
 - justesse (exacte ou par champ), taux de refus, faux refus, latence, coût estimé ;
 - **intervalle de confiance à 95 % (Wilson)** sur chaque taux ;
 - pour un smart contract : résultat des tests Foundry + rapport Slither (nb de findings par sévérité).
 
-**d) Rapport** — résultats vs seuils, échecs regroupés par cause, liste de corrections à renvoyer à Claude Code.
+**d) Rapport** - résultats vs seuils, échecs regroupés par cause, liste de corrections à renvoyer à Claude Code.
 
 **e) Deux POC de démonstration livrés avec le projet** (dans `poc_examples/`) :
 - **Agent de traitement des commandes** : lit des commandes reçues par email/PDF, extrait les champs (client, produits, quantités, prix, date de livraison), remplit une base, prépare une facture. Jeu de 50 commandes fictives variées (dont scans et cas ambigus).
@@ -166,14 +166,14 @@ poc-<nom>/
 - Tâche planifiée (quotidienne) : détecte les nouveaux documents ou les changements (hash), les ingère dans le corpus avec version, génère un **résumé du changement** et indique **quelles missions sont concernées**.
 - Un document modifié ne remplace jamais silencieusement l'ancien : versions conservées, date de consultation tracée.
 
-### 3.11 Paramètres — fournisseurs IA
+### 3.11 Paramètres - fournisseurs IA
 
 - Couche d'abstraction **LiteLLM** : Anthropic, OpenAI, Mistral, Google, Ollama (local).
 - Configuration par **rôle** dans `config/llm.yaml` :
-  - `reasoning` (agents, qualification, rédaction) — défaut : Claude
-  - `extraction` (champs structurés) — défaut : Claude
-  - `local` (missions confidentielles) — défaut : modèle Ollama
-  - `embedding` — défaut : `bge-m3` en local
+  - `reasoning` (agents, qualification, rédaction) - défaut : Claude
+  - `extraction` (champs structurés) - défaut : Claude
+  - `local` (missions confidentielles) - défaut : modèle Ollama
+  - `embedding` - défaut : `bge-m3` en local
 - Journal de chaque appel : rôle, modèle, tokens, coût estimé, durée, mission.
 
 ---
@@ -319,7 +319,7 @@ Trois missions fictives complètes, préchargées :
 
 1. **« Maison Lumen »**, distributeur de prêt-à-porter haut de gamme : commandes et factures sur Excel, demandes de suivi de livraison, contrefaçon. → Solutions : digitalisation des commandes, agent de traitement des commandes (IA), passeport numérique produit (blockchain, avec grille de pertinence). → Réglementation : RGPD, AI Act, ESPR, vérification hors champ MiCA.
 2. **« Banque Azur »**, banque régionale : projet de fonds monétaire tokenisé réglé en stablecoin EUR, contrôle KYC des investisseurs par IA. → Réglementation : MiFID II / régime pilote DLT, MiCA (EMT), DORA, AMLR, AI Act. → Benchmark : stablecoins EUR et fonds monétaires tokenisés. → POC : token à transferts restreints + évaluation (audit Slither).
-3. **« Hexa Industrie »**, ETI (450 salariés) fabriquant des capteurs connectés pour l'industrie : Active Directory vieillissant, pas de plan de réponse à incident, sauvegardes non testées, firmware mis à jour à la main. → Diagnostic de maturité cyber (grille NIST CSF 2.0 : Gouverner, Identifier, Protéger, Détecter, Répondre, Rétablir). → Réglementation : NIS 2 (fabrication — annexe II, entité importante ?), Cyber Resilience Act (capteurs = produits comportant des éléments numériques), RGPD art. 32-33. → Solutions : quick wins (MFA, sauvegardes hors ligne testées, inventaire), feuille de route, et un usage IA encadré (tri des alertes) avec qualification AI Act.
+3. **« Hexa Industrie »**, ETI (450 salariés) fabriquant des capteurs connectés pour l'industrie : Active Directory vieillissant, pas de plan de réponse à incident, sauvegardes non testées, firmware mis à jour à la main. → Diagnostic de maturité cyber (grille NIST CSF 2.0 : Gouverner, Identifier, Protéger, Détecter, Répondre, Rétablir). → Réglementation : NIS 2 (fabrication - annexe II, entité importante ?), Cyber Resilience Act (capteurs = produits comportant des éléments numériques), RGPD art. 32-33. → Solutions : quick wins (MFA, sauvegardes hors ligne testées, inventaire), feuille de route, et un usage IA encadré (tri des alertes) avec qualification AI Act.
 
 ---
 
@@ -332,7 +332,7 @@ Trois missions fictives complètes, préchargées :
 
 ---
 
-## 11. Plan de réalisation — recentré « démonstrateur »
+## 11. Plan de réalisation - recentré « démonstrateur »
 
 | Phase | Contenu | Statut |
 |---|---|---|

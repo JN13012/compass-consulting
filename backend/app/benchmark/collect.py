@@ -119,7 +119,7 @@ def build(name: str, template: Template, coins: list[Stablecoin], register: dict
 
         mapping = _mapping(c, template)
         if mapping is None:
-            emetteur = Cell(value=None, display="Non rapproché", source="—", url="",
+            emetteur = Cell(value=None, display="Non rapproché", source="-", url="",
                             method="aucun rapprochement token → émetteur configuré")
             statut = Cell(value="non_rapproche", display="Émetteur non rapproché", source=ESMA, url=esma.REGISTER_PAGE,
                           method="non vérifiable sans rapprochement")
@@ -129,7 +129,7 @@ def build(name: str, template: Template, coins: list[Stablecoin], register: dict
                             method="rapprochement manuel token → LEI, à valider")
             issuer = register.get(mapping.lei)
             if issuer:
-                label = f"Inscrit — {short_authority(issuer.authority)} ({issuer.country})"
+                label = f"Inscrit - {short_authority(issuer.authority)} ({issuer.country})"
                 statut = Cell(value="inscrit", display=label, source=ESMA, url=esma.EMT_URL,
                               method=f"LEI trouvé dans le registre (date publiée : {issuer.date})")
             else:
@@ -137,12 +137,12 @@ def build(name: str, template: Template, coins: list[Stablecoin], register: dict
                               method="LEI recherché, non trouvé")
         change = c.change_30d
         rows.append(Row(key=f"{c.symbol}-{c.id}", cells={
-            "token": dl(c.symbol, f"{c.symbol} — {c.name}"),
+            "token": dl(c.symbol, f"{c.symbol} - {c.name}"),
             "mecanisme": dl(c.mechanism, {"fiat-backed": "Réserves fiat",
                                           "crypto-backed": "Réserves crypto",
-                                          "algorithmic": "Algorithmique"}.get(c.mechanism, c.mechanism or "—")),
+                                          "algorithmic": "Algorithmique"}.get(c.mechanism, c.mechanism or "-")),
             "offre": dl(c.circulating, _money(c.circulating, c.peg)),
-            "variation_30j": dl(change, "—" if change is None else f"{change:+.1%}".replace(".", ","),
+            "variation_30j": dl(change, "-" if change is None else f"{change:+.1%}".replace(".", ","),
                                 "calcul : (offre actuelle − offre il y a 30 j) / offre il y a 30 j"),
             "blockchains": dl(
                 c.chains, f"{len(c.chains)} : " + ", ".join(c.chains[:4]) + ("…" if len(c.chains) > 4 else "")

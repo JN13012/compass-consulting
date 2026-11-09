@@ -16,12 +16,12 @@ def by_ref(passages):  # type: ignore[no-untyped-def]
 def test_oj_articles_paragraphs_and_annex() -> None:
     refs = by_ref(parse_articles_and_annexes(OJ, "T"))
     assert refs["T-ART-1"].kind == "article"
-    assert refs["T-ART-1"].heading == "Article premier — Objet"
+    assert refs["T-ART-1"].heading == "Article premier - Objet"
     assert refs["T-ART-1"].text.endswith("modifie le règlement (CE) nº 300/2008.")  # superscript + footnote
     assert refs["T-ART-3-1"].text.startswith("1. Aux fins du présent règlement")
     assert "2) «crypto-actif»" in refs["T-ART-3-1"].text
     assert "a) sous-point imbriqué;" in refs["T-ART-3-1"].text
-    assert refs["T-ART-3-2"].heading == "Article 3 — Définitions, paragraphe 2"
+    assert refs["T-ART-3-2"].heading == "Article 3 - Définitions, paragraphe 2"
     annex = refs["T-ANX-I-1"]
     assert annex.heading == "ANNEXE I" and "1. Le nom." in annex.text
 
@@ -33,7 +33,7 @@ def test_long_paragraph_is_split_into_points() -> None:
     assert point.kind == "point"
     assert point.text.startswith("2) «crypto-actif»")
     assert "a) sous-point imbriqué;" in point.text  # nested points stay with their parent
-    assert point.heading.startswith("Article 3 — Définitions, paragraphe 1, point 2 : 1. Aux fins")
+    assert point.heading.startswith("Article 3 - Définitions, paragraphe 1, point 2 : 1. Aux fins")
 
 
 def test_recitals_and_footnotes_removed() -> None:
@@ -65,7 +65,7 @@ def test_points_directly_in_article_are_split() -> None:
     refs = by_ref(parse_articles_and_annexes(CONS, "C", max_chars=50))
     assert refs["C-ART-3-intro"].text == "Aux fins du présent règlement, on entend par:"
     assert refs["C-ART-3-2"].text.startswith("2) «réseau et système d’information»")
-    assert refs["C-ART-3-2"].heading.startswith("Article 3 — Définitions, point 2 : Aux fins")
+    assert refs["C-ART-3-2"].heading.startswith("Article 3 - Définitions, point 2 : Aux fins")
 
 
 def test_refs_are_stable() -> None:

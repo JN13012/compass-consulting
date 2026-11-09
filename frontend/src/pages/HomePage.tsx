@@ -45,7 +45,7 @@ export function HomePage() {
     <div className="space-y-8">
       <header>
         <p className="text-xs uppercase tracking-widest text-ink/60">Assistant du consultant</p>
-        <h1 className="mt-1 text-3xl font-semibold tracking-tight">Compass — IA, Blockchain, Cybersécurité</h1>
+        <h1 className="mt-1 text-3xl font-semibold tracking-tight">Compass - IA, Blockchain, Cybersécurité</h1>
         <p className="mt-2 max-w-2xl text-ink/80">
           Conduit une mission de conseil de bout en bout, du premier entretien au livrable, en s’appuyant sur les textes
           officiels européens et des données publiques vérifiables.
@@ -61,10 +61,10 @@ export function HomePage() {
       </header>
 
       <section aria-label="Chiffres clés" className="grid grid-cols-2 gap-3 md:grid-cols-4">
-        <Figure value={String(sources.data?.length ?? '—')} label="textes officiels (versions consolidées)" />
-        <Figure value={passages ? passages.toLocaleString('fr-FR') : '—'} label="passages indexés et citables" />
-        <Figure value="79 %" label="réponses justes sur le jeu de test (IC 95 % : 66–88 %)" />
-        <Figure value={String(missions.data?.length ?? '—')} label="missions en cours" />
+        <Figure value={String(sources.data?.length ?? '-')} label="textes officiels (versions consolidées)" />
+        <Figure value={passages ? passages.toLocaleString('fr-FR') : '-'} label="passages indexés et citables" />
+        <Figure value="79 %" label="réponses justes sur le jeu de test (IC 95 % : 66-88 %)" />
+        <Figure value={String(missions.data?.length ?? '-')} label="missions en cours" />
       </section>
 
       <section>

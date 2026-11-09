@@ -1,4 +1,4 @@
-# CLAUDE.md — Compass
+# CLAUDE.md - Compass
 
 Assistant interne pour consultants IA & Blockchain. Le cahier des charges complet est dans `SPEC.md` :
 **le relire avant toute tâche**. En cas de doute sur le périmètre, demander plutôt que deviner.

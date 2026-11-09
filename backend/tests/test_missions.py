@@ -52,7 +52,7 @@ DIAG = {
 
 def test_maturity_axes_add_nist_for_cyber() -> None:
     assert len(maturity_axes(["ia"])) == 5
-    assert "Cyber — Protéger" in maturity_axes(["cyber"])
+    assert "Cyber - Protéger" in maturity_axes(["cyber"])
 
 
 def test_quote_found_is_tolerant_but_strict_on_content() -> None:

@@ -66,8 +66,8 @@ def cmd_retrieval(split_name: str, k: int) -> int:
                 found += 1
         n = sum(i.answerable for i in items)
         print(f"\n{mode:<8} rappel@{k} = {found}/{n}")
-        print(f"  score du meilleur passage — répondables : {sorted(sims_a)}")
-        print(f"  score du meilleur passage — hors corpus : {sorted(sims_u)}")
+        print(f"  score du meilleur passage - répondables : {sorted(sims_a)}")
+        print(f"  score du meilleur passage - hors corpus : {sorted(sims_u)}")
     return 0
 
 

@@ -93,7 +93,7 @@ class Passage(Base):
     document_id: Mapped[uuid.UUID] = mapped_column(ForeignKey("source_documents.id", ondelete="CASCADE"))
     ref: Mapped[str] = mapped_column(String(80), index=True)  # stable id, e.g. MICA-ART-3-1-5
     kind: Mapped[str] = mapped_column(String(20))  # article | paragraphe | point | considerant | annexe
-    heading: Mapped[str] = mapped_column(Text)  # e.g. "Article 3 — Définitions, paragraphe 1"
+    heading: Mapped[str] = mapped_column(Text)  # e.g. "Article 3 - Définitions, paragraphe 1"
     text: Mapped[str] = mapped_column(Text)
     position: Mapped[int] = mapped_column(Integer)
     source_celex: Mapped[str] = mapped_column(String(30))  # recitals come from the original act

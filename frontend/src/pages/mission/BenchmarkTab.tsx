@@ -92,7 +92,7 @@ export function BenchmarkTab({ missionId }: { missionId: string }) {
               >
                 {runs.map((b) => (
                   <option key={b.id} value={b.id}>
-                    {new Date(b.created_at).toLocaleString('fr-FR')} — {b.template}
+                    {new Date(b.created_at).toLocaleString('fr-FR')} - {b.template}
                   </option>
                 ))}
               </select>
@@ -120,7 +120,7 @@ export function BenchmarkTab({ missionId }: { missionId: string }) {
                           <button
                             type="button"
                             onClick={() => setFocus(cell)}
-                            title={`Source : ${cell.source} — ${cell.method}`}
+                            title={`Source : ${cell.source} - ${cell.method}`}
                             className="text-left hover:underline"
                           >
                             {c.key === 'statut_mica' ? (
