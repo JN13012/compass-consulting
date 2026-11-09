@@ -38,7 +38,8 @@ describe('App', () => {
       return new Response(JSON.stringify(body), { headers: { 'Content-Type': 'application/json' } })
     })
     renderAt('/')
-    expect(await screen.findByRole('option', { name: 'Local · qwen3.5:9b + bge-m3' })).toBeInTheDocument()
+    expect(await screen.findByRole('option', { name: 'Local · qwen3.5:9b' })).toBeInTheDocument()
+    expect(screen.getByRole('option', { name: 'Local · bge-m3' })).toBeInTheDocument()
     expect(screen.getByText('13 textes · à jour au 09/11')).toBeInTheDocument()
   })
 

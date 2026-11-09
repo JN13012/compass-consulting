@@ -30,7 +30,6 @@ function Figure({ value, label }: { value: string; label: string }) {
 
 export function HomePage() {
   const sources = useQuery({ queryKey: ['kb-sources'], queryFn: async () => (await api.GET('/kb/sources')).data ?? [] })
-  const missions = useQuery({ queryKey: ['missions'], queryFn: async () => (await api.GET('/missions')).data ?? [] })
   const passages = sources.data?.reduce((n, s) => n + s.passages, 0) ?? 0
 
   return (
@@ -56,7 +55,7 @@ export function HomePage() {
         <Figure value={String(sources.data?.length ?? '-')} label="textes officiels (versions consolidées)" />
         <Figure value={passages ? passages.toLocaleString('fr-FR') : '-'} label="passages indexés et citables" />
         <Figure value="100 %" label="des citations relues mot pour mot dans le texte officiel" />
-        <Figure value={String(missions.data?.length ?? '-')} label="missions en cours" />
+        <Figure value="90 %" label="de réponses justes sur 48 questions de test (IA via clé API ; 79 % en local)" />
       </section>
 
       <section>

@@ -62,34 +62,53 @@ function SystemPanel() {
   })
   const h = health.data
   const active = h?.ai_options?.find((o) => o.role === h.ai_active)
-  // Meaning-based search always runs on the local embedding model, whatever generative model is chosen.
   const search = h?.search
-  const status = active?.status !== 'ok' ? active?.status : search && search.status !== 'ok' ? search.status : 'ok'
+  const select = 'w-full rounded border border-white/15 bg-white/5 px-2 py-1 text-[11px] text-white disabled:opacity-100'
 
   return (
     <div className="mt-auto space-y-3 border-t border-white/10 px-3 pt-4 text-[11px] text-white/55">
       <div>
         <label htmlFor="ai-choice" className="mb-1 flex items-center gap-2 text-white/80">
-          <Dot status={health.isPending ? undefined : status} />
-          Modèles d’IA
+          <Dot status={health.isPending ? undefined : active?.status} />
+          IA générative
         </label>
         <select
           id="ai-choice"
           value={h?.ai_active ?? ''}
           onChange={(e) => choose.mutate(e.target.value)}
           disabled={!h || choose.isPending}
-          className="w-full rounded border border-white/15 bg-white/5 px-2 py-1 text-[11px] text-white"
+          className={select}
         >
           {h?.ai_options?.map((o) => (
             <option key={o.role} value={o.role} disabled={o.status === 'no_key'} className="text-ink">
               {o.local ? 'Local' : 'Clé API'} · {o.model}
-              {search ? ` + ${search.detail}` : ''}
               {o.status === 'no_key' ? ' (clé absente)' : ''}
             </option>
           ))}
         </select>
-        {!health.isPending && status && status !== 'ok' && <p className="mt-1 leading-snug">{DOWN[status]}</p>}
+        {active && active.status !== 'ok' && <p className="mt-1 leading-snug">{DOWN[active.status]}</p>}
       </div>
+      {search && (
+        <div>
+          <label htmlFor="search-choice" className="mb-1 flex items-center gap-2 text-white/80">
+            <Dot status={search.status} />
+            Recherche sémantique
+          </label>
+          {/* Fixed on purpose: the 7 000 passages are indexed with this model; changing it means re-indexing. */}
+          <select
+            id="search-choice"
+            disabled
+            value="current"
+            title="Les passages sont indexés avec ce modèle : en changer impose de réindexer tout le corpus."
+            className={select}
+          >
+            <option value="current" className="text-ink">
+              Local · {search.detail}
+            </option>
+          </select>
+          {search.status !== 'ok' && <p className="mt-1 leading-snug">{DOWN[search.status]}</p>}
+        </div>
+      )}
       {h?.texts && <Line status={h.texts.status} label={h.texts.label} detail={h.texts.detail} />}
     </div>
   )
