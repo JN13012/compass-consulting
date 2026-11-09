@@ -62,13 +62,16 @@ function SystemPanel() {
   })
   const h = health.data
   const active = h?.ai_options?.find((o) => o.role === h.ai_active)
+  // Meaning-based search always runs on the local embedding model, whatever generative model is chosen.
+  const search = h?.search
+  const status = active?.status !== 'ok' ? active?.status : search && search.status !== 'ok' ? search.status : 'ok'
 
   return (
     <div className="mt-auto space-y-3 border-t border-white/10 px-3 pt-4 text-[11px] text-white/55">
       <div>
         <label htmlFor="ai-choice" className="mb-1 flex items-center gap-2 text-white/80">
-          <Dot status={health.isPending ? undefined : active?.status} />
-          IA générative
+          <Dot status={health.isPending ? undefined : status} />
+          Modèles d’IA
         </label>
         <select
           id="ai-choice"
@@ -79,21 +82,15 @@ function SystemPanel() {
         >
           {h?.ai_options?.map((o) => (
             <option key={o.role} value={o.role} disabled={o.status === 'no_key'} className="text-ink">
-              {o.label} · {o.model}
+              {o.local ? 'Local' : 'Clé API'} · {o.model}
+              {search ? ` + ${search.detail}` : ''}
               {o.status === 'no_key' ? ' (clé absente)' : ''}
             </option>
           ))}
         </select>
-        <p className="mt-1 leading-snug">
-          {active && active.status !== 'ok' ? DOWN[active.status] : 'Missions confidentielles : toujours en local'}
-        </p>
+        {!health.isPending && status && status !== 'ok' && <p className="mt-1 leading-snug">{DOWN[status]}</p>}
       </div>
-      {h?.search && h.texts && (
-        <>
-          <Line status={h.search.status} label={h.search.label} detail={h.search.status === 'ok' ? `${h.search.detail} (local)` : DOWN[h.search.status]} />
-          <Line status={h.texts.status} label={h.texts.label} detail={h.texts.detail} />
-        </>
-      )}
+      {h?.texts && <Line status={h.texts.status} label={h.texts.label} detail={h.texts.detail} />}
     </div>
   )
 }
