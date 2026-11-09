@@ -22,6 +22,7 @@ from app.corpus.cellar import candidates
 
 class VersionLister(Protocol):
     def consolidated_versions(self, celex: str) -> list[str]: ...
+    def is_available(self, celex: str) -> bool: ...
 
 
 # --- 1. update check ----------------------------------------------------------------------------------
@@ -55,14 +56,21 @@ def check_updates(session: Session, lister: VersionLister, today: date, now: dat
             texts.append(TextStatus(code=d.code, title=d.title, current=_celex(d.version), latest=None,
                                     status="erreur", detail=type(exc).__name__))
             continue
-        latest = found[0].celex if found else None
-        if latest is None:
-            status: Literal["a_jour", "nouvelle_version", "non_consolide"] = "non_consolide"
-        elif latest == _celex(d.version):
-            status = "a_jour"
+        current = _celex(d.version)
+        status: Literal["a_jour", "nouvelle_version", "non_consolide"] = "non_consolide" if not found else "a_jour"
+        latest, detail = (found[0].celex if found else None), ""
+        for v in found:  # newest first; stop at the version already in the database
+            if v.celex == current:
+                break
+            if lister.is_available(v.celex):
+                status, latest = "nouvelle_version", v.celex
+                break
         else:
-            status = "nouvelle_version"
-        texts.append(TextStatus(code=d.code, title=d.title, current=_celex(d.version), latest=latest, status=status))
+            if found:  # only listed versions without any published text: the stored text is still the latest
+                detail = f"version consolidée {found[0].celex} référencée sans texte publié"
+                latest = current
+        texts.append(TextStatus(code=d.code, title=d.title, current=current, latest=latest, status=status,
+                                detail=detail))
     return CheckResult(checked_at=now.isoformat(timespec="seconds"), texts=texts)
 
 

@@ -90,6 +90,14 @@ SELECT DISTINCT ?celex WHERE {{
             raise ValueError(f"{celex}: unexpected content ({resp.headers.get('content-type')})")
         return resp.content
 
+    def is_available(self, celex: str) -> bool:
+        """True when a French XHTML text is actually published (some listed versions have none)."""
+        try:
+            self.fetch_xhtml(celex)
+        except Exception:
+            return False
+        return True
+
     def _get(self, url: str, **kwargs: object) -> httpx.Response:
         last: Exception | None = None
         for _ in range(3):

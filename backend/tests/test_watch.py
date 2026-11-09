@@ -43,11 +43,15 @@ def test_diff_passages_classifies_changes_and_skips_recitals() -> None:
 
 
 class Lister:
+    def is_available(self, celex: str) -> bool:
+        return celex != "02023R1113-20230609"  # listed, but no text published behind it
+
     def consolidated_versions(self, celex: str) -> list[str]:
         if celex == "BROKEN":
             raise RuntimeError("down")
         return {"32022R2554": ["02022R2554-20221227", "02022R2554-20270101"],  # future version ignored
-                "32014L0065": ["02014L0065-20250117", "02014L0065-20260606"]}.get(celex, [])
+                "32014L0065": ["02014L0065-20250117", "02014L0065-20260606"],
+                "32023R1113": ["02023R1113-20230609"]}.get(celex, [])
 
 
 def test_check_updates_statuses() -> None:
@@ -55,6 +59,7 @@ def test_check_updates_statuses() -> None:
         SourceDocument(code="DORA", title="t", version="02022R2554-20221227", original_celex="32022R2554"),
         SourceDocument(code="MIFID2", title="t", version="02014L0065-20250117", original_celex="32014L0065"),
         SourceDocument(code="DLT", title="t", version="32022R0858", original_celex="32022R0858"),
+        SourceDocument(code="TFR", title="t", version="32023R1113", original_celex="32023R1113"),
         SourceDocument(code="KO", title="t", version="x", original_celex="BROKEN"),
     ]
 
@@ -67,6 +72,7 @@ def test_check_updates_statuses() -> None:
     assert status["DORA"] == ("a_jour", "02022R2554-20221227")
     assert status["MIFID2"] == ("nouvelle_version", "02014L0065-20260606")
     assert status["DLT"] == ("non_consolide", None)
+    assert status["TFR"] == ("a_jour", "32023R1113")  # only an unpublished consolidation exists
     assert status["KO"][0] == "erreur"
 
 

@@ -99,8 +99,10 @@ export function WatchPage() {
                   <td className="whitespace-nowrap px-4 py-2.5 tabular-nums">{t.latest ? versionDate(t.latest) : '-'}</td>
                   <td className="px-4 py-2.5">
                     <Badge tone={STATUS[t.status]?.tone}>{STATUS[t.status]?.label ?? t.status}</Badge>
-                    {t.status === 'nouvelle_version' && t.current === t.current.replace(/-\d{8}$/, '') && (
-                      <span className="mt-0.5 block text-[11px] text-ink/50">base : acte d’origine</span>
+                    {t.detail && (
+                      <span className="mt-0.5 block max-w-56 text-[11px] leading-snug text-ink/50">
+                        Version consolidée annoncée sans texte publié : le texte d’origine reste la référence.
+                      </span>
                     )}
                   </td>
                   <td className="px-4 py-2.5 text-xs text-ink/70">{(status.data?.cited_by[t.code] ?? []).join(', ') || '-'}</td>
