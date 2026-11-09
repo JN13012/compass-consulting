@@ -104,7 +104,7 @@ export interface paths {
         put?: never;
         /**
          * Seed Demo
-         * @description Creates the three demo missions if they do not exist yet (idempotent).
+         * @description Creates the three demo missions and fills their interview grid if missing (idempotent).
          */
         post: operations["seed_demo_missions_demo_post"];
         delete?: never;
@@ -387,6 +387,8 @@ export interface components {
             database: "ok" | "unreachable";
             /** Version */
             version: string;
+            /** Ai Model */
+            ai_model: string;
         };
         /**
          * Interview

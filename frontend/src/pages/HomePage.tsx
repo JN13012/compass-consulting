@@ -54,7 +54,7 @@ export function HomePage() {
           <Link to="/missions" className="rounded bg-ink px-4 py-2 text-sm text-white">
             Voir les missions
           </Link>
-          <Link to="/connaissances" className="rounded border border-ink/30 px-4 py-2 text-sm">
+          <Link to="/textes" className="rounded border border-ink/30 px-4 py-2 text-sm">
             Interroger les textes
           </Link>
         </div>

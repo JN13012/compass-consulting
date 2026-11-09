@@ -38,7 +38,7 @@ function renderKb() {
   const client = new QueryClient({ defaultOptions: { queries: { retry: false } } })
   render(
     <QueryClientProvider client={client}>
-      <MemoryRouter initialEntries={['/connaissances']}>
+      <MemoryRouter initialEntries={['/textes']}>
         <App />
       </MemoryRouter>
     </QueryClientProvider>,

@@ -63,7 +63,8 @@ export function KnowledgeBasePage() {
   return (
     <>
       <PageHeader
-        title="Base de connaissances"
+        eyebrow="Base de connaissances"
+        title="Textes officiels"
         subtitle="La réponse cite le passage exact du texte officiel, avec sa source. Si les textes du corpus ne permettent pas de répondre, l'outil le dit et ne répond pas."
       />
 

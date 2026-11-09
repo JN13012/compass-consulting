@@ -16,7 +16,8 @@ export default function App() {
         <Route path="missions/:missionId" element={<Navigate to={MISSION_TABS[0].slug} replace />} />
         <Route path="missions/:missionId/:tab" element={<MissionPage />} />
         <Route path="veille" element={<WatchPage />} />
-        <Route path="connaissances" element={<KnowledgeBasePage />} />
+        <Route path="textes" element={<KnowledgeBasePage />} />
+        <Route path="connaissances" element={<Navigate to="/textes" replace />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Route>
     </Routes>

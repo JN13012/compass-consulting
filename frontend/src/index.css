@@ -1,13 +1,31 @@
 @import 'tailwindcss';
 
+/* Consulting-report look: warm paper, night-blue ink, one brass accent; colours beyond that only for statuses. */
 @theme {
-  --color-ink: #1b2a41;
-  --color-paper: #fbfaf7;
-  --color-line: #e4e1da;
+  --color-ink: #14213d;
+  --color-ink-soft: #24365c;
+  --color-paper: #f6f4ef;
+  --color-line: #e3ded3;
+  --color-accent: #a8844f;
+  --color-accent-soft: #f3ece0;
   --color-warn-bg: #fbf3d9;
+  --font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-serif: 'Source Serif 4', Georgia, 'Times New Roman', serif;
 }
 
-body {
-  @apply bg-paper text-ink antialiased;
-  font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+@layer base {
+  body {
+    @apply bg-paper font-sans text-ink antialiased;
+    font-feature-settings: 'tnum' 1;
+  }
+  h1,
+  h2 {
+    @apply font-serif;
+  }
+  h1 {
+    letter-spacing: -0.01em;
+  }
+  ::selection {
+    @apply bg-accent-soft;
+  }
 }

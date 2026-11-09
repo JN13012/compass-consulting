@@ -20,7 +20,10 @@ def test_health_ok() -> None:
     response = TestClient(app).get("/health")
     app.dependency_overrides.clear()
     assert response.status_code == 200
-    assert response.json() == {"status": "ok", "database": "ok", "version": "0.1.0"}
+    body = response.json()
+    assert {k: body[k] for k in ("status", "database", "version")} == {"status": "ok", "database": "ok",
+                                                                    "version": "0.1.0"}
+    assert "key" not in body["ai_model"].lower() and body["ai_model"]
 
 
 def test_health_degraded_when_db_down() -> None:

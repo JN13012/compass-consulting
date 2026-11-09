@@ -27,7 +27,7 @@ export function MissionsPage() {
 
   return (
     <>
-      <PageHeader title="Missions" subtitle="Un espace par client : diagnostic, solutions, réglementation." />
+      <PageHeader eyebrow="Portefeuille" title="Missions" subtitle="Un espace par client : diagnostic, solutions, réglementation." />
       <div className="mb-6 flex flex-wrap gap-3">
         <button onClick={() => setShowForm((v) => !v)} className="rounded bg-ink px-4 py-2 text-sm text-white">
           Nouvelle mission

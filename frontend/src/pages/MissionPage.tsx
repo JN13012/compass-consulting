@@ -6,7 +6,7 @@ import { api } from '../api/client'
 import { Badge } from '../components/Badge'
 import { MissionForm } from '../components/MissionForm'
 import { FOCUS_LABELS } from '../lib/labels'
-import { PageHeader, Placeholder } from '../components/PageHeader'
+import { Placeholder } from '../components/PageHeader'
 import { useAnalyze, useMission, type MissionOut, type Step } from '../lib/missions'
 import { BenchmarkTab } from './mission/BenchmarkTab'
 import { DeliverablesTab } from './mission/DeliverablesTab'
@@ -14,14 +14,20 @@ import { InterviewTab } from './mission/InterviewTab'
 import { DiagnosticTab, RegulationTab, SolutionsTab } from './mission/tabs'
 
 export const MISSION_TABS = [
-  { slug: 'entretiens', label: '0. Entretiens', phase: '' },
-  { slug: 'diagnostic', label: '1. Diagnostic', phase: '' },
-  { slug: 'solutions', label: '2. Solutions', phase: '' },
-  { slug: 'reglementation', label: '3. Réglementation', phase: '' },
-  { slug: 'benchmark', label: '4. Benchmark', phase: '' },
-  { slug: 'poc', label: '5. POC & évaluation', phase: 'phase 4' },
-  { slug: 'livrables', label: '6. Livrables', phase: '' },
+  { slug: 'entretiens', label: 'Entretiens' },
+  { slug: 'diagnostic', label: 'Diagnostic' },
+  { slug: 'solutions', label: 'Solutions' },
+  { slug: 'reglementation', label: 'Réglementation' },
+  { slug: 'benchmark', label: 'Benchmark' },
+  { slug: 'poc', label: 'POC' },
+  { slug: 'livrables', label: 'Livrables' },
 ] as const
+
+function stepDone(m: MissionOut, slug: string): boolean {
+  if (slug === 'entretiens') return m.notes.trim().length > 0
+  const step = STEP_OF[slug]
+  return step !== undefined && m.steps_done.includes(step)
+}
 
 const STEP_OF: Record<string, Step> = { diagnostic: 'diagnostic', solutions: 'solutions', reglementation: 'regulation' }
 
@@ -49,11 +55,21 @@ export function MissionPage() {
 
   return (
     <>
-      <div className="flex items-start gap-3">
+      <div className="mb-6 flex items-start gap-3">
         <div className="min-w-0 flex-1">
-          <PageHeader title={m.client} subtitle={`${m.sector} - ${m.context}`} />
+          <p className="mb-1 text-[11px] font-medium uppercase tracking-[0.18em] text-accent">Mission · {m.sector}</p>
+          <h1 className="text-3xl font-semibold">{m.client}</h1>
+          <p className="mt-2 max-w-3xl text-sm leading-relaxed text-ink/70">{m.context}</p>
+          <div className="mt-3 flex flex-wrap gap-1.5">
+            {m.focus.map((f) => (
+              <Badge key={f} tone="blue">
+                {FOCUS_LABELS[f] ?? f}
+              </Badge>
+            ))}
+            {m.confidentiality === 'confidentiel' && <Badge tone="dark">Confidentiel · modèle local uniquement</Badge>}
+          </div>
         </div>
-        <button onClick={() => setEditing((v) => !v)} className="rounded border border-ink/30 px-3 py-1.5 text-sm">
+        <button onClick={() => setEditing((v) => !v)} className="rounded-md border border-ink/20 bg-white px-3 py-1.5 text-sm hover:border-ink/40">
           Modifier
         </button>
         <button
@@ -61,32 +77,38 @@ export function MissionPage() {
             if (window.confirm(`Supprimer la mission « ${m.client} » et ses benchmarks ? Cette action est définitive.`)) remove.mutate()
           }}
           disabled={remove.isPending}
-          className="rounded border border-red-300 px-3 py-1.5 text-sm text-red-700"
+          className="rounded-md border border-red-200 bg-white px-3 py-1.5 text-sm text-red-700 hover:border-red-400"
         >
           Supprimer
         </button>
       </div>
       {editing && <MissionForm mission={m} onSaved={() => setEditing(false)} onCancel={() => setEditing(false)} />}
-      <div className="-mt-3 mb-5 flex flex-wrap gap-1.5">
-        {m.focus.map((f) => (
-          <Badge key={f} tone="blue">
-            {FOCUS_LABELS[f] ?? f}
-          </Badge>
-        ))}
-        {m.confidentiality === 'confidentiel' && <Badge tone="dark">Confidentiel · modèle local uniquement</Badge>}
-      </div>
-      <nav aria-label="Étapes de la mission" className="mb-6 flex flex-wrap gap-1 border-b border-line">
-        {MISSION_TABS.map((t) => (
-          <NavLink
-            key={t.slug}
-            to={`/missions/${missionId}/${t.slug}`}
-            className={({ isActive }) =>
-              `-mb-px border-b-2 px-3 py-2 text-sm ${isActive ? 'border-ink font-medium' : 'border-transparent text-ink/60 hover:text-ink'}`
-            }
-          >
-            {t.label}
-          </NavLink>
-        ))}
+      <nav aria-label="Étapes de la mission" className="mb-8 flex flex-wrap items-center gap-y-2 rounded-md border border-line bg-white px-2 py-2">
+        {MISSION_TABS.map((t, i) => {
+          const done = stepDone(m, t.slug)
+          return (
+            <NavLink
+              key={t.slug}
+              to={`/missions/${missionId}/${t.slug}`}
+              className={({ isActive }) =>
+                `flex items-center gap-2 rounded px-3 py-1.5 text-sm transition-colors ${isActive ? 'bg-ink text-white' : 'text-ink/70 hover:bg-paper hover:text-ink'}`
+              }
+            >
+              {({ isActive }) => (
+                <>
+                  <span
+                    className={`flex h-5 w-5 items-center justify-center rounded-full text-[11px] font-semibold ${
+                      isActive ? 'bg-accent text-white' : done ? 'bg-emerald-100 text-emerald-800' : 'bg-ink/5 text-ink/60'
+                    }`}
+                  >
+                    {done && !isActive ? '✓' : i}
+                  </span>
+                  {t.label}
+                </>
+              )}
+            </NavLink>
+          )
+        })}
       </nav>
       {STEP_OF[current.slug] ? (
         <StepPanel mission={m} step={STEP_OF[current.slug]} />
@@ -97,7 +119,10 @@ export function MissionPage() {
       ) : current.slug === 'livrables' ? (
         <DeliverablesTab mission={m} />
       ) : (
-        <Placeholder phase={current.phase} />
+        <Placeholder
+          title="Cadrage du POC - à venir"
+          text="Choisir une solution, définir le périmètre du prototype, les données de test et les critères de réussite mesurables, puis comparer les résultats aux objectifs."
+        />
       )}
     </>
   )
