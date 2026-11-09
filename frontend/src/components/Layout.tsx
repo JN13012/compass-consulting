@@ -39,16 +39,36 @@ export function Layout() {
             </NavLink>
           ))}
         </nav>
-        <div className="mt-auto space-y-1 border-t border-white/10 px-3 pt-4 text-[11px] text-white/50">
-          <p>
-            Modèle : <span className="text-white/80">{health.data?.ai_model ?? '…'}</span>
-          </p>
-          <p>{health.data?.database === 'ok' ? 'Base de données connectée' : health.isPending ? '…' : 'API injoignable'}</p>
+        <div className="mt-auto space-y-2.5 border-t border-white/10 px-3 pt-4 text-[11px] text-white/50">
+          <Status
+            ok={health.data?.ai_status === 'ok'}
+            pending={health.isPending}
+            label="IA"
+            value={health.data?.ai_model}
+            down={health.data?.ai_status === 'no_key' ? 'clé API manquante' : 'hors ligne'}
+          />
+          <Status ok={health.data?.ai_status === 'ok'} pending={health.isPending} label="Recherche" value={health.data?.search_model} down="hors ligne" />
+          <Status ok={health.data?.database === 'ok'} pending={health.isPending} label="Textes et missions" value="disponibles" down="indisponibles" />
         </div>
       </aside>
       <main className="mx-auto w-full max-w-6xl min-w-0 flex-1 px-10 py-10">
         <Outlet />
       </main>
     </div>
+  )
+}
+
+function Status({ ok, pending, label, value, down }: { ok: boolean; pending: boolean; label: string; value?: string; down: string }) {
+  const color = pending ? 'bg-white/30' : ok ? 'bg-emerald-400' : 'bg-red-400'
+  return (
+    <p className="flex items-start gap-2">
+      <span className="relative mt-1 flex h-2 w-2 shrink-0">
+        {ok && !pending && <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-60" />}
+        <span className={`relative inline-flex h-2 w-2 rounded-full ${color}`} />
+      </span>
+      <span>
+        {label} : <span className="text-white/80">{pending ? '…' : ok ? value : down}</span>
+      </span>
+    </p>
   )
 }

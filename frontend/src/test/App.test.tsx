@@ -24,14 +24,17 @@ describe('App', () => {
     expect(screen.getByRole('navigation', { name: 'Navigation principale' })).toBeInTheDocument()
   })
 
-  it('displays API health from /health', async () => {
+  it('shows AI and data status in the sidebar', async () => {
     vi.spyOn(globalThis, 'fetch').mockImplementation(async (input) => {
       const url = input instanceof Request ? input.url : String(input)
-      const body = url.endsWith('/health') ? { status: 'ok', database: 'ok', version: '0.1.0' } : []
+      const body = url.endsWith('/health')
+        ? { status: 'ok', database: 'ok', version: '0.1.0', ai_model: 'qwen3.5:9b (local)', ai_status: 'ok', search_model: 'bge-m3 (local)' }
+        : []
       return new Response(JSON.stringify(body), { headers: { 'Content-Type': 'application/json' } })
     })
     renderAt('/')
-    expect(await screen.findByText(/Base de données : connectée/)).toBeInTheDocument()
+    expect(await screen.findByText('qwen3.5:9b (local)')).toBeInTheDocument()
+    expect(screen.getByText('disponibles')).toBeInTheDocument()
   })
 
   it('renders a mission with its seven tabs and diagnostic results', async () => {

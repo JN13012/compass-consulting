@@ -500,6 +500,13 @@ export interface components {
             version: string;
             /** Ai Model */
             ai_model: string;
+            /**
+             * Ai Status
+             * @enum {string}
+             */
+            ai_status: "ok" | "unreachable" | "no_key" | "not_configured";
+            /** Search Model */
+            search_model: string;
         };
         /** Impact */
         Impact: {

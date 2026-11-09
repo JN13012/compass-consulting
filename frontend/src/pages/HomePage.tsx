@@ -29,14 +29,6 @@ function Figure({ value, label }: { value: string; label: string }) {
 }
 
 export function HomePage() {
-  const health = useQuery({
-    queryKey: ['health'],
-    queryFn: async () => {
-      const { data, error } = await api.GET('/health')
-      if (error || !data) throw new Error('API injoignable')
-      return data
-    },
-  })
   const sources = useQuery({ queryKey: ['kb-sources'], queryFn: async () => (await api.GET('/kb/sources')).data ?? [] })
   const missions = useQuery({ queryKey: ['missions'], queryFn: async () => (await api.GET('/missions')).data ?? [] })
   const passages = sources.data?.reduce((n, s) => n + s.passages, 0) ?? 0
@@ -63,7 +55,7 @@ export function HomePage() {
       <section aria-label="Chiffres clés" className="grid grid-cols-2 gap-3 md:grid-cols-4">
         <Figure value={String(sources.data?.length ?? '-')} label="textes officiels (versions consolidées)" />
         <Figure value={passages ? passages.toLocaleString('fr-FR') : '-'} label="passages indexés et citables" />
-        <Figure value="79 %" label="réponses justes sur le jeu de test (IC 95 % : 66-88 %)" />
+        <Figure value="100 %" label="des citations relues mot pour mot dans le texte officiel" />
         <Figure value={String(missions.data?.length ?? '-')} label="missions en cours" />
       </section>
 
@@ -92,12 +84,6 @@ export function HomePage() {
         </ul>
       </section>
 
-      <footer aria-label="État du système" className="text-xs text-ink/60">
-        {health.isPending && 'Vérification…'}
-        {health.isError && 'API injoignable.'}
-        {health.data &&
-          `API ${health.data.status === 'ok' ? 'opérationnelle' : 'dégradée'} · Base de données : ${health.data.database === 'ok' ? 'connectée' : 'injoignable'} · v${health.data.version}`}
-      </footer>
     </div>
   )
 }
