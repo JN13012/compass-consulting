@@ -1,0 +1,757 @@
+{
+ "date": "2026-11-09T10:22:28",
+ "split": "dev",
+ "config": {
+  "mode": "vector",
+  "role": "reasoning",
+  "model": "openai/gpt-5.1",
+  "top_k": 8,
+  "min_score": 0.3,
+  "min_similarity": 0.45
+ },
+ "summary": {
+  "bonne_source": {
+   "k": 22,
+   "n": 24,
+   "rate": 0.917,
+   "ic95": [
+    0.742,
+    0.977
+   ]
+  },
+  "correct_strict": {
+   "k": 21,
+   "n": 24,
+   "rate": 0.875,
+   "ic95": [
+    0.69,
+    0.957
+   ]
+  },
+  "faux_refus": {
+   "k": 2,
+   "n": 24,
+   "rate": 0.083,
+   "ic95": [
+    0.023,
+    0.258
+   ]
+  },
+  "mauvaise_source": {
+   "k": 0,
+   "n": 24,
+   "rate": 0.0,
+   "ic95": [
+    0.0,
+    0.138
+   ]
+  },
+  "refus_corrects": {
+   "k": 8,
+   "n": 8,
+   "rate": 1.0,
+   "ic95": [
+    0.676,
+    1.0
+   ]
+  },
+  "global": {
+   "k": 30,
+   "n": 32,
+   "rate": 0.938,
+   "ic95": [
+    0.799,
+    0.983
+   ]
+  },
+  "rappel_recherche": {
+   "k": 23,
+   "n": 24,
+   "rate": 0.958,
+   "ic95": [
+    0.798,
+    0.993
+   ]
+  },
+  "duree_moyenne_s": 2.97
+ },
+ "outcomes": [
+  {
+   "id": "n09",
+   "label": "refus_correct",
+   "status": "refused",
+   "cited": [],
+   "expected": [],
+   "answer": "",
+   "refusal_reason": "insuffisant",
+   "best_similarity": 0.5476424140464318,
+   "retrieved": [
+    "AMLR-RCT-153",
+    "TFR-ART-26-2",
+    "AMLR-ART-77-4",
+    "DAC8-RCT-40",
+    "TFR-ART-26-3"
+   ]
+  },
+  {
+   "id": "n11",
+   "label": "refus_correct",
+   "status": "refused",
+   "cited": [],
+   "expected": [],
+   "answer": "",
+   "refusal_reason": "aucun_passage_pertinent",
+   "best_similarity": 0.4454265903226413,
+   "retrieved": [
+    "NIS2-ART-13-2",
+    "NIS2-RCT-95",
+    "NIS2-ART-25-2",
+    "NIS2-ART-25-1",
+    "NIS2-ART-7-4"
+   ]
+  },
+  {
+   "id": "n12",
+   "label": "refus_correct",
+   "status": "refused",
+   "cited": [],
+   "expected": [],
+   "answer": "",
+   "refusal_reason": "insuffisant",
+   "best_similarity": 0.5405063403558157,
+   "retrieved": [
+    "DLT-ART-7-4",
+    "NIS2-ART-32-2",
+    "NIS2-ART-33-2",
+    "CRA-ART-64-2",
+    "DORA-ART-28-4"
+   ]
+  },
+  {
+   "id": "n13",
+   "label": "refus_correct",
+   "status": "refused",
+   "cited": [],
+   "expected": [],
+   "answer": "",
+   "refusal_reason": "insuffisant",
+   "best_similarity": 0.458444969184302,
+   "retrieved": [
+    "ESPR-ART-18-3",
+    "MICA-ART-139-2",
+    "AMLR-ANX- VI-2",
+    "ESPR-ART-28-2",
+    "CRA-RCT-85"
+   ]
+  },
+  {
+   "id": "n16",
+   "label": "refus_correct",
+   "status": "refused",
+   "cited": [],
+   "expected": [],
+   "answer": "",
+   "refusal_reason": "insuffisant",
+   "best_similarity": 0.572246806815863,
+   "retrieved": [
+    "AIACT-ART-75c-8",
+    "RGPD-ART-36-2",
+    "MICA-ART-105-4",
+    "RGPD-RCT-137",
+    "MIFID2-ART-95-1"
+   ]
+  },
+  {
+   "id": "n18",
+   "label": "refus_correct",
+   "status": "refused",
+   "cited": [],
+   "expected": [],
+   "answer": "",
+   "refusal_reason": "aucun_passage_pertinent",
+   "best_similarity": 0.34377488867338735,
+   "retrieved": [
+    "ESPR-ANX-III-1",
+    "MIFID2-ANX-IV-4",
+    "MICA-ART-35-6",
+    "MICA-ANX-II-5",
+    "MICA-ART-22-6"
+   ]
+  },
+  {
+   "id": "n19",
+   "label": "refus_correct",
+   "status": "refused",
+   "cited": [],
+   "expected": [],
+   "answer": "",
+   "refusal_reason": "aucun_passage_pertinent",
+   "best_similarity": 0.41782670681872836,
+   "retrieved": [
+    "AMLR-RCT-59",
+    "DORA-ART-35-8",
+    "AMLR-ANX- IV-1",
+    "MICA-ART-111-3",
+    "MICA-ART-111-5-j"
+   ]
+  },
+  {
+   "id": "n20",
+   "label": "refus_correct",
+   "status": "refused",
+   "cited": [],
+   "expected": [],
+   "answer": "",
+   "refusal_reason": "insuffisant",
+   "best_similarity": 0.6848190695836519,
+   "retrieved": [
+    "CRA-RCT-33",
+    "CRA-RCT-81",
+    "ESPR-RCT-113",
+    "ESPR-ANX-III-1",
+    "AIACT-RCT-77"
+   ]
+  },
+  {
+   "id": "q01",
+   "label": "correct",
+   "status": "answered",
+   "cited": [
+    "MICA-ART-3-1-5",
+    "MICA-RCT-16",
+    "MICA-RCT-2"
+   ],
+   "expected": [
+    "MICA-ART-3-1-5"
+   ],
+   "answer": "MiCA définit le «crypto‑actif» comme une représentation numérique d’une valeur ou d’un droit pouvant être transférée et stockée de manière électronique, au moyen de la technologie des registres distribués ou d’une technologie similaire. Le règlement précise que cette définition doit être entendue de manière large afin de couvrir tous les types de crypto‑actifs qui ne relèvent pas déjà des actes législatifs de l’Union relatifs aux services financiers.",
+   "refusal_reason": null,
+   "best_similarity": 0.6272591422929014,
+   "retrieved": [
+    "MICA-ART-3-1-5",
+    "MICA-RCT-18",
+    "MICA-RCT-2",
+    "MICA-RCT-41",
+    "MICA-ART-6-5"
+   ]
+  },
+  {
+   "id": "q02",
+   "label": "correct",
+   "status": "answered",
+   "cited": [
+    "MICA-ART-3-1-7",
+    "MICA-ART-48-2",
+    "MICA-RCT-66",
+    "MICA-RCT-19"
+   ],
+   "expected": [
+    "MICA-ART-3-1-7"
+   ],
+   "answer": "Au sens de MiCA, un jeton de monnaie électronique est un type de crypto‑actif qui vise à conserver une valeur stable en se référant à la valeur d’une monnaie officielle unique. Ces jetons sont réputés être de la «monnaie électronique» au sens de la directive 2009/110/CE et sont soumis à des conditions strictes d’émission, notamment l’obligation d’être émis par un établissement de crédit ou un établissement de monnaie électronique agréé. La définition est conçue de manière large pour englober tous les crypto‑actifs se référant à une monnaie officielle unique, afin d’éviter le contournement des règles applicables à la monnaie électronique.",
+   "refusal_reason": null,
+   "best_similarity": 0.5841020198050784,
+   "retrieved": [
+    "MICA-ART-3-1-7",
+    "MICA-ART-48-2",
+    "MICA-ART-56-4",
+    "MICA-ART-57-1",
+    "MICA-RCT-66"
+   ]
+  },
+  {
+   "id": "q04",
+   "label": "correct",
+   "status": "answered",
+   "cited": [
+    "MICA-ART-48-1",
+    "MICA-ART-48-2"
+   ],
+   "expected": [
+    "MICA-ART-48-1"
+   ],
+   "answer": "En principe, seul l’émetteur du jeton de monnaie électronique, agréé en tant qu’établissement de crédit ou établissement de monnaie électronique, ayant notifié et publié un livre blanc conformément à l’article 51, peut offrir au public ce jeton dans l’Union. Toutefois, d’autres personnes peuvent également offrir au public ce jeton ou demander son admission à la négociation, à condition d’avoir obtenu le consentement écrit de l’émetteur et de respecter les articles 50 et 53. Un jeton de monnaie électronique adossé à l’euro, monnaie officielle d’un État membre, est réputé faire l’objet d’une offre au public dans l’Union.",
+   "refusal_reason": null,
+   "best_similarity": 0.6498243034095449,
+   "retrieved": [
+    "MICA-ART-48-1",
+    "MICA-ART-4-1",
+    "MICA-ART-48-2",
+    "MICA-ART-60-4",
+    "MICA-RCT-108"
+   ]
+  },
+  {
+   "id": "q06",
+   "label": "correct",
+   "status": "answered",
+   "cited": [
+    "MICA-ART-40-1",
+    "MICA-ART-40-3",
+    "MICA-ART-34-5"
+   ],
+   "expected": [
+    "MICA-ART-40-1"
+   ],
+   "answer": "Les émetteurs de jetons se référant à un ou des actifs n’ont pas le droit d’accorder des intérêts en lien avec ces jetons. Toute rémunération ou avantage lié à la durée de détention de ces jetons est juridiquement qualifié d’« intérêt », y compris les compensations ou remises nettes ayant un effet équivalent, qu’elles proviennent directement de l’émetteur ou de tiers et soient directement associées aux jetons ou à la tarification d’autres produits. Les émetteurs doivent en outre mettre en place des politiques et procédures efficaces pour garantir le respect de cette interdiction dans le cadre de leur dispositif de gouvernance.",
+   "refusal_reason": null,
+   "best_similarity": 0.765013963140174,
+   "retrieved": [
+    "MICA-ART-40-1",
+    "MICA-ART-40-3",
+    "MICA-ART-34-5",
+    "MICA-ART-27-2",
+    "MICA-ART-50-1"
+   ]
+  },
+  {
+   "id": "q07",
+   "label": "correct",
+   "status": "answered",
+   "cited": [
+    "MICA-ART-8-1",
+    "MICA-RCT-31"
+   ],
+   "expected": [
+    "MICA-ART-8-1"
+   ],
+   "answer": "Pour un crypto-actif autre qu’un jeton se référant à un ou des actifs (ART) ou un jeton de monnaie électronique (EMT), le livre blanc doit être notifié à l’autorité compétente de l’État membre d’origine de l’offreur, de la personne qui demande l’admission à la négociation ou de l’exploitant de la plateforme de négociation. Pour les offreurs établis dans un pays tiers, la notification se fait à l’autorité compétente de l’État membre dans lequel ils ont l’intention d’offrir les crypto‑actifs.",
+   "refusal_reason": null,
+   "best_similarity": 0.6996658831935066,
+   "retrieved": [
+    "MICA-ART-51-14",
+    "MICA-RCT-31",
+    "MICA-ART-8-1",
+    "MICA-ART-25-5",
+    "MICA-ART-8-7"
+   ]
+  },
+  {
+   "id": "q08",
+   "label": "faux_refus",
+   "status": "refused",
+   "cited": [],
+   "expected": [
+    "MICA-ART-149-2"
+   ],
+   "answer": "",
+   "refusal_reason": "aucun_passage_pertinent",
+   "best_similarity": 0.4411871328092525,
+   "retrieved": [
+    "MICA-ART-149-4",
+    "MICA-ART-143-6",
+    "MICA-ART-17-3",
+    "MICA-ART-149-2",
+    "MICA-ART-143-3"
+   ]
+  },
+  {
+   "id": "q09",
+   "label": "correct",
+   "status": "answered",
+   "cited": [
+    "MICA-ART-143-3"
+   ],
+   "expected": [
+    "MICA-ART-143-3"
+   ],
+   "answer": "Les prestataires de services sur crypto‑actifs qui fournissaient déjà leurs services conformément au droit applicable avant le 30 décembre 2024 peuvent continuer à les fournir sans agrément MiCA jusqu’au 1er juillet 2026 ou jusqu’à ce qu’un agrément MiCA leur soit octroyé ou refusé, la première de ces dates étant retenue. Les États membres peuvent toutefois décider de ne pas appliquer ce régime transitoire ou d’en réduire la durée si leur cadre national antérieur est jugé moins strict que MiCA.",
+   "refusal_reason": null,
+   "best_similarity": 0.6475106932190986,
+   "retrieved": [
+    "MICA-ART-143-3",
+    "MICA-ART-143-6",
+    "MICA-ART-62-4",
+    "MICA-ART-64-1",
+    "MICA-ART-67-2"
+   ]
+  },
+  {
+   "id": "q13",
+   "label": "correct",
+   "status": "answered",
+   "cited": [
+    "MIFID2-ART-42-1",
+    "MIFID2-RCT-111",
+    "MIFID2-ART-39-1",
+    "MICA-ART-61-1",
+    "MICA-RCT-75"
+   ],
+   "expected": [
+    "MICA-ART-61-1"
+   ],
+   "answer": "Les textes prévoient explicitement qu’une entreprise d’un pays tiers peut fournir des services à un client établi ou situé dans l’Union lorsque ce client déclenche la fourniture du service sur sa seule initiative ou son initiative exclusive, sans que l’obligation d’agrément (ou d’établissement de succursale, selon le cas) ne s’applique pour ce service et la relation qui y est spécifiquement liée. Pour les services d’investissement, l’article 42, paragraphe 1, précise que l’agrément prévu à l’article 39 ne s’applique pas dans ce cas, et le considérant 111 confirme que ces services ne sont alors pas considérés comme dispensés sur le territoire de l’Union. Pour les services sur crypto‑actifs, l’article 61, paragraphe 1, prévoit de façon analogue que l’agrément prévu à l’article 59 ne s’applique pas lorsque le client lance, sur son initiative exclusive, la fourniture du service, et le considérant 75 précise que ces services ne sont pas réputés être dispensés dans l’Union. En revanche, si l’entreprise de pays tiers démarche, promeut ou fait de la publicité auprès de clients ou clients potentiels dans l’Union, les services ne sont plus réputés fournis sur l’initiative (exclusive) du client et le régime d’agrément/succursale redevient applicable.",
+   "refusal_reason": null,
+   "best_similarity": 0.7145912307014818,
+   "retrieved": [
+    "MIFID2-ART-42-1",
+    "MIFID2-ART-42-2",
+    "MIFID2-RCT-109",
+    "MIFID2-RCT-111",
+    "MICA-ART-61-1"
+   ]
+  },
+  {
+   "id": "q15",
+   "label": "correct",
+   "status": "answered",
+   "cited": [
+    "TFR-ART-14-1",
+    "TFR-RCT-36"
+   ],
+   "expected": [
+    "TFR-ART-14-1"
+   ],
+   "answer": "Les informations sur l’initiateur qui doivent accompagner un transfert de crypto‑actifs sont : (1) le nom de l’initiateur ; (2) son adresse de registre distribué lorsque le transfert est enregistré sur une DLT ou technologie similaire, et le numéro de compte de crypto‑actifs lorsque ce compte existe et est utilisé pour la transaction, ou, si le transfert n’est pas enregistré sur DLT, le numéro de compte de crypto‑actifs ; (3) l’adresse de l’initiateur, y compris le pays, ainsi que soit le numéro de document d’identité officiel et le numéro d’identification client, soit la date et le lieu de naissance ; (4) le cas échéant, si fourni par l’initiateur et si un champ de message existe, l’IEJ actuel ou, à défaut, tout autre identifiant officiel équivalent disponible.",
+   "refusal_reason": null,
+   "best_similarity": 0.8163621936600832,
+   "retrieved": [
+    "TFR-ART-14-1",
+    "TFR-RCT-36",
+    "TFR-ART-14-2",
+    "TFR-RCT-37",
+    "TFR-ART-21-1"
+   ]
+  },
+  {
+   "id": "q17",
+   "label": "bonne_source_fait_absent",
+   "status": "answered",
+   "cited": [
+    "TFR-ART-14-5",
+    "TFR-RCT-39",
+    "AMLR-ART-40-1",
+    "TFR-RCT-38"
+   ],
+   "expected": [
+    "TFR-ART-14-5"
+   ],
+   "answer": "Pour tout transfert vers une adresse auto‑hébergée, le prestataire de l’initiateur doit obtenir et conserver les informations requises sur l’initiateur et le bénéficiaire, et s’assurer que le transfert puisse être identifié individuellement. Lorsque le montant du transfert vers une adresse auto‑hébergée est supérieur à 1 000 EUR, il doit en plus prendre des mesures appropriées pour déterminer si cette adresse appartient à l’initiateur ou est effectivement contrôlée par lui. Par ailleurs, il doit identifier et évaluer les risques de BC/FT liés à ces transferts et appliquer des mesures d’atténuation proportionnées, pouvant inclure l’identification/verification renforcée, la demande d’informations supplémentaires sur l’origine et la destination des crypto‑actifs, et une surveillance continue renforcée des transactions impliquant des adresses auto‑hébergées.",
+   "refusal_reason": null,
+   "best_similarity": 0.8212811244297712,
+   "retrieved": [
+    "TFR-RCT-39",
+    "TFR-ART-14-5",
+    "TFR-RCT-45",
+    "TFR-ART-16-2",
+    "AMLR-ART-40-1"
+   ]
+  },
+  {
+   "id": "q18",
+   "label": "faux_refus",
+   "status": "refused",
+   "cited": [],
+   "expected": [
+    "TFR-ART-40"
+   ],
+   "answer": "",
+   "refusal_reason": "insuffisant",
+   "best_similarity": 0.7256913522489644,
+   "retrieved": [
+    "TFR-ART-2-4",
+    "TFR-ART-2-1",
+    "TFR-ART-1",
+    "TFR-ART-23",
+    "TFR-ART-38-4"
+   ]
+  },
+  {
+   "id": "q23",
+   "label": "correct",
+   "status": "answered",
+   "cited": [
+    "DLT-ART-3-1",
+    "DLT-RCT-23"
+   ],
+   "expected": [
+    "DLT-ART-3-1"
+   ],
+   "answer": "Pour qu’un émetteur d’actions puisse voir ses titres admis à la négociation ou enregistrés sur une infrastructure de marché DLT, sa capitalisation boursière (ou capitalisation boursière indicative) doit être inférieure à 500 millions d’euros au moment de l’admission ou de l’enregistrement.",
+   "refusal_reason": null,
+   "best_similarity": 0.7059181788442059,
+   "retrieved": [
+    "DLT-ART-3-1",
+    "DLT-ART-3-2",
+    "DLT-RCT-23",
+    "DLT-ART-3-3",
+    "DLT-ART-3-4"
+   ]
+  },
+  {
+   "id": "q24",
+   "label": "correct",
+   "status": "answered",
+   "cited": [
+    "DLT-ART-3-2",
+    "DLT-ART-3-3",
+    "DLT-RCT-23"
+   ],
+   "expected": [
+    "DLT-ART-3-2"
+   ],
+   "answer": "La valeur de marché agrégée maximale des instruments financiers DLT admis à la négociation ou enregistrés sur une infrastructure de marché DLT est de six milliards d’euros au moment de l’admission ou de l’enregistrement initial d’un nouvel instrument financier DLT. Lorsque cette valeur agrégée atteint neuf milliards d’euros, l’exploitant doit activer sa stratégie de transition et en notifier l’autorité compétente.",
+   "refusal_reason": null,
+   "best_similarity": 0.7736967436581158,
+   "retrieved": [
+    "DLT-ART-3-2",
+    "DLT-ART-3-3",
+    "DLT-ART-3-1",
+    "DLT-RCT-23",
+    "DLT-ART-3-4"
+   ]
+  },
+  {
+   "id": "q31",
+   "label": "correct",
+   "status": "answered",
+   "cited": [
+    "DORA-ART-24-1",
+    "DORA-ART-24-2",
+    "DORA-ART-24-3",
+    "DORA-ART-24-6"
+   ],
+   "expected": [
+    "DORA-ART-24-1"
+   ],
+   "answer": "Les entités financières autres que les microentreprises doivent établir, maintenir et réexaminer un programme solide et complet de tests de résilience opérationnelle numérique, intégré au cadre de gestion du risque lié aux TIC. Une banque qui n’est pas une microentreprise est donc tenue de mettre en place un tel programme. Ce programme doit inclure une série d’évaluations, tests, méthodologies, pratiques et outils conformément aux articles 25 et 26, et être exécuté selon une approche fondée sur le risque. En outre, tous les systèmes et applications de TIC soutenant des fonctions critiques ou importantes doivent être soumis au moins une fois par an à des tests appropriés.",
+   "refusal_reason": null,
+   "best_similarity": 0.7285216655525049,
+   "retrieved": [
+    "DORA-ART-24-1",
+    "DORA-ART-24-3",
+    "DORA-RCT-56",
+    "DORA-ART-25-1",
+    "DORA-RCT-25"
+   ]
+  },
+  {
+   "id": "q33",
+   "label": "correct",
+   "status": "answered",
+   "cited": [
+    "DORA-ART-28-3",
+    "DORA-RCT-65"
+   ],
+   "expected": [
+    "DORA-ART-28-3"
+   ],
+   "answer": "Les textes imposent aux entités financières de tenir et de mettre à jour un registre d’informations couvrant tous les accords contractuels relatifs à l’utilisation de services TIC fournis par des prestataires tiers de services TIC, au niveau de l’entité ainsi qu’aux niveaux sous‑consolidé et consolidé. Ce registre doit distinguer les contrats portant sur des services soutenant des fonctions critiques ou importantes de ceux qui ne le font pas. Les entités financières doivent en outre communiquer au moins une fois par an aux autorités compétentes des informations agrégées sur ces accords et être en mesure de fournir, sur demande, le registre complet ou des parties de celui‑ci.",
+   "refusal_reason": null,
+   "best_similarity": 0.7490955591201836,
+   "retrieved": [
+    "DORA-ART-28-3",
+    "DORA-RCT-65",
+    "DORA-ART-5-3",
+    "DORA-RCT-63",
+    "DORA-ART-28-5"
+   ]
+  },
+  {
+   "id": "q34",
+   "label": "correct",
+   "status": "answered",
+   "cited": [
+    "DORA-ART-64"
+   ],
+   "expected": [
+    "DORA-ART-64"
+   ],
+   "answer": "Le règlement DORA s’applique à partir du 17 janvier 2025.",
+   "refusal_reason": null,
+   "best_similarity": 0.47431296911291165,
+   "retrieved": [
+    "DORA-ART-64",
+    "DORA-ART-3-30",
+    "DORA-ART-57-6",
+    "DORA-ART-57-2",
+    "DORA-ART-58-2"
+   ]
+  },
+  {
+   "id": "q35",
+   "label": "correct",
+   "status": "answered",
+   "cited": [
+    "NIS2-ART-23-1",
+    "NIS2-ART-23-4",
+    "NIS2-RCT-102"
+   ],
+   "expected": [
+    "NIS2-ART-23-4"
+   ],
+   "answer": "Selon NIS 2, l’entité essentielle ou importante doit transmettre une alerte précoce au CSIRT ou à l’autorité compétente sans retard injustifié et au plus tard dans les 24 heures après avoir eu connaissance de l’incident important. Elle doit ensuite transmettre une notification d’incident, sans retard injustifié et au plus tard dans les 72 heures après avoir eu connaissance de cet incident important. Pour les prestataires de services de confiance, la notification des incidents importants doit intervenir sans retard injustifié et en tout état de cause dans les 24 heures après la prise de connaissance de l’incident important.",
+   "refusal_reason": null,
+   "best_similarity": 0.6855231148628183,
+   "retrieved": [
+    "NIS2-ART-23-4",
+    "NIS2-ART-23-1",
+    "NIS2-RCT-102",
+    "NIS2-ART-23-5",
+    "NIS2-RCT-101"
+   ]
+  },
+  {
+   "id": "q40",
+   "label": "correct",
+   "status": "answered",
+   "cited": [
+    "CRA-ART-14-2"
+   ],
+   "expected": [
+    "CRA-ART-14-2"
+   ],
+   "answer": "Le fabricant doit soumettre une alerte précoce de vulnérabilité activement exploitée sans retard injustifié et, en tout état de cause, au plus tard 24 heures après en avoir eu connaissance.",
+   "refusal_reason": null,
+   "best_similarity": 0.7691383178583922,
+   "retrieved": [
+    "CRA-ART-14-2",
+    "CRA-ART-14-4",
+    "CRA-ART-14-1",
+    "CRA-ART-14-8",
+    "CRA-RCT-68"
+   ]
+  },
+  {
+   "id": "q42",
+   "label": "correct",
+   "status": "answered",
+   "cited": [
+    "CRA-ART-30-1",
+    "CRA-ART-30-2",
+    "CRA-ART-30-3",
+    "CRA-ART-30-5",
+    "CRA-RCT-89"
+   ],
+   "expected": [
+    "CRA-ART-30-1"
+   ],
+   "answer": "Le marquage CE doit être apposé de manière visible, lisible et indélébile sur le produit comportant des éléments numériques, ou, si la nature du produit ne le permet pas ou ne le justifie pas, sur son emballage et sur la déclaration UE de conformité qui l’accompagne. Pour un produit se présentant sous forme de logiciel, il est apposé soit sur la déclaration UE de conformité, soit sur le site internet qui accompagne le logiciel, à condition que la section concernée soit aisément et directement accessible aux consommateurs. Le marquage CE doit être apposé avant la mise sur le marché du produit et peut, en raison de la nature du produit, avoir une hauteur inférieure à 5 mm s’il reste visible et lisible. Il matérialise la conformité du produit aux exigences du règlement et, le cas échéant, aux autres législations d’harmonisation de l’Union prévoyant également le marquage CE.",
+   "refusal_reason": null,
+   "best_similarity": 0.8253798692965721,
+   "retrieved": [
+    "CRA-ART-30-1",
+    "CRA-RCT-36",
+    "CRA-RCT-89",
+    "CRA-ART-30-3",
+    "CRA-ART-30-5"
+   ]
+  },
+  {
+   "id": "q46",
+   "label": "correct",
+   "status": "answered",
+   "cited": [
+    "AMLR-ART-26-1",
+    "AMLR-ART-26-2",
+    "AMLR-ART-26-3",
+    "AMLR-RCT-69",
+    "AMLR-RCT-71"
+   ],
+   "expected": [
+    "AMLR-ART-26-1"
+   ],
+   "answer": "Les textes imposent explicitement une surveillance continue de la relation d’affaires dans la durée. L’article 26, paragraphe 1, prévoit que les entités assujetties exercent une surveillance continue des relations d’affaires et des transactions conclues par le client pendant toute la durée de la relation. Cette surveillance inclut la mise à jour régulière des documents, données et informations relatifs au client, avec une périodicité maximale fixée en fonction du niveau de risque (un an pour les clients à risque plus élevé, cinq ans pour les autres). Les considérants précisent que cette mise à jour et ce réexamen doivent être réguliers et fondés sur les risques, en tenant compte de l’évolution de la situation du client et de la relation d’affaires dans son ensemble.",
+   "refusal_reason": null,
+   "best_similarity": 0.7598898910885586,
+   "retrieved": [
+    "AMLR-ART-26-1",
+    "AMLR-RCT-71",
+    "AMLR-ART-26-2",
+    "AMLR-ART-26-4",
+    "AMLR-RCT-60"
+   ]
+  },
+  {
+   "id": "q55",
+   "label": "correct",
+   "status": "answered",
+   "cited": [
+    "RGPD-ART-35-1",
+    "RGPD-ART-35-3",
+    "RGPD-RCT-91",
+    "RGPD-ART-35-4"
+   ],
+   "expected": [
+    "RGPD-ART-35-1"
+   ],
+   "answer": "Une analyse d’impact relative à la protection des données est obligatoire lorsque «un type de traitement (…) est susceptible d’engendrer un risque élevé pour les droits et libertés des personnes physiques», compte tenu de la nature, de la portée, du contexte et des finalités du traitement, et elle doit être réalisée avant le début du traitement (RGPD-ART-35-1). Elle est en particulier requise dans trois cas : (a) évaluation systématique et approfondie d’aspects personnels fondée sur un traitement automatisé, y compris le profilage, servant de base à des décisions produisant des effets juridiques ou affectant de manière significative une personne ; (b) traitement à grande échelle de catégories particulières de données (art. 9 §1) ou de données relatives aux condamnations pénales et infractions (art. 10) ; (c) surveillance systématique à grande échelle d’une zone accessible au public (RGPD-ART-35-3, RGPD-RCT-91). Le considérant 91 précise que cela vise notamment les traitements à grande échelle de données sensibles ou utilisant de nouvelles techniques, les traitements servant à prendre des décisions individuelles après évaluation systématique (profilage), ainsi que la surveillance à grande échelle de zones publiques, ou tout autre traitement que l’autorité de contrôle estime susceptible d’engendrer un risque élevé (RGPD-RCT-91). Par ailleurs, chaque autorité de contrôle doit publier une liste des types de traitements pour lesquels une telle analyse est requise (RGPD-ART-35-4).",
+   "refusal_reason": null,
+   "best_similarity": 0.7475245600882153,
+   "retrieved": [
+    "RGPD-ART-35-3",
+    "RGPD-RCT-90",
+    "RGPD-RCT-84",
+    "RGPD-ART-35-11",
+    "RGPD-RCT-91"
+   ]
+  },
+  {
+   "id": "q57",
+   "label": "correct",
+   "status": "answered",
+   "cited": [
+    "RGPD-ART-17-1",
+    "RGPD-RCT-65"
+   ],
+   "expected": [
+    "RGPD-ART-17-1"
+   ],
+   "answer": "Une personne concernée peut exiger l’effacement de ses données à caractère personnel lorsque l’un des motifs prévus à l’article 17, paragraphe 1, est rempli (données non nécessaires, retrait du consentement sans autre base légale, opposition valable au traitement, traitement illicite, obligation légale d’effacer, ou collecte dans le cadre de services de la société de l’information visés à l’article 8, paragraphe 1). Le considérant 65 précise que ce droit à l’oubli s’applique notamment lorsque la conservation des données viole le RGPD ou le droit de l’Union ou d’un État membre, ou lorsque les données ne sont plus nécessaires, que le consentement est retiré ou qu’il y a opposition au traitement. Toutefois, ce même considérant 65 indique que la conservation ultérieure peut rester licite si elle est nécessaire, par exemple, au respect d’une obligation légale, à une mission d’intérêt public, à la liberté d’expression et d’information, à des fins de santé publique, de recherche, d’archivage ou pour la constatation, l’exercice ou la défense de droits en justice.",
+   "refusal_reason": null,
+   "best_similarity": 0.7168399770642196,
+   "retrieved": [
+    "RGPD-ART-17-1",
+    "RGPD-RCT-65",
+    "RGPD-ART-17-2",
+    "RGPD-RCT-66",
+    "RGPD-ART-21-1"
+   ]
+  },
+  {
+   "id": "q59",
+   "label": "correct",
+   "status": "answered",
+   "cited": [
+    "ESPR-ART-9-1",
+    "ESPR-ART-9-2",
+    "ESPR-RCT-32"
+   ],
+   "expected": [
+    "ESPR-ART-9-1"
+   ],
+   "answer": "Un passeport numérique de produit est exigé lorsque des exigences en matière d’information prévoyant un tel passeport ont été fixées par un acte délégué adopté en vertu de l’article 4 (et, le cas échéant, des articles 10 et 11) pour le groupe de produits concerné. Dans ce cas, les produits relevant de cet acte délégué ne peuvent être mis sur le marché ou mis en service que si un passeport numérique de produit, conforme à ces actes délégués, est disponible. Les actes délégués précisent notamment les données à inclure, le support de données, le niveau (modèle, lot ou article) et les modalités de mise à disposition du passeport aux clients.",
+   "refusal_reason": null,
+   "best_similarity": 0.7313645917990573,
+   "retrieved": [
+    "ESPR-ART-9-1",
+    "ESPR-RCT-32",
+    "ESPR-ART-11-h",
+    "ESPR-ART-10-1",
+    "ESPR-RCT-41"
+   ]
+  },
+  {
+   "id": "q60",
+   "label": "correct",
+   "status": "answered",
+   "cited": [
+    "ESPR-ART-25-1",
+    "ESPR-RCT-58"
+   ],
+   "expected": [
+    "ESPR-ART-25-1"
+   ],
+   "answer": "La destruction des produits de consommation invendus énumérés à l’annexe VII est interdite à partir du 19 juillet 2026, sauf pour les micro et petites entreprises qui sont exclues de cette interdiction. Pour les moyennes entreprises, cette interdiction ne s’applique qu’à partir du 19 juillet 2030.",
+   "refusal_reason": null,
+   "best_similarity": 0.7398496824997173,
+   "retrieved": [
+    "ESPR-ART-25-1",
+    "ESPR-RCT-58",
+    "ESPR-RCT-55",
+    "ESPR-ART-25-5",
+    "ESPR-ART-26"
+   ]
+  }
+ ]
+}
