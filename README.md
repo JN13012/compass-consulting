@@ -14,7 +14,7 @@ il s'appuie sur les **textes officiels européens** et des **données publiques 
 |---|---|
 | **Corpus** | 13 textes européens en version consolidée, ~7 000 passages citables, vérifiés 10/10 contre EUR-Lex |
 | **Réponses citées** | le modèle ne renvoie que des identifiants ; le texte affiché est relu depuis la base |
-| **Évaluation** | 80 questions, jeu de test gelé avant mesure : 79 % de réponses justes (IC 95 % : 66-88 %), 11/12 refus corrects hors corpus |
+| **Évaluation** | 80 questions, jeu de test gelé avant mesure : 90 % de réponses justes avec gpt-5.1 (IC 95 % : 78-96 %), 79 % avec le modèle local qwen3.5 9B ; 11/12 refus corrects hors corpus |
 | **Benchmark** | DefiLlama + registre MiCA de l'ESMA en direct ; chaque cellule garde sa source et sa méthode |
 | **Confidentialité** | une mission confidentielle ne peut appeler qu'un modèle local (contrôle dans le code, testé) |
 | **Fournisseur IA** | au choix via LiteLLM (Claude, OpenAI, Mistral…) ou Ollama en local ; une seule variable `AI_API_KEY` |

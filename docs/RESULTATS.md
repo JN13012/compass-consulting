@@ -35,3 +35,22 @@ Comme dans d'autres retours d'expérience, l'hybride ne bat pas le vectoriel seu
   réponse donnée sur 12 questions hors corpus. Un modèle plus grand (Claude, via le même routeur) réduirait
   vraisemblablement les refus à tort - non mesuré.
 - Le détail question par question est dans `eval/runs/`.
+
+## 2026-11-09 - Modèle via clé API (openai/gpt-5.1)
+
+Configuration figée avant la mesure (`config/eval_frozen_api.yaml`) : mêmes réglages de recherche que la
+configuration locale (vectorielle, bge-m3, 8 passages, seuil 0,45), seul le modèle qui rédige change.
+Jeu de réglage : 30/32. Mesure unique sur le jeu de test (48 questions) :
+
+| Indicateur | Local (qwen3.5 9B) | Clé API (gpt-5.1) |
+|---|---|---|
+| Global | 38/48 - 79 % (IC 95 % : 66-88 %) | **43/48 - 90 % (IC 95 % : 78-96 %)** |
+| Bonne source citée | 27/36 | 32/36 - 89 % |
+| Faux refus | 7/36 | 1/36 - 3 % |
+| Mauvaise source | - | 3/36 - 8 % |
+| Refus corrects hors corpus | 11/12 | 11/12 - 92 % |
+| Temps moyen par question | - | 3,1 s |
+
+Lecture : le gain vient surtout des faux refus (7 → 1) ; le grand modèle exploite mieux les passages retrouvés.
+Les intervalles se recouvrent : l'amélioration est probable, pas démontrée avec 48 questions.
+Les missions confidentielles restent sur le modèle local, quel que soit ce résultat.
