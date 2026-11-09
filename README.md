@@ -1,10 +1,23 @@
 # Compass - assistant du consultant IA, Blockchain & Cybersécurité
 
-Compass accompagne un consultant sur une mission complète, du premier entretien au livrable :
-**diagnostic → solutions → réglementation → benchmark → POC & évaluation → livrables**.
+Compass est un assistant d'IA pour le consultant en **IA, Blockchain et Cybersécurité**. Il accompagne une mission
+complète, du premier entretien au livrable, en s'appuyant sur les **textes officiels européens** et des **données
+publiques vérifiables**, jamais sur la mémoire du modèle.
 
-Pensé pour des clients bancaires et industriels (licence PSCA, stablecoins, conformité MiCA / DORA / NIS2 / AI Act),
-il s'appuie sur les **textes officiels européens** et des **données publiques vérifiables**, jamais sur la mémoire du modèle.
+## La méthode : une mission en 7 étapes
+
+| # | Étape | Ce que fait Compass |
+|---|---|---|
+| 0 | **Entretiens** | grille de questions par domaine (« ce qu'on cherche »), relances proposées par l'IA, grille imprimable |
+| 1 | **Diagnostic** | processus, irritants et maturité ; chaque irritant cite les notes d'entretien, citation vérifiée dans le code |
+| 2 | **Solutions** | de la plus simple (digitaliser) à la plus complexe ; verdict « faut-il une blockchain ? » calculé par une grille |
+| 3 | **Réglementation** | textes applicables et obligations, chacune appuyée sur le passage officiel exact |
+| 4 | **Benchmark** | registre MiCA de l'ESMA et DefiLlama collectés en direct ; chaque cellule garde sa source |
+| 5 | **POC** | cadrage avec critères chiffrés, dossier pour le développeur, évaluation sur un jeu de test gardé par Compass |
+| 6 | **Livrables** | note de mission prête à imprimer, export PDF |
+
+En parallèle : **Textes officiels** (questions-réponses citées) et **Veille** (nouvelles versions des textes,
+comparaison article par article, missions concernées, calendrier des échéances).
 
 > Ceci n'est pas un conseil juridique. Toute conclusion réglementaire doit être validée par un juriste.
 
@@ -12,18 +25,19 @@ il s'appuie sur les **textes officiels européens** et des **données publiques 
 
 | | |
 |---|---|
-| **Corpus** | 13 textes européens en version consolidée, ~7 000 passages citables, vérifiés 10/10 contre EUR-Lex |
+| **Corpus** | 13 textes européens en version consolidée (MiCA, AI Act, DORA, NIS2, RGPD…), ~7 000 passages citables, vérifiés contre EUR-Lex |
 | **Réponses citées** | le modèle ne renvoie que des identifiants ; le texte affiché est relu depuis la base |
-| **Évaluation** | 80 questions, jeu de test gelé avant mesure : 90 % de réponses justes avec gpt-5.1 (IC 95 % : 78-96 %), 79 % avec le modèle local qwen3.5 9B ; 11/12 refus corrects hors corpus |
-| **Benchmark** | DefiLlama + registre MiCA de l'ESMA en direct ; chaque cellule garde sa source et sa méthode |
-| **Confidentialité** | une mission confidentielle ne peut appeler qu'un modèle local (contrôle dans le code, testé) |
-| **Fournisseur IA** | au choix via LiteLLM (Claude, OpenAI, Mistral…) ou Ollama en local ; une seule variable `AI_API_KEY` |
+| **Évaluation** | 48 questions de test gelées avant mesure : 90 % de réponses justes avec gpt-5.1 (IC 95 % : 78-96 %), 79 % avec le modèle local qwen3.5 9B ; 11/12 refus corrects hors corpus |
+| **IA au choix** | modèle local (Ollama, les données ne quittent pas la machine) ou modèle avancé via clé API (OpenAI, Anthropic, Mistral… via LiteLLM), sélectionnable dans l'interface |
+| **Confidentialité** | une mission confidentielle ne peut appeler que le modèle local, quel que soit le choix (contrôle dans le code, testé) |
+| **POC** | démo évaluée sur 30 cas jamais vus : 100 % de commandes justes, 5/6 cas ambigus refusés, verdict « pas encore » ([résultats](docs/RESULTATS.md)) |
+| **Veille** | vérification des nouvelles versions sur EUR-Lex à la demande, alerte sur les missions dont un passage cité a changé |
 
 ## Démo
 
 Trois missions fictives sont chargées en un clic (« Charger les missions de démo ») :
 
-- **Maison Lumen** - PME du luxe : traçabilité, IA sur les processus Excel, faut-il vraiment une blockchain ?
+- **Maison Lumen** - prêt-à-porter haut de gamme : agent IA de lecture des commandes (POC évalué), contrefaçon et passeport numérique produit, faut-il vraiment une blockchain ?
 - **Banque Azur** - banque régionale (confidentielle) : stablecoin euro, fonds monétaire tokenisé, MiCA.
 - **Hexa Industrie** - ETI industrielle : diagnostic cyber NIST CSF 2.0, qualification NIS2 / CRA.
 
