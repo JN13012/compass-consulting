@@ -1,6 +1,10 @@
-import { NavLink, Navigate, useParams } from 'react-router-dom'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { useState } from 'react'
+import { NavLink, Navigate, useNavigate, useParams } from 'react-router-dom'
 
+import { api } from '../api/client'
 import { Badge } from '../components/Badge'
+import { MissionForm } from '../components/MissionForm'
 import { FOCUS_LABELS } from '../lib/labels'
 import { PageHeader, Placeholder } from '../components/PageHeader'
 import { useAnalyze, useMission, type MissionOut, type Step } from '../lib/missions'
@@ -23,6 +27,19 @@ export function MissionPage() {
   const { missionId = '', tab } = useParams()
   const current = MISSION_TABS.find((t) => t.slug === tab)
   const mission = useMission(missionId)
+  const [editing, setEditing] = useState(false)
+  const navigate = useNavigate()
+  const qc = useQueryClient()
+  const remove = useMutation({
+    mutationFn: async () => {
+      const { error } = await api.DELETE('/missions/{mission_id}', { params: { path: { mission_id: missionId } } })
+      if (error) throw new Error('Suppression impossible.')
+    },
+    onSuccess: () => {
+      void qc.invalidateQueries({ queryKey: ['missions'] })
+      navigate('/missions')
+    },
+  })
   if (!current) return <Navigate to={`/missions/${missionId}/${MISSION_TABS[0].slug}`} replace />
   if (mission.isPending) return <p className="text-sm">Chargement…</p>
   if (mission.isError || !mission.data) return <p className="text-sm">Mission introuvable.</p>
@@ -30,7 +47,24 @@ export function MissionPage() {
 
   return (
     <>
-      <PageHeader title={m.client} subtitle={`${m.sector} - ${m.context}`} />
+      <div className="flex items-start gap-3">
+        <div className="min-w-0 flex-1">
+          <PageHeader title={m.client} subtitle={`${m.sector} - ${m.context}`} />
+        </div>
+        <button onClick={() => setEditing((v) => !v)} className="rounded border border-ink/30 px-3 py-1.5 text-sm">
+          Modifier
+        </button>
+        <button
+          onClick={() => {
+            if (window.confirm(`Supprimer la mission « ${m.client} » et ses benchmarks ? Cette action est définitive.`)) remove.mutate()
+          }}
+          disabled={remove.isPending}
+          className="rounded border border-red-300 px-3 py-1.5 text-sm text-red-700"
+        >
+          Supprimer
+        </button>
+      </div>
+      {editing && <MissionForm mission={m} onSaved={() => setEditing(false)} onCancel={() => setEditing(false)} />}
       <div className="-mt-3 mb-5 flex flex-wrap gap-1.5">
         {m.focus.map((f) => (
           <Badge key={f} tone="blue">

@@ -115,6 +115,20 @@ def get_mission(mission_id: uuid.UUID, session: SessionDep) -> MissionOut:
     return _out(_get(session, mission_id))
 
 
+@router.put("/{mission_id}", response_model=MissionOut)
+def update_mission(mission_id: uuid.UUID, body: MissionIn, session: SessionDep) -> MissionOut:
+    """Edits a mission. Changing the inputs of the analyses makes their results stale, so they are cleared."""
+    mission = _get(session, mission_id)
+    inputs = ("client", "sector", "context", "notes", "focus", "confidentiality")
+    changed = any(getattr(mission, k) != getattr(body, k) for k in inputs if k != "client")
+    for k, v in body.model_dump().items():
+        setattr(mission, k, v)
+    if changed:
+        mission.diagnostic = mission.solutions = mission.regulation = None
+    session.commit()
+    return _out(mission)
+
+
 @router.get("/{mission_id}/note", response_class=HTMLResponse)
 def mission_note(mission_id: uuid.UUID, session: SessionDep) -> HTMLResponse:
     """Print-ready mission note (the browser saves it as PDF)."""

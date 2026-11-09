@@ -1,4 +1,5 @@
 import json
+import uuid
 from collections.abc import Iterator
 from datetime import date
 from typing import Any
@@ -171,3 +172,22 @@ def test_api_create_analyze_and_seed(session: Session) -> None:
     again = client.post("/missions/demo").json()
     demo = [m for m in again if m["client"] in {"Maison Lumen", "Banque Azur", "Hexa Industrie"}]
     assert len(demo) == 3 and len(first) == len(again)
+
+
+@pytest.mark.db
+def test_api_update_clears_stale_results_and_delete(session: Session) -> None:
+    client = TestClient(app)
+    body = {"client": "Test API SA", "sector": "Distribution", "notes": NOTES, "focus": ["ia"]}
+    created = client.post("/missions", json=body).json()
+    mission = session.get(Mission, uuid.UUID(created["id"]))
+    assert mission is not None
+    mission.diagnostic = {"synthese": "x"}
+    session.commit()
+
+    renamed = client.put(f"/missions/{created['id']}", json={**body, "client": "Test API SA"}).json()
+    assert renamed["diagnostic"] == {"synthese": "x"}  # nothing that feeds the analyses changed
+    edited = client.put(f"/missions/{created['id']}", json={**body, "notes": NOTES + " Nouvelle info."}).json()
+    assert edited["diagnostic"] is None and edited["notes"].endswith("Nouvelle info.")
+
+    assert client.delete(f"/missions/{created['id']}").status_code == 204
+    assert client.get(f"/missions/{created['id']}").status_code == 404

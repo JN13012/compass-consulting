@@ -122,7 +122,11 @@ export interface paths {
         };
         /** Get Mission */
         get: operations["get_mission_missions__mission_id__get"];
-        put?: never;
+        /**
+         * Update Mission
+         * @description Edits a mission. Changing the inputs of the analyses makes their results stale, so they are cleared.
+         */
+        put: operations["update_mission_missions__mission_id__put"];
         post?: never;
         /** Delete Mission */
         delete: operations["delete_mission_missions__mission_id__delete"];
@@ -672,6 +676,41 @@ export interface operations {
             cookie?: never;
         };
         requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["MissionOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    update_mission_missions__mission_id__put: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                mission_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["MissionIn"];
+            };
+        };
         responses: {
             /** @description Successful Response */
             200: {
