@@ -201,6 +201,17 @@ export function RegulationTab({ mission }: { mission: MissionOut }) {
           )}
         </Card>
       ))}
+      {(r.non_analyses ?? []).length > 0 && (
+        <Card title="Textes applicables non détaillés (moins prioritaires)">
+          <ul className="space-y-1 text-sm">
+            {r.non_analyses?.map((e) => (
+              <li key={e.code}>
+                <span className="font-medium">{e.code}</span> - <span className="text-ink/70">{e.raisonnement}</span>
+              </li>
+            ))}
+          </ul>
+        </Card>
+      )}
       {r.ecartes.length > 0 && (
         <Card title="Textes écartés">
           <ul className="space-y-1 text-sm">

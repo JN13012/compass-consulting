@@ -160,6 +160,7 @@ class Applicability(BaseModel):
     code: str
     applicable: Literal["oui", "a_verifier", "non"]
     raisonnement: str
+    pertinence: int = Field(default=3, ge=1, le=5)  # how central the text is to this mission
 
 
 class ApplicabilityList(BaseModel):
@@ -205,6 +206,7 @@ class TextAnalysis(BaseModel):
 class Regulation(BaseModel):
     textes: list[TextAnalysis]
     ecartes: list[Applicability]
+    non_analyses: list[Applicability] = []  # applicable but beyond the per-mission budget
 
 
 def _citation(hit: Hit) -> Citation:
@@ -241,8 +243,9 @@ def run_regulation(
                            ApplicabilityList, mission.confidentiality, str(mission.id))
     by_code = {a.code: a for a in applic.textes if a.code in titles}
     order = {"oui": 0, "a_verifier": 1, "non": 2}
-    selected = sorted((a for a in by_code.values() if a.applicable != "non"),
-                      key=lambda a: order[a.applicable])[:max_texts]
+    ranked = sorted((a for a in by_code.values() if a.applicable != "non"),
+                    key=lambda a: (order[a.applicable], -a.pertinence))
+    selected, overflow = ranked[:max_texts], ranked[max_texts:]
 
     analyses: list[TextAnalysis] = []
     for app_ in selected:
@@ -272,7 +275,7 @@ def run_regulation(
                                      raisonnement=app_.raisonnement, obligations=kept,
                                      obligations_rejetees=rejected))
     ecartes = [a for a in by_code.values() if a.applicable == "non"]
-    return Regulation(textes=analyses, ecartes=ecartes)
+    return Regulation(textes=analyses, ecartes=ecartes, non_analyses=overflow)
 
 
 def role_for(mission: Mission, default_role: str) -> str:

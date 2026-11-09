@@ -91,6 +91,9 @@ def _regulation(r: dict[str, Any] | None) -> str:
         )
         parts.append(f"<h3>{_e(t['titre'])} - {_e(APPLICABLE.get(t['applicable'], t['applicable']))}</h3>"
                      f"<p>{_e(t['raisonnement'])}</p>{obligations}")
+    later = ", ".join(_e(x["code"]) for x in r.get("non_analyses", []))
+    if later:
+        parts.append(f'<p class="meta">Textes applicables non détaillés (moins prioritaires) : {later}.</p>')
     discarded = ", ".join(_e(x["code"]) for x in r.get("ecartes", []))
     if discarded:
         parts.append(f'<p class="meta">Textes écartés : {discarded}.</p>')

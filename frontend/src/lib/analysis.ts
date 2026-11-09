@@ -56,4 +56,5 @@ export interface TextAnalysis {
 export interface Regulation {
   textes: TextAnalysis[]
   ecartes: { code: string; applicable: string; raisonnement: string }[]
+  non_analyses?: { code: string; applicable: string; raisonnement: string }[]
 }
