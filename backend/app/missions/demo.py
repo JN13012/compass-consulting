@@ -89,3 +89,82 @@ Le DSI aimerait utiliser l'IA pour trier les alertes de sécurité, trop nombreu
 La direction demande une feuille de route réaliste sur 12 mois et les obligations réglementaires prioritaires.""",
     },
 ]
+
+
+# Interview grids already filled for the demo missions (question id -> client answer), consistent with the notes.
+DEMO_INTERVIEWS: dict[str, dict[str, Any]] = {
+    "Maison Lumen": {
+        "checked": [
+            "Organigramme et interlocuteurs clés",
+            "Exemples réels de fichiers Excel, documents ou formulaires traités"],
+        "answers": {
+            "C1": "Distributeur de prêt-à-porter haut de gamme, 120 salariés, 14 boutiques en France et un e-shop.",
+            "C2": "La directrice des opérations porte le projet, la direction générale valide le budget.",
+            "C3": "Les erreurs de commande coûtent cher et des "
+                  "copies de nos sacs circulent sur les sites de revente.",
+            "C4": "Plus de ressaisie des commandes, moins de 1 % d'erreurs "
+                  "et une preuve d'authenticité pour nos clients.",
+            "C5": "Les commandes B2B arrivent par e-mail, souvent en PDF ou en photo. Deux assistantes "
+                  "les ressaisissent "
+                  "dans un tableur Excel partagé, puis dans l'ERP (Sage).",
+            "C6": "Environ 900 commandes par mois, 6 minutes de ressaisie par commande. La comptable passe 3 jours "
+                  "chaque fin de mois sur le rapprochement des factures.",
+            "C7": "Environ 4 % d'erreurs (références, quantités), découvertes à la livraison, avec avoirs et retours "
+                  "coûteux. 40 % des appels concernent « où en est ma livraison ? ».",
+            "C8": "Sage pour l'ERP, le CRM de l'e-shop, Excel partagé. Rien n'est connecté.",
+            "C9": "35 000 contacts clients entre l'ERP et le CRM, avec des doublons. Pas de responsable data.",
+            "C10": "Résultats visibles en moins de 6 mois, budget maîtrisé. "
+                   "Le DSI externalisé est favorable à une API ERP.",
+            "IA1": "La ressaisie des commandes et les réponses sur le suivi des livraisons.",
+            "IA2": "Des bons de commande en PDF ou en photo, environ 900 par mois.",
+            "IA3": "Une assistante validerait chaque commande avant l'envoi dans l'ERP.",
+            "B1": "Les revendeurs, les clients de seconde main et la marque doivent pouvoir vérifier l'authenticité.",
+            "B3": "Des produits physiques (sacs) avec un certificat d'authenticité, et le passeport numérique produit.",
+        },
+    },
+    "Banque Azur": {
+        "checked": ["Schéma des flux (qui envoie quoi à qui)", "Agréments et autorisations en vigueur"],
+        "answers": {
+            "C1": "Banque régionale, 2 300 salariés, 600 000 clients, avec une filiale de gestion d'actifs.",
+            "C2": "Le directeur de l'innovation porte le projet, avec la directrice de la conformité et le RSSI.",
+            "C3": "Les grandes banques lancent des fonds tokenisés et le contrôle KYC manuel ne suit plus.",
+            "C4": "Un premier pilote en 9 mois et une feuille de route validée par la conformité.",
+            "C5": "Chaque dossier d'investisseur professionnel est contrôlé à la main : Kbis, pièces d'identité des "
+                  "dirigeants, bénéficiaires effectifs.",
+            "C6": "1 200 dossiers d'investisseurs professionnels par an.",
+            "C11": "La banque est soumise à DORA. Elle se demande si les parts tokenisées relèvent de MiCA ou de la "
+                   "réglementation des instruments financiers.",
+            "IA3": "L'outil prépare la décision, l'analyste garde la décision finale.",
+            "IA4": "Données clients strictement confidentielles, hébergement en France obligatoire.",
+            "B3": "Des parts d'un fonds monétaire émises sous forme de jetons, réglées dans un stablecoin euro émis "
+                  "par un établissement de crédit partenaire.",
+            "B4": "La filiale de gestion émet les parts ; le stablecoin est émis par un partenaire.",
+            "B5": "Uniquement des investisseurs professionnels.",
+            "B7": "Oui : geler des jetons sur décision de justice et restreindre les transferts aux investisseurs dont "
+                  "le KYC est validé.",
+        },
+    },
+    "Hexa Industrie": {
+        "checked": ["Configuration des accès à distance et de la messagerie (MFA)"],
+        "answers": {
+            "C1": "ETI de 450 salariés, 95 M€ de chiffre d'affaires, capteurs connectés vendus dans toute l'UE.",
+            "C3": "Une tentative de rançongiciel il y a 18 mois, et les clients exigent des preuves de sécurité dans "
+                  "les appels d'offres.",
+            "C4": "Une feuille de route réaliste sur 12 mois et les obligations réglementaires prioritaires.",
+            "C10": "4 personnes à la DSI, pas de RSSI, budget sécurité non identifié. Un SOC est jugé trop cher.",
+            "S1": "Pas de RSSI ni de politique de sécurité écrite.",
+            "S2": "Pas d'inventaire à jour des postes et serveurs. Active Directory vieillissant (serveurs de 2014).",
+            "S3": "Comptes administrateurs partagés, pas d'authentification multifacteur, y compris pour le VPN des "
+                  "commerciaux.",
+            "S4": "Sauvegardes quotidiennes sur un NAS dans la même salle serveur, jamais testées en restauration.",
+            "S5": "Les alertes sont trop nombreuses pour l'équipe, personne ne les trie vraiment.",
+            "S6": "Aucun plan de réponse à incident, personne ne sait qui prévenir ni dans quel délai.",
+            "S7": "Industrie manufacturière, 450 salariés, 95 M€ de chiffre d'affaires. "
+                  "La direction découvre NIS 2.",
+            "S8": "Oui : les capteurs embarquent un firmware et communiquent avec une plateforme cloud. "
+                  "Les mises à jour "
+                  "sont faites à la main chez les clients, pas de processus pour les signalements de vulnérabilités.",
+            "IA1": "Le tri des alertes de sécurité, trop nombreuses pour l'équipe.",
+        },
+    },
+}

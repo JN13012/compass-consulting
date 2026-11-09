@@ -39,6 +39,8 @@ class Mission(Base):
     focus: Mapped[list[str]] = mapped_column(JSONB, default=list)
     # Interview notes / process description provided by the consultant.
     notes: Mapped[str] = mapped_column(Text, default="")
+    # Interview grid answers ({"answers": {id: text}, "checked": [...]}), None until started.
+    interview: Mapped[dict[str, Any] | None] = mapped_column(JSONB, nullable=True)
     # Analysis results (validated JSON), None until generated.
     diagnostic: Mapped[dict[str, Any] | None] = mapped_column(JSONB, nullable=True)
     solutions: Mapped[dict[str, Any] | None] = mapped_column(JSONB, nullable=True)

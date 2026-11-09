@@ -37,7 +37,7 @@ export function MissionsPage() {
         </button>
       </div>
 
-      {showForm && <MissionForm onSaved={(id) => navigate(`/missions/${id}/diagnostic`)} />}
+      {showForm && <MissionForm onSaved={(id) => navigate(`/missions/${id}/entretiens`)} />}
 
       {missions.isPending && <p className="text-sm">Chargement…</p>}
       {missions.data?.length === 0 && (

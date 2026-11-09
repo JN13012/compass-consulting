@@ -207,6 +207,78 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/missions/{mission_id}/interview": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get Interview */
+        get: operations["get_interview_missions__mission_id__interview_get"];
+        /** Save Interview */
+        put: operations["save_interview_missions__mission_id__interview_put"];
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/missions/{mission_id}/interview/notes": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * To Notes
+         * @description Replaces the mission notes with the answered grid. Analyses based on the old notes are cleared.
+         */
+        post: operations["to_notes_missions__mission_id__interview_notes_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/missions/{mission_id}/interview/followups": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Followups */
+        post: operations["followups_missions__mission_id__interview_followups_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/missions/{mission_id}/interview/print": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Print Blank */
+        get: operations["print_blank_missions__mission_id__interview_print_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
 }
 export type webhooks = Record<string, never>;
 export interface components {
@@ -284,6 +356,18 @@ export interface components {
          * @enum {string}
          */
         Confidentiality: "public" | "confidentiel";
+        /** FollowUp */
+        FollowUp: {
+            /** Question */
+            question: string;
+            /** Raison */
+            raison: string;
+        };
+        /** FollowUps */
+        FollowUps: {
+            /** Questions */
+            questions: components["schemas"]["FollowUp"][];
+        };
         /** HTTPValidationError */
         HTTPValidationError: {
             /** Detail */
@@ -303,6 +387,30 @@ export interface components {
             database: "ok" | "unreachable";
             /** Version */
             version: string;
+        };
+        /**
+         * Interview
+         * @description What the consultant filled in: answers by question id, checked observation items by label.
+         */
+        Interview: {
+            /**
+             * Answers
+             * @default {}
+             */
+            answers: {
+                [key: string]: string;
+            };
+            /**
+             * Checked
+             * @default []
+             */
+            checked: string[];
+        };
+        /** InterviewOut */
+        InterviewOut: {
+            /** Sections */
+            sections: components["schemas"]["Section"][];
+            interview: components["schemas"]["Interview"];
         };
         /** MissionIn */
         MissionIn: {
@@ -422,6 +530,15 @@ export interface components {
             /** Score */
             score: number;
         };
+        /** Question */
+        Question: {
+            /** Id */
+            id: string;
+            /** Question */
+            question: string;
+            /** But */
+            but: string;
+        };
         /** SearchResponse */
         SearchResponse: {
             /** Passages */
@@ -431,6 +548,24 @@ export interface components {
              * @enum {string}
              */
             mode_used: "fulltext" | "vector" | "hybrid";
+        };
+        /** Section */
+        Section: {
+            /** Key */
+            key: string;
+            /** Title */
+            title: string;
+            /** Focus */
+            focus: string | null;
+            /** Intro */
+            intro: string;
+            /** Themes */
+            themes: components["schemas"]["Theme"][];
+            /**
+             * Observer
+             * @default []
+             */
+            observer: string[];
         };
         /** SourceOut */
         SourceOut: {
@@ -464,6 +599,13 @@ export interface components {
             title: string;
             /** Description */
             description: string;
+        };
+        /** Theme */
+        Theme: {
+            /** Title */
+            title: string;
+            /** Questions */
+            questions: components["schemas"]["Question"][];
         };
         /** ValidationError */
         ValidationError: {
@@ -895,6 +1037,165 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["BenchmarkOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    get_interview_missions__mission_id__interview_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                mission_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["InterviewOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    save_interview_missions__mission_id__interview_put: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                mission_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["Interview"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["InterviewOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    to_notes_missions__mission_id__interview_notes_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                mission_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["MissionOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    followups_missions__mission_id__interview_followups_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                mission_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["FollowUps"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    print_blank_missions__mission_id__interview_print_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                mission_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "text/html": string;
                 };
             };
             /** @description Validation Error */

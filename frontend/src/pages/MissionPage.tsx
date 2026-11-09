@@ -10,9 +10,11 @@ import { PageHeader, Placeholder } from '../components/PageHeader'
 import { useAnalyze, useMission, type MissionOut, type Step } from '../lib/missions'
 import { BenchmarkTab } from './mission/BenchmarkTab'
 import { DeliverablesTab } from './mission/DeliverablesTab'
+import { InterviewTab } from './mission/InterviewTab'
 import { DiagnosticTab, RegulationTab, SolutionsTab } from './mission/tabs'
 
 export const MISSION_TABS = [
+  { slug: 'entretiens', label: '0. Entretiens', phase: '' },
   { slug: 'diagnostic', label: '1. Diagnostic', phase: '' },
   { slug: 'solutions', label: '2. Solutions', phase: '' },
   { slug: 'reglementation', label: '3. Réglementation', phase: '' },
@@ -90,6 +92,8 @@ export function MissionPage() {
         <StepPanel mission={m} step={STEP_OF[current.slug]} />
       ) : current.slug === 'benchmark' ? (
         <BenchmarkTab missionId={m.id} />
+      ) : current.slug === 'entretiens' ? (
+        <InterviewTab mission={m} />
       ) : current.slug === 'livrables' ? (
         <DeliverablesTab mission={m} />
       ) : (

@@ -34,7 +34,7 @@ describe('App', () => {
     expect(await screen.findByText(/Base de données : connectée/)).toBeInTheDocument()
   })
 
-  it('renders a mission with its six tabs and diagnostic results', async () => {
+  it('renders a mission with its seven tabs and diagnostic results', async () => {
     const mission = {
       id: 'm1', client: 'Hexa Industrie', sector: 'Industrie', focus: ['cyber'], confidentiality: 'public',
       created_at: '2026-11-07T10:00:00Z', steps_done: ['diagnostic'], context: 'ETI', notes: 'notes',
@@ -51,6 +51,6 @@ describe('App', () => {
     expect(await screen.findByText('Pas de MFA')).toBeInTheDocument()
     expect(screen.getByText('✓ citation retrouvée dans les notes')).toBeInTheDocument()
     const tabs = screen.getByRole('navigation', { name: 'Étapes de la mission' })
-    expect(tabs.querySelectorAll('a')).toHaveLength(6)
+    expect(tabs.querySelectorAll('a')).toHaveLength(7)
   })
 })

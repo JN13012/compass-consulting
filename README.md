@@ -43,6 +43,7 @@ Résultats : [`docs/RESULTATS.md`](docs/RESULTATS.md)
 - Phase 2 - missions : diagnostic, solutions (verdict blockchain calculé), réglementation avec obligations citées.
 - Phase 3 - benchmark sourcé : DefiLlama + registre MiCA de l'ESMA, chaque cellule garde sa source.
 - Phase 5 - livrables : note de mission imprimable, export PDF depuis le navigateur.
+- Entretiens : grille par domaine (questions + « ce qu'on cherche »), relances proposées par l'IA, réponses envoyées vers les notes, grille vierge imprimable.
 
 ```bash
 docker compose exec api python -m app.corpus ingest            # tout le corpus

@@ -79,3 +79,12 @@ Format : date - décision - alternatives - raison.
 - **Alternatives** : WeasyPrint (dépendances système Cairo/Pango dans l'image Docker), python-pptx (reporté).
 - **Raison** : zéro dépendance ajoutée, rendu identique à l'écran et sur papier ; aucune citation générée, les extraits
   viennent de la base comme partout ailleurs. Export PPTX non fait.
+
+## 2026-11-09 - Entretiens : grille écrite à la main, IA seulement pour les relances
+
+- **Choix** : banque de questions dans `config/interview_guide.yaml` (tronc commun + modules IA, blockchain, cyber
+  selon NIST CSF 2.0), chaque question avec « ce qu'on cherche ». Les réponses sont enregistrées par mission et
+  « Envoyer vers les notes » les range par thème dans les notes, qui alimentent le diagnostic.
+- **Alternatives** : questions entièrement générées par le modèle ; simple liste sans zone de réponse.
+- **Raison** : une méthode d'entretien reproductible et relue vaut mieux qu'une liste variable d'une fois sur
+  l'autre. Le modèle n'intervient que pour proposer des relances à partir des réponses déjà saisies.

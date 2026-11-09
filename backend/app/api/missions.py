@@ -25,7 +25,7 @@ from app.missions.analysis import (
     run_regulation,
     run_solutions,
 )
-from app.missions.demo import DEMO_MISSIONS
+from app.missions.demo import DEMO_INTERVIEWS, DEMO_MISSIONS
 
 router = APIRouter(prefix="/missions", tags=["missions"])
 
@@ -100,12 +100,15 @@ def create_mission(body: MissionIn, session: SessionDep) -> MissionOut:
 
 @router.post("/demo", response_model=list[MissionSummary])
 def seed_demo(session: SessionDep) -> list[MissionSummary]:
-    """Creates the three demo missions if they do not exist yet (idempotent)."""
+    """Creates the three demo missions and fills their interview grid if missing (idempotent)."""
     existing = set(session.scalars(select(Mission.client)))
     for data in DEMO_MISSIONS:
         if data["client"] not in existing:
             fields = {**data, "confidentiality": Confidentiality(data["confidentiality"])}
             session.add(Mission(**fields, status="ouverte"))
+    for m in session.scalars(select(Mission).where(Mission.client.in_(DEMO_INTERVIEWS))):
+        if m.interview is None:  # fill the demo grid once, never overwrite the consultant's answers
+            m.interview = DEMO_INTERVIEWS[m.client]
     session.commit()
     return list_missions(session)
 

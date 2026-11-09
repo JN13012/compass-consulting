@@ -1,0 +1,169 @@
+# Interview guide (grille d'entretien). Written by hand, no model involved.
+# Each section applies to a mission when its `focus` is null (always) or is in the mission's focus.
+# Question ids are stable: answers are stored by id, so never reuse an id for a different question.
+
+sections:
+  - key: commun
+    title: Tronc commun
+    focus: null
+    intro: "À poser à chaque client, en ouverture (environ 15 minutes)."
+    themes:
+      - title: Entreprise et décision
+        questions:
+          - id: C1
+            question: "Pouvez-vous présenter l'activité, la taille et l'organisation de l'entreprise ?"
+            but: "Situer le client (effectif, chiffre d'affaires, implantations), utile aussi pour les seuils NIS2."
+          - id: C2
+            question: "Qui porte le projet, qui décide et qui finance ?"
+            but: "Identifier le sponsor et le circuit de décision ; un projet sans sponsor n'avance pas."
+      - title: Déclencheur et ambition
+        questions:
+          - id: C3
+            question: "Pourquoi ce sujet maintenant ?"
+            but: "Contrainte réglementaire, concurrent, incident, demande de la direction ? Le déclencheur fixe l'urgence."
+          - id: C4
+            question: "Si dans un an le projet est une réussite, qu'est-ce qui a changé concrètement ?"
+            but: "Obtenir des critères de succès mesurables (temps gagné, erreurs, chiffre d'affaires, conformité)."
+      - title: Processus et irritants
+        questions:
+          - id: C5
+            question: "Pouvez-vous me raconter, étape par étape, le processus qui vous pose le plus de difficultés ?"
+            but: "Faire décrire le processus réel (qui, quoi, avec quel outil), pas le processus théorique."
+          - id: C6
+            question: "Quels volumes et quels temps cela représente-t-il (par jour, par mois) ?"
+            but: "Chiffrer pour estimer le gain ; relancer jusqu'à obtenir un ordre de grandeur."
+          - id: C7
+            question: "Où se produisent les erreurs, les retards ou les ressaisies ?"
+            but: "Ce sont les irritants ; noter les mots exacts du client, ils seront cités dans le diagnostic."
+      - title: Outils et données
+        questions:
+          - id: C8
+            question: "Quels outils utilisez-vous (Excel, ERP, CRM, logiciels métier) et sont-ils connectés entre eux ?"
+            but: "Cartographier le système d'information et repérer les ressaisies entre outils."
+          - id: C9
+            question: "Où sont les données, quelle est leur qualité et qui y a accès ?"
+            but: "Doublons, données incomplètes ou dispersées : prérequis à toute automatisation ou IA."
+      - title: Contraintes
+        questions:
+          - id: C10
+            question: "Quels sont le budget, le délai et les compétences disponibles en interne ?"
+            but: "Calibrer les solutions (gain rapide ou projet de fond) et le besoin d'accompagnement."
+          - id: C11
+            question: "Quelles réglementations ou exigences de vos clients connaissez-vous déjà sur ce sujet ?"
+            but: "Mesurer la maturité réglementaire et repérer les textes à analyser."
+    observer:
+      - Organigramme et interlocuteurs clés
+      - Cartographie du système d'information (même sommaire)
+      - Exemples réels de fichiers Excel, documents ou formulaires traités
+      - Se faire montrer le processus en vrai, sur le poste de travail
+
+  - key: ia
+    title: Intelligence artificielle
+    focus: ia
+    intro: "Repérer les tâches qui relèvent d'une simple automatisation et celles qui justifient une IA."
+    themes:
+      - title: Tâches et documents
+        questions:
+          - id: IA1
+            question: "Quelles tâches sont répétitives et prennent du temps (saisie, tri de documents, réponses aux mêmes questions) ?"
+            but: "Lister les cas d'usage candidats et le temps passé sur chacun."
+          - id: IA2
+            question: "Quels documents ou données entrent dans ces tâches (PDF, e-mails, photos, formulaires) et en quelle quantité ?"
+            but: "Des documents non structurés justifient une IA ; des données déjà structurées, une simple automatisation."
+          - id: IA3
+            question: "Le résultat doit-il être exact à 100 %, ou s'agit-il d'aider une personne qui garde la décision ?"
+            but: "Définir le niveau d'autonomie acceptable et le contrôle humain nécessaire."
+      - title: Données et risques
+        questions:
+          - id: IA4
+            question: "Les données contiennent-elles des informations personnelles ou sensibles, et peuvent-elles sortir chez un fournisseur cloud ?"
+            but: "Choisir entre modèle local et modèle en ligne ; déclenche l'analyse RGPD."
+          - id: IA5
+            question: "L'IA aurait-elle un effet sur des personnes (recrutement, crédit, accès à un service) ?"
+            but: "Repérer un système à haut risque au sens de l'AI Act."
+          - id: IA6
+            question: "Des outils d'IA sont-ils déjà utilisés, officiellement ou non (par exemple ChatGPT par les salariés) ?"
+            but: "Mesurer la maturité et le risque de fuite de données déjà présent."
+    observer:
+      - Échantillon de 10 à 20 documents réels à traiter (anonymisés)
+      - Mesure du temps passé sur la tâche, chronométrée si possible
+      - Politique interne sur l'usage de l'IA, si elle existe
+
+  - key: blockchain
+    title: Blockchain et crypto-actifs
+    focus: blockchain
+    intro: "Vérifier qu'une blockchain est utile, puis qualifier l'actif pour savoir quel texte s'applique."
+    themes:
+      - title: La blockchain est-elle utile ?
+        questions:
+          - id: B1
+            question: "Plusieurs organisations doivent-elles partager une même information sans se faire totalement confiance ?"
+            but: "Si une seule organisation détient la donnée, une base de données classique suffit."
+          - id: B2
+            question: "Un intermédiaire de confiance existant (banque, notaire, plateforme) pourrait-il jouer ce rôle ?"
+            but: "Critère clé de la grille de décision : si oui, la blockchain est souvent déconseillée."
+      - title: Qualification de l'actif
+        questions:
+          - id: B3
+            question: "Quel actif est concerné (titre financier, part de fonds, monnaie, certificat, produit physique) ?"
+            but: "Un titre ou une part de fonds relève de MiFID II, un stablecoin euro de MiCA (EMT). Qualifier chaque actif séparément."
+          - id: B4
+            question: "Qui émet, qui conserve et qui échange l'actif ? Le client veut-il le faire lui-même ou via un prestataire ?"
+            but: "Déterminer les services rendus et donc les agréments (PSCA, conservation, émetteur)."
+          - id: B5
+            question: "Les clients finaux sont-ils des particuliers ou des professionnels, et dans quels pays ?"
+            but: "Obligations d'information, commercialisation transfrontalière, passeport européen."
+      - title: Agréments et contrôles
+        questions:
+          - id: B6
+            question: "Quels agréments l'entreprise détient-elle déjà (banque, PSAN, PSCA, société de gestion) ?"
+            but: "Un établissement de crédit bénéficie d'un régime simplifié pour certains services MiCA."
+          - id: B7
+            question: "Faut-il pouvoir geler des jetons, restreindre les transferts ou identifier les détenteurs ?"
+            but: "Exigences LCB-FT (AMLR, règle de voyage TFR) et choix de blockchain publique ou permissionnée."
+    observer:
+      - Schéma des flux (qui envoie quoi à qui)
+      - Agréments et autorisations en vigueur
+      - Documentation des prestataires envisagés (conservation, émission)
+
+  - key: cyber
+    title: Cybersécurité
+    focus: cyber
+    intro: "Organisé selon les six fonctions du NIST CSF 2.0, puis qualification réglementaire."
+    themes:
+      - title: Gouverner et identifier
+        questions:
+          - id: S1
+            question: "Y a-t-il un responsable de la sécurité, une politique écrite, et la direction en parle-t-elle ?"
+            but: "Fonction Gouverner : sans pilotage, les mesures techniques restent isolées."
+          - id: S2
+            question: "Existe-t-il un inventaire des équipements, logiciels et prestataires informatiques ? Quelles sont les données critiques ?"
+            but: "Fonction Identifier : on ne protège pas ce qu'on ne connaît pas."
+      - title: Protéger et détecter
+        questions:
+          - id: S3
+            question: "Comment se font les accès à distance, l'authentification (MFA ?) et les mises à jour ?"
+            but: "Fonction Protéger : les causes d'intrusion les plus fréquentes."
+          - id: S4
+            question: "Les sauvegardes sont-elles hors ligne, et une restauration a-t-elle déjà été testée ?"
+            but: "Condition de survie face à un rançongiciel."
+          - id: S5
+            question: "Qui verrait une intrusion, et en combien de temps ?"
+            but: "Fonction Détecter : journaux, supervision, prestataire de surveillance."
+      - title: Répondre et récupérer
+        questions:
+          - id: S6
+            question: "Que se passe-t-il en cas d'incident majeur (rançongiciel) ? Existe-t-il un plan, a-t-il été testé ?"
+            but: "Fonctions Répondre et Récupérer ; vérifier aussi la capacité à notifier dans les délais réglementaires."
+      - title: Qualification réglementaire
+        questions:
+          - id: S7
+            question: "Quels sont le secteur exact, l'effectif et le chiffre d'affaires ? Êtes-vous fournisseur d'une entité régulée ?"
+            but: "Déterminer si NIS2 s'applique (entité essentielle ou importante) ou DORA dans le secteur financier."
+          - id: S8
+            question: "Vendez-vous des produits comportant des éléments numériques (logiciels, objets connectés) ?"
+            but: "Repérer les obligations du Cyber Resilience Act (CRA)."
+    observer:
+      - Dernier audit, test d'intrusion ou rapport d'incident
+      - Liste des prestataires informatiques et leurs contrats
+      - Configuration des accès à distance et de la messagerie (MFA)
