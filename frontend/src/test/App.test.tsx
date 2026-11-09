@@ -19,9 +19,9 @@ function renderAt(path: string) {
 afterEach(() => vi.restoreAllMocks())
 
 describe('App', () => {
-  it('shows the legal disclaimer on every page', () => {
+  it('renders the main navigation', () => {
     renderAt('/veille')
-    expect(screen.getByRole('note')).toHaveTextContent("Ceci n'est pas un conseil juridique")
+    expect(screen.getByRole('navigation', { name: 'Navigation principale' })).toBeInTheDocument()
   })
 
   it('displays API health from /health', async () => {

@@ -1,6 +1,5 @@
 import { NavLink, Outlet } from 'react-router-dom'
 
-import { Disclaimer } from './Disclaimer'
 
 const NAV = [
   { to: '/missions', label: 'Missions' },
@@ -30,7 +29,6 @@ export function Layout() {
         </nav>
       </aside>
       <div className="flex min-w-0 flex-1 flex-col">
-        <Disclaimer />
         <main className="mx-auto w-full max-w-5xl flex-1 px-8 py-8">
           <Outlet />
         </main>

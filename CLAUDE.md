@@ -36,7 +36,7 @@ N'ajouter une dépendance que si nécessaire, et le signaler dans le résumé de
 - `frontend/` : React + TypeScript, **appelle uniquement l'API**. Types API **générés** (`npm run gen:api`)
   depuis l'OpenAPI de FastAPI, jamais écrits à la main : après tout changement de route ou de schéma, régénérer.
   Garder le front simple : pas de gestionnaire d'état global (TanStack Query suffit), composants shadcn/ui plutôt que du CSS maison.
-  Composants partagés obligatoires pour : citation, cellule sourcée, avertissement juridique.
+  Composants partagés obligatoires pour : citation, cellule sourcée. L'avertissement juridique figure dans les livrables (note PDF), pas en bandeau.
 - `config/llm.yaml` : rôles → modèles. Le code demande un **rôle**, jamais un modèle en dur.
 - `corpus/sources.yaml` : liste des sources officielles (URL, domaine, référence).
 - `eval/` : jeux de tests de Compass. `docs/` : décisions (`DECISIONS.md`), limites, résultats.
