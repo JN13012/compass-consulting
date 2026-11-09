@@ -102,3 +102,13 @@ class Passage(Base):
     embedding: Mapped[list[float] | None] = mapped_column(Vector(EMBEDDING_DIM), nullable=True)
 
     document: Mapped[SourceDocument] = relationship(back_populates="passages")
+
+
+class WatchCheck(Base):
+    """Result of one "check for updates" run against the Publications Office."""
+
+    __tablename__ = "watch_checks"
+
+    id: Mapped[uuid.UUID] = mapped_column(primary_key=True, default=uuid.uuid4)
+    checked_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=_now)
+    data: Mapped[dict[str, Any]] = mapped_column(JSONB)

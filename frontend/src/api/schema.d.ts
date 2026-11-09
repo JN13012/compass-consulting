@@ -279,6 +279,74 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/watch/status": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Status */
+        get: operations["status_watch_status_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/watch/check": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Check */
+        post: operations["check_watch_check_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/watch/diff/{code}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Diff */
+        get: operations["diff_watch_diff__code__get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/watch/deadlines": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Deadlines */
+        get: operations["deadlines_watch_deadlines_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
 }
 export type webhooks = Record<string, never>;
 export interface components {
@@ -351,11 +419,54 @@ export interface components {
                 [key: string]: unknown;
             };
         };
+        /** Change */
+        Change: {
+            /** Ref */
+            ref: string;
+            /** Heading */
+            heading: string;
+            /**
+             * Kind
+             * @enum {string}
+             */
+            kind: "ajoute" | "modifie" | "supprime";
+            /** Segments */
+            segments: components["schemas"]["Segment"][];
+        };
+        /** CheckResult */
+        CheckResult: {
+            /** Checked At */
+            checked_at: string;
+            /** Texts */
+            texts: components["schemas"]["TextStatus"][];
+        };
         /**
          * Confidentiality
          * @enum {string}
          */
         Confidentiality: "public" | "confidentiel";
+        /** Deadline */
+        Deadline: {
+            /**
+             * Date
+             * Format: date
+             */
+            date: string;
+            /** Code */
+            code: string;
+            /** Title */
+            title: string;
+            /** Detail */
+            detail: string;
+            /** Ref */
+            ref: string;
+        };
+        /** DiffOut */
+        DiffOut: {
+            diff: components["schemas"]["VersionDiff"];
+            /** Impacts */
+            impacts: components["schemas"]["Impact"][];
+        };
         /** FollowUp */
         FollowUp: {
             /** Question */
@@ -389,6 +500,17 @@ export interface components {
             version: string;
             /** Ai Model */
             ai_model: string;
+        };
+        /** Impact */
+        Impact: {
+            /** Mission Id */
+            mission_id: string;
+            /** Client */
+            client: string;
+            /** Cited */
+            cited: string[];
+            /** Changed */
+            changed: string[];
         };
         /**
          * Interview
@@ -569,6 +691,16 @@ export interface components {
              */
             observer: string[];
         };
+        /** Segment */
+        Segment: {
+            /**
+             * Op
+             * @enum {string}
+             */
+            op: "equal" | "insert" | "delete";
+            /** Text */
+            text: string;
+        };
         /** SourceOut */
         SourceOut: {
             /** Code */
@@ -602,6 +734,27 @@ export interface components {
             /** Description */
             description: string;
         };
+        /** TextStatus */
+        TextStatus: {
+            /** Code */
+            code: string;
+            /** Title */
+            title: string;
+            /** Current */
+            current: string;
+            /** Latest */
+            latest: string | null;
+            /**
+             * Status
+             * @enum {string}
+             */
+            status: "a_jour" | "nouvelle_version" | "non_consolide" | "erreur";
+            /**
+             * Detail
+             * @default
+             */
+            detail: string;
+        };
         /** Theme */
         Theme: {
             /** Title */
@@ -621,6 +774,31 @@ export interface components {
             input?: unknown;
             /** Context */
             ctx?: Record<string, never>;
+        };
+        /** VersionDiff */
+        VersionDiff: {
+            /** Code */
+            code: string;
+            /** Title */
+            title: string;
+            /** Old Version */
+            old_version: string;
+            /** New Version */
+            new_version: string;
+            /** Changes */
+            changes: components["schemas"]["Change"][];
+            /** Unchanged */
+            unchanged: number;
+        };
+        /** WatchStatus */
+        WatchStatus: {
+            last_check: components["schemas"]["CheckResult"] | null;
+            /** With History */
+            with_history: string[];
+            /** Cited By */
+            cited_by: {
+                [key: string]: string[];
+            };
         };
     };
     responses: never;
@@ -1207,6 +1385,97 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    status_watch_status_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["WatchStatus"];
+                };
+            };
+        };
+    };
+    check_watch_check_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["CheckResult"];
+                };
+            };
+        };
+    };
+    diff_watch_diff__code__get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                code: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DiffOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    deadlines_watch_deadlines_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Deadline"][];
                 };
             };
         };

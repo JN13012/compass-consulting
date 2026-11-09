@@ -185,3 +185,25 @@ def format_report(reports: list[SourceReport]) -> str:
     summary = f"{len(reports) - len(failed)}/{len(reports)} sources OK"
     lines.append(summary + (f" - échecs : {failed}" if failed else ""))
     return "\n".join(lines)
+
+
+def archive_version(session: Session, source: Source, fetcher: Fetcher, celex: str, today: date) -> int:
+    """Stores an older consolidated version (not current) so the watch can show what changed since.
+
+    Returns the number of passages stored, 0 when that version is already in the database.
+    """
+    if session.scalars(select(SourceDocument).where(SourceDocument.code == source.code,
+                                                    SourceDocument.version == celex)).first():
+        return 0
+    main, original = fetcher.fetch_xhtml(celex), fetcher.fetch_xhtml(source.celex)
+    parsed = build_passages(main, original, source.code)
+    doc = SourceDocument(
+        code=source.code, title=source.title, url=eurlex_url(celex), domain=source.domain, version=celex,
+        consolidated=True, original_celex=source.celex, original_url=eurlex_url(source.celex), consulted_on=today,
+        sha256=sha256(main), original_sha256=sha256(original), language="fr", is_current=False,
+        parser_version=PARSER_VERSION,
+    )
+    doc.passages = _to_rows(parsed, source.celex, celex)
+    session.add(doc)
+    session.commit()
+    return len(doc.passages)

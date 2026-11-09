@@ -88,3 +88,15 @@ Format : date - décision - alternatives - raison.
 - **Alternatives** : questions entièrement générées par le modèle ; simple liste sans zone de réponse.
 - **Raison** : une méthode d'entretien reproductible et relue vaut mieux qu'une liste variable d'une fois sur
   l'autre. Le modèle n'intervient que pour proposer des relances à partir des réponses déjà saisies.
+
+## 2026-11-09 - Veille réglementaire : réelle, sans planificateur
+
+- **Choix** : bouton « Vérifier les mises à jour » qui interroge l'Office des publications (SPARQL) et enregistre
+  chaque vérification ; comparaison article par article entre la version en base et une version antérieure
+  conservée (`python -m app.corpus archive`) ; missions qui citent le texte, avec les passages cités modifiés ;
+  calendrier des échéances écrit à la main (`config/deadlines.yaml`), chaque date vérifiée par un test contre le
+  passage qui la fixe.
+- **Données de démonstration** : versions antérieures réelles archivées pour MiFID II (17/01/2025) et l'AI Act
+  (12/07/2024), afin de montrer de vrais changements, pas des exemples inventés.
+- **Non fait** : planification automatique (tâche hebdomadaire) et notifications, indiquées comme désactivées.
+- **Raison** : tout ce qui est affiché est vrai et vérifiable ; seul l'automatisme est hors démonstration.

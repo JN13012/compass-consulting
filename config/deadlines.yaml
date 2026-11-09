@@ -1,0 +1,74 @@
+# Regulatory deadlines. Written by hand; each date is taken from the passage named in `ref` (current version),
+# so it can be checked in the corpus. Tests verify that every ref exists and contains the date.
+
+deadlines:
+  - date: 2024-06-30
+    code: MICA
+    title: "MiCA : stablecoins (titres III et IV)"
+    detail: "Règles applicables aux jetons se référant à des actifs (ART) et aux jetons de monnaie électronique (EMT)."
+    ref: MICA-ART-149-3
+  - date: 2024-10-17
+    code: NIS2
+    title: "NIS2 : date limite de transposition"
+    detail: "Les États membres adoptent et publient les dispositions nationales."
+    ref: NIS2-ART-41-1
+  - date: 2024-12-30
+    code: MICA
+    title: "MiCA : application générale"
+    detail: "Agrément des prestataires de services sur crypto-actifs (PSCA) et règles d'émission."
+    ref: MICA-ART-149-2
+  - date: 2024-12-30
+    code: TFR
+    title: "TFR : règle de voyage pour les crypto-actifs"
+    detail: "Informations sur l'émetteur et le bénéficiaire accompagnant les transferts de crypto-actifs."
+    ref: TFR-ART-40
+  - date: 2025-01-17
+    code: DORA
+    title: "DORA : entrée en application"
+    detail: "Gestion du risque informatique, notification des incidents, registre des prestataires TIC."
+    ref: DORA-ART-64
+  - date: 2026-01-01
+    code: DAC8
+    title: "DAC8 : déclaration fiscale des crypto-actifs"
+    detail: "Les PSCA collectent les données de leurs clients pour l'échange automatique d'informations."
+    ref: DAC8-ART-2-1
+  - date: 2026-06-11
+    code: CRA
+    title: "CRA : organismes d'évaluation de la conformité"
+    detail: "Chapitre IV (notification des organismes d'évaluation)."
+    ref: CRA-ART-71-2
+  - date: 2026-07-01
+    code: MICA
+    title: "MiCA : fin de la période transitoire maximale des PSCA"
+    detail: "Les prestataires actifs avant le 30 décembre 2024 doivent avoir obtenu leur agrément."
+    ref: MICA-ART-143-3
+  - date: 2026-08-02
+    code: AIACT
+    title: "AI Act : application générale"
+    detail: "Hors systèmes à haut risque, reportés par la version consolidée en vigueur."
+    ref: AIACT-ART-113
+  - date: 2026-09-11
+    code: CRA
+    title: "CRA : signalement des vulnérabilités exploitées"
+    detail: "Obligations de notification des fabricants (article 14)."
+    ref: CRA-ART-71-2
+  - date: 2027-07-10
+    code: AMLR
+    title: "AMLR : application du règlement anti-blanchiment"
+    detail: "Règlement unique applicable aux entités assujetties, dont les PSCA."
+    ref: AMLR-ART-90
+  - date: 2027-12-02
+    code: AIACT
+    title: "AI Act : systèmes à haut risque (annexe III)"
+    detail: "Recrutement, crédit, accès aux services essentiels, etc."
+    ref: AIACT-ART-113
+  - date: 2027-12-11
+    code: CRA
+    title: "CRA : application générale"
+    detail: "Exigences de cybersécurité pour tous les produits comportant des éléments numériques."
+    ref: CRA-ART-71-2
+  - date: 2028-08-02
+    code: AIACT
+    title: "AI Act : systèmes à haut risque (annexe I)"
+    detail: "IA intégrée à des produits déjà réglementés (machines, dispositifs médicaux…)."
+    ref: AIACT-ART-113
