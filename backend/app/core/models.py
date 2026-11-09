@@ -41,6 +41,8 @@ class Mission(Base):
     notes: Mapped[str] = mapped_column(Text, default="")
     # Interview grid answers ({"answers": {id: text}, "checked": [...]}), None until started.
     interview: Mapped[dict[str, Any] | None] = mapped_column(JSONB, nullable=True)
+    # POC: {"framing", "cases", "evaluation"}, None until framed (SPEC §3.8).
+    poc: Mapped[dict[str, Any] | None] = mapped_column(JSONB, nullable=True)
     # Analysis results (validated JSON), None until generated.
     diagnostic: Mapped[dict[str, Any] | None] = mapped_column(JSONB, nullable=True)
     solutions: Mapped[dict[str, Any] | None] = mapped_column(JSONB, nullable=True)

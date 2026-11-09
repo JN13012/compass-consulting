@@ -100,3 +100,25 @@ Format : date - décision - alternatives - raison.
   (12/07/2024), afin de montrer de vrais changements, pas des exemples inventés.
 - **Non fait** : planification automatique (tâche hebdomadaire) et notifications, indiquées comme désactivées.
 - **Raison** : tout ce qui est affiché est vrai et vérifiable ; seul l'automatisme est hors démonstration.
+
+## 2026-11-09 - Phase 4 : Compass cadre et évalue le POC, il ne le code pas
+
+- **Choix** : onglet « POC » en trois blocs. (1) Cadrage proposé par le modèle (solution, périmètre, user stories,
+  critères chiffrés parmi 5 métriques fixes), contraintes de la mission ajoutées par le code (confidentialité,
+  textes applicables, refus plutôt que deviner), seuils modifiables par le consultant. (2) Jeu de cas
+  `{id, input, expected}` (`expected = null` : refus attendu), scindé de façon déterministe et stratifiée :
+  40 % vont dans le dossier zip remis au développeur (CLAUDE.md, SPEC.md, ARCHITECTURE.md, INTERFACE.md, eval/),
+  60 % restent dans Compass comme jeu de test. (3) Banc HTTP (`POST /run`) en tâche de fond : comparaison champ par
+  champ, taux avec IC de Wilson, verdict par critère (« robuste » si tout l'intervalle respecte le seuil), échecs
+  groupés par cause et liste de corrections, tout en Python.
+- **Stockage** : colonne JSONB `missions.poc` (migration 0009) plutôt que les tables `PocDossier` / `EvalRun` de la
+  spec : un seul POC par mission en v1, même modèle que diagnostic / solutions / réglementation.
+- **Alternatives** : exécuter une commande CLI fournie par l'utilisateur (refusé : exécution arbitraire) ;
+  transmettre tout le jeu au développeur (refusé : on réglerait le POC sur le test).
+- **POC de démonstration** : `poc_examples/commandes/` (Maison Lumen), service Docker séparé (profil `poc`).
+  Le modèle lit l'e-mail ; le code vérifie les références, prend les prix au catalogue, calcule le total.
+  50 commandes fictives générées par script (`data/generate.py`), attendus calculés par le même script.
+  « PDF » = texte extrait d'un bon de commande ; pas d'OCR d'images (dépendance lourde, hors v1).
+- **Limite** : la liste de corrections cite des cas du jeu de test. Après une itération, ce jeu n'est plus vierge :
+  chaque passage est donc publié avec son numéro d'itération (voir `RESULTATS.md`).
+- **Reporté (phase 4b)** : POC token ERC-3643 (Foundry, Slither, Sepolia).

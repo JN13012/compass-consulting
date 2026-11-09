@@ -25,6 +25,7 @@ services:
       - ./config:/srv/config:ro
       - ./corpus:/srv/corpus
       - ./eval:/srv/eval
+      - ./poc_examples:/srv/poc_examples:ro
     depends_on:
       db: { condition: service_healthy }
 
@@ -39,6 +40,13 @@ services:
       - ./frontend:/app
       - /app/node_modules
     depends_on: [api]
+
+  # POC de démonstration (agent de commandes), évalué par Compass : `docker compose --profile poc up -d`
+  poc-commandes:
+    build: ./poc_examples/commandes
+    profiles: [poc]
+    env_file: [{ path: .env, required: false }]
+    ports: ["8100:8100"]
 
   # Modèles locaux (missions confidentielles). Optionnel : `docker compose --profile local up`
   ollama:

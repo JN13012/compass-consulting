@@ -6,11 +6,11 @@ import { api } from '../api/client'
 import { Badge } from '../components/Badge'
 import { MissionForm } from '../components/MissionForm'
 import { FOCUS_LABELS } from '../lib/labels'
-import { Placeholder } from '../components/PageHeader'
 import { useAnalyze, useMission, type MissionOut, type Step } from '../lib/missions'
 import { BenchmarkTab } from './mission/BenchmarkTab'
 import { DeliverablesTab } from './mission/DeliverablesTab'
 import { InterviewTab } from './mission/InterviewTab'
+import { PocTab } from './mission/PocTab'
 import { DiagnosticTab, RegulationTab, SolutionsTab } from './mission/tabs'
 
 export const MISSION_TABS = [
@@ -25,6 +25,7 @@ export const MISSION_TABS = [
 
 function stepDone(m: MissionOut, slug: string): boolean {
   if (slug === 'entretiens') return m.notes.trim().length > 0
+  if (slug === 'poc') return m.steps_done.includes('poc')
   const step = STEP_OF[slug]
   return step !== undefined && m.steps_done.includes(step)
 }
@@ -119,10 +120,7 @@ export function MissionPage() {
       ) : current.slug === 'livrables' ? (
         <DeliverablesTab mission={m} />
       ) : (
-        <Placeholder
-          title="Cadrage du POC - à venir"
-          text="Choisir une solution, définir le périmètre du prototype, les données de test et les critères de réussite mesurables, puis comparer les résultats aux objectifs."
-        />
+        <PocTab mission={m} />
       )}
     </>
   )

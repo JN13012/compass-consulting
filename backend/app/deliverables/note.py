@@ -113,6 +113,33 @@ def _benchmark(b: Benchmark | None) -> str:
             f'<p class="meta">Collecté le {_e(data["collected_at"][:10])}. Sources : {sources}.</p>')
 
 
+def _pct(metric: str, v: float) -> str:
+    return f"{v:.1f} s" if metric == "latence_p95_s" else f"{round(v * 100)} %"
+
+
+def _poc(p: dict[str, Any] | None) -> str:
+    f = (p or {}).get("framing")
+    if not f:
+        return _missing("POC")
+    out = (f"<p><strong>{_e(f['nom'])}</strong> - solution retenue : {_e(f['solution_retenue'])}</p>"
+           f"<p>{_e(f['objectif'])}</p>")
+    ev = (p or {}).get("evaluation") or {}
+    if ev.get("status") != "terminee":
+        crit = "".join(f"<li>{_e(c['metrique'])} : seuil {_pct(c['metrique'], c['seuil'])}</li>"
+                       for c in f.get("criteres", []))
+        return out + f"<h3>Critères d'acceptation</h3><ul>{crit}</ul>" + _missing("évaluation du POC")
+    rows = "".join(
+        f"<tr><td>{_e(c['libelle'])}</td><td>{_pct(c['metrique'], c['seuil'])}</td>"
+        f"<td>{_pct(c['metrique'], c['valeur'])}</td>"
+        f"<td>{'' if not c.get('ic95') else _pct('', c['ic95'][0]) + ' - ' + _pct('', c['ic95'][1])}</td>"
+        f"<td>{'atteint' if c['atteint'] else 'non atteint'}</td></tr>" for c in ev.get("verdict", []))
+    verdict = "oui" if ev.get("passage_echelle") else "pas encore"
+    fixes = "".join(f"<li>{_e(c)}</li>" for c in ev.get("corrections", []))
+    return (out + f"<h3>Évaluation sur {ev.get('total')} cas de test - passage à l'échelle : {verdict}</h3>"
+            f"<table><tr><th>Critère</th><th>Seuil</th><th>Mesuré</th><th>IC 95 %</th><th></th></tr>{rows}</table>"
+            + (f"<h3>Corrections demandées</h3><ul>{fixes}</ul>" if fixes else ""))
+
+
 def render_note(mission: Mission, benchmark: Benchmark | None, today: date | None = None) -> str:
     today = today or date.today()
     conf = " · CONFIDENTIEL" if mission.confidentiality.value == "confidentiel" else ""
@@ -124,4 +151,5 @@ def render_note(mission: Mission, benchmark: Benchmark | None, today: date | Non
 <h2>2. Solutions et feuille de route</h2>{_solutions(mission.solutions)}
 <h2>3. Réglementation applicable</h2>{_regulation(mission.regulation)}
 <h2>4. Benchmark</h2>{_benchmark(benchmark)}
+<h2>5. POC et évaluation</h2>{_poc(mission.poc)}
 <p class="warn">{DISCLAIMER}</p></body></html>"""

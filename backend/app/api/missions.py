@@ -64,7 +64,10 @@ class MissionOut(MissionSummary):
 
 
 def _steps(m: Mission) -> list[str]:
-    return [s for s in ("diagnostic", "solutions", "regulation") if getattr(m, s) is not None]
+    done = [s for s in ("diagnostic", "solutions", "regulation") if getattr(m, s) is not None]
+    if ((m.poc or {}).get("evaluation") or {}).get("status") == "terminee":
+        done.append("poc")
+    return done
 
 
 def _summary(m: Mission) -> MissionSummary:

@@ -54,3 +54,26 @@ Jeu de réglage : 30/32. Mesure unique sur le jeu de test (48 questions) :
 Lecture : le gain vient surtout des faux refus (7 → 1) ; le grand modèle exploite mieux les passages retrouvés.
 Les intervalles se recouvrent : l'amélioration est probable, pas démontrée avec 48 questions.
 Les missions confidentielles restent sur le modèle local, quel que soit ce résultat.
+
+# Résultats - POC de démonstration « agent de traitement des commandes » (Maison Lumen)
+
+Jeu : 50 commandes fictives (`poc_examples/commandes/data/commandes.jsonl`, générées par script), dont 10 ambiguës.
+Scission déterministe : 20 cas dans le dossier du développeur, **30 cas de test gardés par Compass** (24 à traiter,
+6 à refuser). Modèle du POC : `qwen3.5:9b` en local (Ollama). Seuils proposés au cadrage par gpt-5.1, non modifiés.
+
+| Critère (seuil) | Itération 1 | Itération 2 |
+|---|---|---|
+| Commandes entièrement justes (≥ 85 %) | 18/24 = 75 % (IC 55-88 %) | **24/24 = 100 % (IC 86-100 %)** |
+| Champs justes (≥ 95 %) | 90/96 = 94 % (IC 87-97 %) | 96/96 = 100 % (IC 96-100 %) |
+| Cas ambigus refusés (≥ 90 %) | 5/6 = 83 % (IC 44-97 %) | 5/6 = 83 % (IC 44-97 %) |
+| Refus à tort (≤ 15 %) | 0/24 (IC 0-14 %) | 0/24 (IC 0-14 %) |
+| Latence p95 (≤ 10 s) | 3,2 s | 3,4 s |
+| **Passage à l'échelle** | non | **non** |
+
+- **Itération 1 → 2** : le rapport de Compass désignait deux causes. (1) Dans 6 cas, une livraison en janvier était
+  datée de l'année de l'e-mail : le changement d'année est désormais **calculé dans le code** à partir de la date
+  d'envoi. (2) Un e-mail sans nom de boutique était accepté : la règle de refus a été précisée.
+- **Reste** : « 3 sacs Iris » sans couleur (deux coloris au catalogue) n'est pas refusé. Non corrigé volontairement :
+  le jeu de test a déjà servi deux fois ; une itération de plus serait un réglage sur le test.
+- **Limite** : 6 cas ambigus seulement, d'où un intervalle très large (44-97 %). Pour décider, il faut un jeu plus
+  grand de cas ambigus réels. C'est la vraie conclusion du POC.

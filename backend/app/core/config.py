@@ -14,6 +14,7 @@ class Settings(BaseSettings):
     kb_role: str = "reasoning"
     kb_min_score: float = 0.30
     kb_min_similarity: float = 0.45  # frozen on the dev set (config/eval_frozen.yaml)
+    poc_examples_dir: Path = Path("/srv/poc_examples")
     cors_origins: list[str] = ["http://localhost:5173"]
 
 

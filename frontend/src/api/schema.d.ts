@@ -193,6 +193,128 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/missions/{mission_id}/poc": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get Poc */
+        get: operations["get_poc_missions__mission_id__poc_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/missions/{mission_id}/poc/framing": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Frame */
+        post: operations["frame_missions__mission_id__poc_framing_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/missions/{mission_id}/poc/criteria": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        /**
+         * Set Criteria
+         * @description The consultant has the last word on thresholds.
+         */
+        put: operations["set_criteria_missions__mission_id__poc_criteria_put"];
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/missions/{mission_id}/poc/cases": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        /** Set Cases */
+        put: operations["set_cases_missions__mission_id__poc_cases_put"];
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/missions/{mission_id}/poc/cases/demo": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Demo Cases */
+        post: operations["demo_cases_missions__mission_id__poc_cases_demo_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/missions/{mission_id}/poc/dossier.zip": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Dossier */
+        get: operations["dossier_missions__mission_id__poc_dossier_zip_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/missions/{mission_id}/poc/evaluate": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Evaluate */
+        post: operations["evaluate_missions__mission_id__poc_evaluate_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/benchmarks/templates": {
         parameters: {
             query?: never;
@@ -461,6 +583,29 @@ export interface components {
                 [key: string]: unknown;
             };
         };
+        /** CasesIn */
+        CasesIn: {
+            /** Jsonl */
+            jsonl: string;
+            /**
+             * Source
+             * @default fichier importé
+             */
+            source: string;
+        };
+        /** CasesInfo */
+        CasesInfo: {
+            /** Total */
+            total: number;
+            /** Dev */
+            dev: number;
+            /** Test */
+            test: number;
+            /** A Refuser */
+            a_refuser: number;
+            /** Source */
+            source: string;
+        };
         /** Change */
         Change: {
             /** Ref */
@@ -499,6 +644,21 @@ export interface components {
          * @enum {string}
          */
         Confidentiality: "public" | "confidentiel";
+        /** Criterion */
+        Criterion: {
+            /**
+             * Metrique
+             * @enum {string}
+             */
+            metrique: "justesse_document" | "justesse_champs" | "refus_corrects" | "faux_refus" | "latence_p95_s";
+            /** Seuil */
+            seuil: number;
+            /**
+             * Justification
+             * @default
+             */
+            justification: string;
+        };
         /** Deadline */
         Deadline: {
             /**
@@ -520,6 +680,14 @@ export interface components {
             diff: components["schemas"]["VersionDiff"];
             /** Impacts */
             impacts: components["schemas"]["Impact"][];
+        };
+        /** EvaluateIn */
+        EvaluateIn: {
+            /**
+             * Endpoint
+             * @default http://poc-commandes:8100/run
+             */
+            endpoint: string;
         };
         /** FollowUp */
         FollowUp: {
@@ -711,6 +879,23 @@ export interface components {
             original_url: string;
             /** Score */
             score: number;
+        };
+        /** PocOut */
+        PocOut: {
+            /** Framing */
+            framing: {
+                [key: string]: unknown;
+            } | null;
+            cases: components["schemas"]["CasesInfo"] | null;
+            /** Evaluation */
+            evaluation: {
+                [key: string]: unknown;
+            } | null;
+            /**
+             * Default Endpoint
+             * @default http://poc-commandes:8100/run
+             */
+            default_endpoint: string;
         };
         /** Question */
         Question: {
@@ -1224,6 +1409,235 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["MissionOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    get_poc_missions__mission_id__poc_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                mission_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PocOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    frame_missions__mission_id__poc_framing_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                mission_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PocOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    set_criteria_missions__mission_id__poc_criteria_put: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                mission_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["Criterion"][];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PocOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    set_cases_missions__mission_id__poc_cases_put: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                mission_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["CasesIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PocOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    demo_cases_missions__mission_id__poc_cases_demo_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                mission_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PocOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    dossier_missions__mission_id__poc_dossier_zip_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                mission_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": unknown;
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    evaluate_missions__mission_id__poc_evaluate_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                mission_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["EvaluateIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            202: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PocOut"];
                 };
             };
             /** @description Validation Error */

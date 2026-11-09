@@ -1,0 +1,14 @@
+[
+  {"reference": "LUM-SAC-IRIS-NR", "designation": "Sac Iris cuir noir", "prix_ht": 690.0},
+  {"reference": "LUM-SAC-IRIS-CA", "designation": "Sac Iris cuir camel", "prix_ht": 690.0},
+  {"reference": "LUM-CAB-ALBA", "designation": "Cabas Alba toile et cuir", "prix_ht": 420.0},
+  {"reference": "LUM-POC-NOVA", "designation": "Pochette Nova", "prix_ht": 260.0},
+  {"reference": "LUM-CEI-LIN", "designation": "Ceinture Lin cuir", "prix_ht": 145.0},
+  {"reference": "LUM-FOU-SOIE", "designation": "Foulard soie imprimé", "prix_ht": 180.0},
+  {"reference": "LUM-PUL-CACH", "designation": "Pull cachemire col rond", "prix_ht": 310.0},
+  {"reference": "LUM-CHE-POP", "designation": "Chemise popeline blanche", "prix_ht": 165.0},
+  {"reference": "LUM-MAN-LAINE", "designation": "Manteau laine double face", "prix_ht": 890.0},
+  {"reference": "LUM-POR-CART", "designation": "Porte-cartes cuir", "prix_ht": 95.0},
+  {"reference": "LUM-GAN-AGN", "designation": "Gants agneau", "prix_ht": 120.0},
+  {"reference": "LUM-ECH-CACH", "designation": "Écharpe cachemire", "prix_ht": 230.0}
+]
