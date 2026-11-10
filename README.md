@@ -19,7 +19,6 @@ publiques vérifiables**, jamais sur la mémoire du modèle.
 En parallèle : **Textes officiels** (questions-réponses citées) et **Veille** (nouvelles versions des textes,
 comparaison article par article, missions concernées, calendrier des échéances).
 
-> Ceci n'est pas un conseil juridique. Toute conclusion réglementaire doit être validée par un juriste.
 
 ## En bref
 
